@@ -26,6 +26,9 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
 
+    path('create_account_credentials/<int:account_id>/', views.create_account_credentials, name='create_account_credentials'),
+    path('get_account_credentials/<int:account_id>/', views.get_account_credentials, name='get_account_credentials'),
+
     path('get_tenant_domain/<int:tenant_id>/', views.getTenantDomain, name='get_tenant_domain'),
     path('get_default_password/', views.createDefaultPassword, name='get_default_password'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
