@@ -1,0 +1,60 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function(){
+        $('#_gen_username').on('click', function(event) {
+            var tenant_id = $('#id_tenant>option:selected').val();
+            if (!tenant_id) {
+                alert('Kein Mandant ausgewählt!');
+                return;
+            }
+            var firstname = $('#id_first_name').val().toLowerCase();
+            if (!firstname) {
+                alert('Vorname nicht eingegeben!');
+                return;
+            }
+            var lastname = $('#id_last_name').val().toLowerCase();
+            if (!lastname) {
+                alert('Nachname nicht eingegeben!');
+                return;
+            }
+            //get tenants domain
+            $.ajax({
+                type: 'GET',
+                url: '/get_tenant_domain/'+tenant_id+'/',
+                success: function(domain){
+                    $('#id_username').val(firstname+'.'+lastname+'@'+domain);
+                },
+                error: function (xhr, ajaxOptions, thrownError){
+                    alert(thrownError);
+                }
+            });
+        });
+        $('#_gen_password').on('click', function(event) {
+            $.ajax({
+                type: 'GET',
+                url: '/get_default_password/',
+                success: function(password){
+                    $('#id_def_pwd').val(password);
+                },
+                error: function (xhr, ajaxOptions, thrownError){
+                    alert(thrownError);
+                }
+            });
+        });
+    });
+})(django.jQuery);
+</script>
+{% endblock %}
+
+{% block submit_buttons_bottom %}
+    <div class="submit-row">
+        <input id="_gen_username" type="button" value="{% trans 'generate username' %}" name="_gen_username">
+        <input id="_gen_password" type="button" value="{% trans 'generate password' %}" name="_gen_password">
+    </div>
+    {{ block.super }}
+{% endblock %}

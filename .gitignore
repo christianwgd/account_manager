@@ -1,0 +1,10 @@
+.idea/photos.iml
+media/
+__pycache__/
+localsettings.py
+.vscode
+*.pyc
+log/
+fixtures/
+db.*
+
