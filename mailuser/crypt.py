@@ -20,7 +20,8 @@ from django.utils.translation import ugettext as _
 
 def init_storage_dir():
     """Create the directory whare documents will be stored."""
-    storage_dir = 'pdfs/'
+    #TODO: get storage_dir from settings!!
+    storage_dir = 'media/credentials/'
     if os.path.exists(storage_dir):
         return
     try:
@@ -34,8 +35,8 @@ def init_storage_dir():
 
 def get_creds_filename(account):
     """Return the full path of a document."""
-    #storage_dir = param_tools.get_global_parameter("storage_dir")
-    storage_dir = 'pdfs/'
+    # TODO: get storage_dir from settings!!
+    storage_dir = 'media/credentials/'
     return os.path.join(storage_dir, account.username + ".pdf")
 
 
@@ -100,5 +101,3 @@ def get_document_logo(logo):
         logo = os.path.join(settings.MEDIA_ROOT, logo.path)
     except AttributeError:
         logo = None
-    finally:
-        return logo
