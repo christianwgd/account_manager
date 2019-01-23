@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from filebrowser.fields import FileBrowseField
 
 
 class Tenant(models.Model):
@@ -16,6 +17,8 @@ class Tenant(models.Model):
 
     name = models.CharField(_('name'), max_length=50, null=True, blank=True)
     domain = models.CharField(_('domain'), max_length=50, null=True, blank=True)
+    logo = FileBrowseField(_('Logo'), max_length=200, directory='logos/',
+                           extensions=['.jpg', '.png'], blank=True)
 
 
 class Account(models.Model):
@@ -26,7 +29,7 @@ class Account(models.Model):
     @property
     def full_name(self):
         if self.first_name is not None and self.last_name is not None:
-            return self.first_name + ' ' + last_name
+            return self.first_name + ' ' + self.last_name
         else:
             return None
 

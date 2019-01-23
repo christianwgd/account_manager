@@ -14,13 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from filebrowser.sites import site
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
 urlpatterns = [
+    path('admin/filebrowser/', site.urls),
+    path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
 
     path('get_tenant_domain/<int:tenant_id>/', views.getTenantDomain, name='get_tenant_domain'),
     path('get_default_password/', views.createDefaultPassword, name='get_default_password'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

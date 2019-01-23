@@ -1,13 +1,27 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
+from django.utils.html import mark_safe
 
 from .models import Tenant, Account, Alias
 
+
+from filebrowser.settings import ADMIN_THUMBNAIL
+
+
 @admin.register(Tenant)
 class TenantAdmin(admin.ModelAdmin):
-    list_display = ['name', 'domain']
+
+    def logo_thumbnail(self, obj):
+        if obj.logo and obj.logo.filetype == "Image":
+            return mark_safe('<img src="%s" />' % obj.logo.version_generate(ADMIN_THUMBNAIL).url)
+        else:
+            return ""
+
+    list_display = ['name', 'domain', 'logo_thumbnail']
     ordering = ['name']
+    logo_thumbnail.allow_tags = True
+    logo_thumbnail.short_description = "Logo"
 
 
 @admin.register(Alias)
