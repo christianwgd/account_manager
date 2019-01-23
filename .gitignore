@@ -1,4 +1,4 @@
-.idea/photos.iml
+.idea/
 media/
 __pycache__/
 localsettings.py
@@ -7,4 +7,5 @@ localsettings.py
 log/
 fixtures/
 db.*
-
+.project
+_versions/
