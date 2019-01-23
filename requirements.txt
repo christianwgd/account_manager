@@ -3,3 +3,4 @@ django-filebrowser==3.11.1
 django-grappelli==2.12.2
 Pillow==5.4.1
 pytz==2018.9
+reportlab==3.5.13
