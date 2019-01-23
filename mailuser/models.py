@@ -39,7 +39,8 @@ class Account(models.Model):
     first_name = models.CharField(_('first name'), max_length=50, null=True, blank=True)
     last_name = models.CharField(_('last name'), max_length=50, null=True, blank=True)
     username = models.EmailField(_('account user'))
-    def_pwd = models.CharField(_('default password'), max_length=50, null=True, blank=True)
+    description = models.CharField(_('description'), max_length=80, null=True, blank=True)
+    def_pwd = models.CharField(_('default password'), max_length=50)
 
 
 class Alias(models.Model):
