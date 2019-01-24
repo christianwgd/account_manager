@@ -20,6 +20,7 @@ class TenantAdmin(admin.ModelAdmin):
 
     list_display = ['name', 'domain', 'logo_thumbnail']
     ordering = ['name']
+    filter_horizontal = ['manager', ]
     logo_thumbnail.allow_tags = True
     logo_thumbnail.short_description = "Logo"
 

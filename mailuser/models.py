@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.dispatch import receiver
@@ -9,6 +9,13 @@ from filebrowser.fields import FileBrowseField
 from .crypt import get_creds_filename, decrypt_file, init_storage_dir
 from .createpdf import credentials
 
+
+CONN_SECURITY = (
+    ('NNE', 'None'),
+    ('SSL', 'SSL'),
+    ('TLS', 'TLS'),
+    ('STL', 'STARTTLS'),
+)
 
 class Tenant(models.Model):
     
@@ -24,6 +31,14 @@ class Tenant(models.Model):
     domain = models.CharField(_('domain'), max_length=50, null=True, blank=True)
     logo = FileBrowseField(_('Logo'), max_length=200, directory='logos/',
                            extensions=['.jpg', '.png'], blank=True)
+    weburl = models.URLField(_('url'), null=True, blank=True)
+    smtp_url = models.CharField(_('SMTP server address'), max_length=50, null=True, blank=True)
+    smtp_port = models.CharField(_('SMTP server port'), max_length=3, default='25')
+    smtp_sec = models.CharField(_('SMTP server security'), max_length=3, choices=CONN_SECURITY, default='NNE')
+    imap_url = models.CharField(_('IMAP server address'), max_length=50, null=True, blank=True)
+    imap_port = models.CharField(_('IMAP server port'), max_length=3, default='143')
+    imap_sec = models.CharField(_('IMAP server security'), max_length=3, choices=CONN_SECURITY, default='NNE')
+    manager = models.ManyToManyField(User, verbose_name=_('manager'))
 
 
 class Account(models.Model):
