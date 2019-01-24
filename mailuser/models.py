@@ -14,6 +14,7 @@ CONN_SECURITY = (
     ('NNE', 'None'),
     ('SSL', 'SSL'),
     ('TLS', 'TLS'),
+    ('STL', 'SSL/TLS'),
     ('STL', 'STARTTLS'),
 )
 
