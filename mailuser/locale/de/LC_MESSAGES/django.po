@@ -76,7 +76,7 @@ msgstr "Alias"
 
 #: .\models.py:56
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #: .\templates\mailuser\custom_admin_account_change.html:46
 msgid "generate username"

@@ -3,9 +3,10 @@ import os
 import sys
 
 from rfc6266 import build_header
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, render
 from django.utils.crypto import get_random_string
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .crypt import get_creds_filename, decrypt_file, init_storage_dir
 from .models import Tenant, Account
@@ -53,3 +54,17 @@ def get_account_credentials(request, account_id):
     resp["Content-Length"] = len(content)
     resp["Content-Disposition"] = build_header(os.path.basename(fname))
     return resp
+
+
+@login_required(login_url='/accounts/login/')
+def tenant_list(request):
+    tenants = Tenant.objects.all()
+    print(tenants, tenants.count())
+    return render(request, 'mailuser/tenant_list.html', {'tenantlist': tenants})
+
+
+@login_required(login_url='/accounts/login/')
+def account_list(request, tenant_id):
+    tenant = Tenant.objects.get(pk=tenant_id)
+    accounts = Account.objects.filter(tenant=tenant)
+    return render(request, 'mailuser/account_list.html', {'accountlist': accounts})

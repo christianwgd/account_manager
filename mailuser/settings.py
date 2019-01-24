@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap4',
     'mailuser',
 ]
 
@@ -104,6 +105,16 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+##################
+# BOOTSTRAP 4    #
+##################
+BOOTSTRAP4 = {
+    # wird sonst 2-mal geladen...
+    'javascript_in_head': True,
+}
+
 
 ##################
 # LOCAL SETTINGS #
