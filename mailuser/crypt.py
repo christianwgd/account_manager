@@ -6,7 +6,6 @@ from io import BytesIO
 import os
 import struct
 
-from cryptography.exceptions import InternalError
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 
@@ -14,14 +13,10 @@ from django.conf import settings
 from django.utils.encoding import force_bytes, smart_bytes
 from django.utils.translation import ugettext as _
 
-# from modoboa.lib.exceptions import InternalError
-# from modoboa.parameters import tools as param_tools
-
 
 def init_storage_dir():
     """Create the directory whare documents will be stored."""
-    #TODO: get storage_dir from settings!!
-    storage_dir = 'media/credentials/'
+    storage_dir = getattr(settings, "STORAGE_DIR", 'media/credentials/')
     if os.path.exists(storage_dir):
         return
     try:
@@ -101,3 +96,4 @@ def get_document_logo(logo):
         logo = os.path.join(settings.MEDIA_ROOT, logo.path)
     except AttributeError:
         logo = None
+    return logo
