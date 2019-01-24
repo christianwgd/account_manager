@@ -16,6 +16,7 @@
                         <th>{% trans 'mail aliases' %}</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,12 @@
                             {% for alias in account.alias_set.all %}
                                 {{ alias }}<br/>
                             {% endfor %}
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-secondary" href="{% url 'get_account_credentials' account.id %}" role="button"
+                                title="{% trans 'load credentials pdf' %}">
+                            <i class="far fa-file-pdf"></i>
+                            </a>
                         </td>
                         <td>
                             <button class="btn btn-sm btn-secondary" name="edit" value="{{ event.id }}" title="{% trans 'edit' %}">
