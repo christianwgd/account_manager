@@ -31,13 +31,14 @@ class Tenant(models.Model):
     domain = models.CharField(_('domain'), max_length=50, null=True, blank=True)
     logo = FileBrowseField(_('Logo'), max_length=200, directory='logos/',
                            extensions=['.jpg', '.png'], blank=True)
-    weburl = models.URLField(_('url'), null=True, blank=True)
+    weburl = models.URLField(_('web url'), null=True, blank=True)
     smtp_url = models.CharField(_('SMTP server address'), max_length=50, null=True, blank=True)
     smtp_port = models.CharField(_('SMTP server port'), max_length=3, default='25')
     smtp_sec = models.CharField(_('SMTP server security'), max_length=3, choices=CONN_SECURITY, default='NNE')
     imap_url = models.CharField(_('IMAP server address'), max_length=50, null=True, blank=True)
     imap_port = models.CharField(_('IMAP server port'), max_length=3, default='143')
     imap_sec = models.CharField(_('IMAP server security'), max_length=3, choices=CONN_SECURITY, default='NNE')
+    man_url = models.URLField(_('manual url'), null=True, blank=True)
     manager = models.ManyToManyField(User, verbose_name=_('manager'))
 
 
