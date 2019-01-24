@@ -92,6 +92,7 @@ the document as soon as possible.
         _("PC/Tablet/Smartphone configuration:"), styles["h3"]))
     story.append(Spacer(1, 0.2 * cm))
     data = [
+        [_("manual url"), account.tenant.man_url],
         [_("SMTP server address"), account.tenant.smtp_url],
         [_("SMTP server port"), account.tenant.smtp_port],
         [_("SMTP connection security"), account.tenant.get_smtp_sec_display()],
@@ -101,6 +102,7 @@ the document as soon as possible.
     ]
     table = Table(data)
     table.setStyle(TableStyle([
+        ('TEXTCOLOR', (1, 0), (1, 0), colors.blue),
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
         ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
     ]))

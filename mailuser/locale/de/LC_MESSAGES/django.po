@@ -20,11 +20,11 @@ msgstr ""
 
 #: createpdf.py:50 createpdf.py:63
 msgid "Personal account information"
-msgstr ""
+msgstr "Persönliche Kontoinformationen"
 
 #: createpdf.py:53
 msgid "Powered by MailUser"
-msgstr "Persönliche Kontoinformationen"
+msgstr ""
 
 #: createpdf.py:65
 #, python-format
@@ -35,9 +35,9 @@ msgid ""
 "the document as soon as possible.\n"
 msgstr ""
 "\n"
-"Liebe/r %s, dieses Dokument enthält die Anmeldeinformationen, die Du benötigst "
-"um Dich mit Modoboa zu verbinden. Präge Dir bitte die Informationen ein und "
-"lösche anschliessend dieses Dokument.\n"
+"Liebe/r %s, dieses Dokument enthält die Anmeldeinformationen, die Sie benötigen "
+"um sich mit Ihrem Email-Konto zu verbinden. Prägen Sie sich bitte die Informationen ein und "
+"löschen anschliessend dieses Dokument.\n"
 
 #: createpdf.py:71
 msgid "Web panel:"
