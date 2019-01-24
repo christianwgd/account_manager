@@ -82,11 +82,6 @@ the document as soon as possible.
     ]))
     story.append(table)
     story.append(Spacer(1, 0.5 * cm))
-    story.append(Paragraph(_("""
-Here you can view your emails anytime online, create filters or manage
-your contacts.
-"""), styles["Normal"]))
-
     story.append(Spacer(1, 0.2 * cm))
     story.append(Paragraph(
         _("Please change your password!"),
