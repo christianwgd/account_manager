@@ -49,7 +49,7 @@
         </ul>
         <ul class="navbar-nav">
             {% if user.is_authenticated %}
-            {% comment %}  <li class="nav-item dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" href="">
                     <i class="far fa-user"></i>
                     {% if user.get_full_name %}
@@ -59,6 +59,7 @@
                     {% endif %}
                 </a>
                 <div class="dropdown-menu right">
+                    {% comment %}
                     <a class="dropdown-item" href="{% url 'logout' %}">
                         <i class="far fa-sign-out"></i>
                         {% trans 'Log out' %}
@@ -71,14 +72,15 @@
                         <i class="far fa-key"></i>
                         {% trans 'Password change' %}
                     </a>
+                    {% endcomment %}
                     {% if user.is_superuser %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'admin:index' %}">
                         {% trans 'Admin' %}
                     </a>
                     {% endif %}
-                </div> {% endcomment %}
-            </li> -->
+                </div>
+            </li>
             {% else %}
             <li class="nav-item">
                 <a class="dropdown-item" href="{% url 'login' %}">

@@ -59,7 +59,6 @@ def get_account_credentials(request, account_id):
 @login_required(login_url='/accounts/login/')
 def tenant_list(request):
     tenants = Tenant.objects.all()
-    print(tenants, tenants.count())
     return render(request, 'mailuser/tenant_list.html', {'tenantlist': tenants})
 
 

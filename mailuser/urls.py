@@ -26,6 +26,7 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
 
+    path('', views.tenant_list, name='tenantlist'),
     path('tenantlist/', views.tenant_list, name='tenantlist'),
     path('accountlist/<int:tenant_id>', views.account_list, name='accountlist'),
     path('get_account_credentials/<int:account_id>/', views.get_account_credentials, name='get_account_credentials'),
