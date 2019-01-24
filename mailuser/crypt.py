@@ -22,7 +22,7 @@ def init_storage_dir():
     try:
         os.mkdir(storage_dir)
     except (OSError, IOError) as inst:
-        raise InternalError(
+        raise FileNotFoundError(
             _("Failed to create the directory that will contain "
               "PDF documents (%s)") % inst
         )
@@ -30,9 +30,10 @@ def init_storage_dir():
 
 def get_creds_filename(account):
     """Return the full path of a document."""
-    # TODO: get storage_dir from settings!!
-    storage_dir = 'media/credentials/'
-    return os.path.join(storage_dir, account.username + ".pdf")
+    base_dir = getattr(settings, "BASE_DIR", None)
+    storage_dir = getattr(settings, "STORAGE_DIR", 'media/credentials/')
+    print(os.path.join(base_dir, storage_dir, account.username + ".pdf"))
+    return os.path.join(base_dir, storage_dir, account.username + ".pdf")
 
 
 def delete_credentials(account):

@@ -7,6 +7,7 @@ from django.shortcuts import HttpResponse, render
 from django.utils.crypto import get_random_string
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import ugettext_lazy as _
 
 from .crypt import get_creds_filename, decrypt_file, init_storage_dir
 from .models import Tenant, Account
@@ -47,7 +48,7 @@ def get_account_credentials(request, account_id):
     account = Account.objects.get(pk=account_id)
     fname = get_creds_filename(account)
     if not os.path.exists(fname):
-        messages.error(_("No document available for this user"))
+        messages.error(request, _("No document available for this user"))
     content = decrypt_file(fname)
     resp = HttpResponse(content)
     resp["Content-Type"] = "application/pdf"
@@ -58,7 +59,7 @@ def get_account_credentials(request, account_id):
 
 @login_required(login_url='/accounts/login/')
 def tenant_list(request):
-    tenants = Tenant.objects.all()
+    tenants = Tenant.objects.filter(manager=request.user)
     return render(request, 'mailuser/tenant_list.html', {'tenantlist': tenants})
 
 
