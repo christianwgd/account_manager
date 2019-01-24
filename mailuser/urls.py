@@ -21,8 +21,14 @@ from django.conf.urls.static import static
 
 from . import views
 
+admin.site.site_header = 'EHV-NRW Kontrollausschuss (KAS)'
+admin.site.site_title = 'KAS'
+admin.site.index_title = 'KAS Verwaltung'
+
+
 urlpatterns = [
     path('admin/filebrowser/', site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
 
