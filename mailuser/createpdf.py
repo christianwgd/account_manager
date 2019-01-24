@@ -60,7 +60,7 @@ def credentials(account):
     story = []
     story.append(resized_image(crypt.get_document_logo(account.tenant.logo), 8*cm))
     story.append(Spacer(1, 1 * cm))
-    # story.append(Paragraph(conf["title"], styles["Title"]))
+    story.append(Paragraph(_("Personal account information"), styles["Title"]))
     story.append(Spacer(1, 1 * cm))
     story.append(Paragraph(_("""
 Dear %s, this document contains the credentials you will need
