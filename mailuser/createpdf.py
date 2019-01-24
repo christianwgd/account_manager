@@ -54,8 +54,6 @@ def credentials(account):
                             styles["Footer"])]
         Frame(0, 0, 21 * cm, 2 * cm).addFromList(footer, canvas)
 
-    # conf = dict(
-    #     param_tools.get_global_parameters("modoboa_pdfcredentials"))
     filename = crypt.get_creds_filename(account)
     buff = BytesIO()
     doc = SimpleDocTemplate(buff, pagesize=A4)
@@ -71,19 +69,18 @@ the document as soon as possible.
 """) % account.full_name, styles["Normal"]))
     story.append(Spacer(1, 0.2 * cm))
     story.append(Paragraph(_("Web panel:"), styles["h3"]))
-    # data = [
-    #     # ["URL", conf["webpanel_url"]],
-    #     [_("URL"), 'http:/test/']
-    #     [_("Username"), str(account.username)],
-    #     [_("Password"), account.password]
-    # ]
-    # table = Table(data)
-    # table.setStyle(TableStyle([
-    #     ('TEXTCOLOR', (1, 0), (1, 0), colors.blue),
-    #     ('GRID', (0, 0), (-1, -1), 1, colors.black),
-    #     ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
-    # ]))
-    # story.append(table)
+    data = [
+        [_("URL"), account.tenant.weburl],
+        [_("Username"), str(account.username)],
+        [_("Password"), account.def_pwd]
+    ]
+    table = Table(data)
+    table.setStyle(TableStyle([
+        ('TEXTCOLOR', (1, 0), (1, 0), colors.blue),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
+    ]))
+    story.append(table)
     story.append(Spacer(1, 0.5 * cm))
     story.append(Paragraph(_("""
 Here you can view your emails anytime online, create filters or manage
@@ -95,30 +92,29 @@ your contacts.
         _("Please change your password!"),
         styles["Warning"]))
 
-    # if conf["include_connection_settings"]:
-    #     story.append(Spacer(1, 1 * cm))
-    #     story.append(Paragraph(
-    #         _("PC/Tablet/Smartphone configuration:"), styles["h3"]))
-    #     story.append(Spacer(1, 0.2 * cm))
-    #     data = [
-    #         [_("SMTP server address"), 'ServerAdress'],
-    #         [_("SMTP server port"), 'ServerPort'],
-    #         [_("SMTP connection security"), "smtp_connection_security"],
-    #         [_("IMAP server address"), "imap_server_address"],
-    #         [_("IMAP server port"), "imap_server_port"],
-    #         [_("IMAP connection security"), "imap_connection_security"],
-    #     ]
-    #     table = Table(data)
-    #     table.setStyle(TableStyle([
-    #         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-    #         ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
-    #     ]))
-    #     story.append(table)
-    #     story.append(Spacer(1, 0.5 * cm))
-    #     story.append(Paragraph(
-    #         _("Use those settings for your computer, tablet or phone."),
-    #         styles["Normal"])
-    #     )
+    story.append(Spacer(1, 1 * cm))
+    story.append(Paragraph(
+        _("PC/Tablet/Smartphone configuration:"), styles["h3"]))
+    story.append(Spacer(1, 0.2 * cm))
+    data = [
+        [_("SMTP server address"), account.tenant.smtp_url],
+        [_("SMTP server port"), account.tenant.smtp_port],
+        [_("SMTP connection security"), account.tenant.get_smtp_sec_display()],
+        [_("IMAP server address"), account.tenant.imap_url],
+        [_("IMAP server port"), account.tenant.imap_port],
+        [_("IMAP connection security"), account.tenant.get_imap_sec_display()],
+    ]
+    table = Table(data)
+    table.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
+    ]))
+    story.append(table)
+    story.append(Spacer(1, 0.5 * cm))
+    story.append(Paragraph(
+        _("Use those settings for your computer, tablet or phone."),
+        styles["Normal"])
+    )
 
     # if conf["custom_message"]:
     #     story.append(Spacer(1, 2 * cm))
