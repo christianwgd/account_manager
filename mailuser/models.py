@@ -2,7 +2,12 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from filebrowser.fields import FileBrowseField
+
+from .crypt import get_creds_filename, decrypt_file, init_storage_dir
+from .createpdf import credentials
 
 
 class Tenant(models.Model):
@@ -44,6 +49,14 @@ class Account(models.Model):
     username = models.EmailField(_('account user'))
     description = models.CharField(_('description'), max_length=80, null=True, blank=True)
     def_pwd = models.CharField(_('default password'), max_length=50)
+
+
+@receiver(post_save, sender=Account)
+def account_updated(sender, **kwargs):
+    """Create or update document."""
+    account = kwargs['instance']
+    init_storage_dir()
+    credentials(account)
 
 
 class Alias(models.Model):

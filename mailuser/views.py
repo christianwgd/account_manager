@@ -5,8 +5,8 @@ import sys
 from rfc6266 import build_header
 from django.shortcuts import HttpResponse
 from django.utils.crypto import get_random_string
+from django.contrib import messages
 
-from .createpdf import credentials
 from .crypt import get_creds_filename, decrypt_file, init_storage_dir
 from .models import Tenant, Account
 
@@ -41,25 +41,13 @@ def createDefaultPassword(request):
     return HttpResponse(pw)
 
 
-def create_account_credentials(request, account_id):
-    """Create or update document."""
-    init_storage_dir()
-    account = Account.objects.get(pk=account_id)
-    credentials(account)
-    return HttpResponse('')
-
-
 def get_account_credentials(request, account_id):
     """View to download a document."""
     account = Account.objects.get(pk=account_id)
-    # if not request.user.can_access(account):
-    #     raise PermDeniedException()
     fname = get_creds_filename(account)
-    # if not os.path.exists(fname):
-    #     raise ModoboaException(_("No document available for this user"))
+    if not os.path.exists(fname):
+        messages.error(_("No document available for this user"))
     content = decrypt_file(fname)
-    # if param_tools.get_global_parameter("delete_first_dl"):
-    #     os.remove(fname)
     resp = HttpResponse(content)
     resp["Content-Type"] = "application/pdf"
     resp["Content-Length"] = len(content)
