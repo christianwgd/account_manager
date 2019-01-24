@@ -70,4 +70,5 @@ class Alias(models.Model):
         ordering = ['name']
 
     name =  models.EmailField(_('alias'))
+    description = models.CharField(_('description'), max_length=80, null=True, blank=True)
     account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_('Account'))
