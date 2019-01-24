@@ -49,8 +49,8 @@ def credentials(account):
     def page_template(canvas, doc):
         canvas.setTitle(_("Personal account information"))
         canvas.setAuthor(account.full_name)
-        canvas.setCreator("Modoboa")
-        footer = [Paragraph(_("Powered by Modoboa - Mail hosting made simple"),
+        canvas.setCreator("MailUser")
+        footer = [Paragraph(_("Powered by MailUser"),
                             styles["Footer"])]
         Frame(0, 0, 21 * cm, 2 * cm).addFromList(footer, canvas)
 
