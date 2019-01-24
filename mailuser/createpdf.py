@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """The code used to generate PDF files (based on Reportlab)."""
 
 from io import BytesIO
@@ -58,7 +59,7 @@ def credentials(account):
     buff = BytesIO()
     doc = SimpleDocTemplate(buff, pagesize=A4)
     story = []
-    story.append(resized_image(crypt.get_document_logo(account.tenant.logo), 8*cm))
+    story.append(resized_image(crypt.get_document_logo(account.tenant.logo), 6*cm))
     story.append(Spacer(1, 1 * cm))
     story.append(Paragraph(_("Personal account information"), styles["Title"]))
     story.append(Spacer(1, 1 * cm))
@@ -105,6 +106,7 @@ the document as soon as possible.
         ('TEXTCOLOR', (1, 0), (1, 0), colors.blue),
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
         ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
+        ('FONTSIZE', (0, 0), (-1, -1), 8),
     ]))
     story.append(table)
     story.append(Spacer(1, 0.5 * cm))
