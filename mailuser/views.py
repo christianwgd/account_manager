@@ -3,7 +3,7 @@ import os
 import sys
 
 from rfc6266 import build_header
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import HttpResponse, render, redirect
 from django.utils.crypto import get_random_string
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -49,7 +49,10 @@ def get_account_credentials(request, account_id):
     fname = get_creds_filename(account)
     if not os.path.exists(fname):
         messages.error(request, _("No document available for this user"))
-    content = decrypt_file(fname)
+    try:
+        content = decrypt_file(fname)
+    except:
+        return redirect(request.META.get('HTTP_REFERER'))
     resp = HttpResponse(content)
     resp["Content-Type"] = "application/pdf"
     resp["Content-Length"] = len(content)

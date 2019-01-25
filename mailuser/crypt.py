@@ -75,19 +75,22 @@ def crypt_and_save_to_file(content, filename, length, chunksize=64*512):
 def decrypt_file(filename, chunksize=24*1024):
     """Decrypt the content of a file and return it."""
     buff = BytesIO()
-    with open(filename, "rb") as fp:
-        origsize = struct.unpack(b"<Q", fp.read(struct.calcsize(b"Q")))[0]
-        iv = fp.read(16)
-        cipher = _get_cipher(iv)
-        decryptor = cipher.decryptor()
-        while True:
-            chunk = fp.read(chunksize)
-            if not len(chunk):
-                break
-            buff.write(decryptor.update(chunk))
-        buff.write(decryptor.finalize())
-        buff.truncate(origsize)
-    return buff.getvalue()
+    try:
+        with open(filename, "rb") as fp:
+            origsize = struct.unpack(b"<Q", fp.read(struct.calcsize(b"Q")))[0]
+            iv = fp.read(16)
+            cipher = _get_cipher(iv)
+            decryptor = cipher.decryptor()
+            while True:
+                chunk = fp.read(chunksize)
+                if not len(chunk):
+                    break
+                buff.write(decryptor.update(chunk))
+            buff.write(decryptor.finalize())
+            buff.truncate(origsize)
+        return buff.getvalue()
+    except:
+        raise
 
 
 def get_document_logo(logo):

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n static bootstrap4 %}
+{% load i18n static bootstrap4 mailuser_tags %}
 
 {% block content %}
 <form method="get" class="from-horizontal" role="form" action="">
@@ -30,7 +30,7 @@
                             {% endfor %}
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-secondary" href="{% url 'get_account_credentials' account.id %}" role="button"
+                            <a class="btn btn-sm btn-secondary{% f_exists account.id %}" href="{% url 'get_account_credentials' account.id %}" role="button"
                                 title="{% trans 'load credentials pdf' %}">
                             <i class="far fa-file-pdf"></i>
                             </a>
