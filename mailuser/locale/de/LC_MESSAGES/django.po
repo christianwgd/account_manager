@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-25 08:12+0100\n"
+"POT-Creation-Date: 2019-01-25 15:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,12 +107,13 @@ msgstr ""
 msgid "mail tenant"
 msgstr "Mandant"
 
-#: .\models.py:28 .\templates\base.html:45
+#: .\models.py:28 .\templates\base.html:47
 #: .\templates\mailuser\tenant_list.html:4
 msgid "mail tenants"
 msgstr "Mandanten"
 
-#: .\models.py:31 .\templates\mailuser\account_list.html:14
+#: .\models.py:31 .\templates\mailuser\account_edit.html:32
+#: .\templates\mailuser\account_list.html:16
 msgid "name"
 msgstr "Name"
 
@@ -126,7 +127,7 @@ msgstr ""
 
 #: .\models.py:35
 msgid "web url"
-msgstr ""
+msgstr "Web URL"
 
 #: .\models.py:43
 msgid "manager"
@@ -152,11 +153,11 @@ msgstr "Vorname"
 msgid "last name"
 msgstr "Nachname"
 
-#: .\models.py:66 .\templates\mailuser\account_list.html:15
+#: .\models.py:66 .\templates\mailuser\account_list.html:17
 msgid "account user"
 msgstr "Benutzername"
 
-#: .\models.py:67 .\models.py:90
+#: .\models.py:67 .\models.py:90 .\templates\mailuser\account_edit.html:33
 msgid "description"
 msgstr "Beschreibung"
 
@@ -168,7 +169,7 @@ msgstr "Initiales Passwort"
 msgid "mail alias"
 msgstr "Alias"
 
-#: .\models.py:86 .\templates\mailuser\account_list.html:16
+#: .\models.py:86 .\templates\mailuser\account_list.html:18
 msgid "mail aliases"
 msgstr "Aliase"
 
@@ -180,57 +181,99 @@ msgstr "Alias"
 msgid "Account"
 msgstr "Konto"
 
-#: .\templates\base.html:4 .\templates\base.html:34
+#: .\settings.py:114 .\templates\base.html:4 .\templates\base.html:36
+#: .\urls.py:25
 msgid "Account Manager"
 msgstr "Account-Manager"
 
-#: .\templates\base.html:64
+#: .\templates\base.html:66
 msgid "Log out"
 msgstr ""
 
-#: .\templates\base.html:68
+#: .\templates\base.html:70
 msgid "Password change"
 msgstr ""
 
-#: .\templates\base.html:73
+#: .\templates\base.html:75
 msgid "Admin"
 msgstr ""
 
-#: .\templates\base.html:82
+#: .\templates\base.html:84
 msgid "Log in"
 msgstr ""
 
-#: .\templates\mailuser\account_list.html:10
-msgid "Accounts"
-msgstr "Konten"
+#: .\templates\mailuser\account_delete.html:4
+msgid "account delete"
+msgstr "Konto löschen"
 
-#: .\templates\mailuser\account_list.html:34
-msgid "load credentials pdf"
-msgstr "Kontodaten PDF laden"
+#: .\templates\mailuser\account_delete.html:14
+#: .\templates\mailuser\account_delete.html:32
+#: .\templates\mailuser\alias_delete.html:14
+#: .\templates\mailuser\alias_delete.html:23
+msgid "Delete"
+msgstr "Löschen"
 
-#: .\templates\mailuser\account_list.html:39
-msgid "edit"
-msgstr "bearbeiten"
+#: .\templates\mailuser\account_delete.html:16
+msgid "Do you really want to delete this account?"
+msgstr "Dieses Konto wirklich löschen?"
 
-#: .\templates\mailuser\account_list.html:44
-msgid "delete"
-msgstr "löschen"
+#: .\templates\mailuser\account_delete.html:21
+msgid "This will also delete the following aliases connected to this account:"
+msgstr "Mit diesem Konto werden die folgenden mit diesem Konto verbundenen Aliase mit gelöscht:"
 
-#: .\templates\mailuser\account_list.html:52
-msgid "back"
-msgstr "zurück"
+#: .\templates\mailuser\account_delete.html:35
+#: .\templates\mailuser\alias_delete.html:26
+msgid "Cancel"
+msgstr "Abbrechen"
 
-#: .\templates\mailuser\account_list.html:55
-msgid "new"
-msgstr "Neu"
+#: .\templates\mailuser\account_edit.html:10
+#: .\templates\mailuser\account_new.html:10
+msgid "account edit"
+msgstr "Konto bearbeiten"
 
+#: .\templates\mailuser\account_edit.html:28
+msgid "aliases"
+msgstr "Aliase"
+
+#: .\templates\mailuser\account_edit.html:74
+#: .\templates\mailuser\account_new.html:37
 #: .\templates\mailuser\custom_admin_account_change.html:56
 msgid "generate username"
 msgstr "Benutzername erzeugen"
 
+#: .\templates\mailuser\account_edit.html:77
+#: .\templates\mailuser\account_new.html:40
 #: .\templates\mailuser\custom_admin_account_change.html:57
 msgid "generate password"
 msgstr "Passwort erzeugen"
+
+#: .\templates\mailuser\account_list.html:4
+msgid "accounts for "
+msgstr "Konten für Domain "
+
+#: .\templates\mailuser\account_list.html:12
+msgid "Accounts"
+msgstr "Konten"
+
+#: .\templates\mailuser\account_list.html:36
+msgid "load credentials pdf"
+msgstr "Kontodaten PDF laden"
+
+#: .\templates\mailuser\account_list.html:54
+msgid "back"
+msgstr "zurück"
+
+#: .\templates\mailuser\alias_delete.html:4
+msgid "alias delete"
+msgstr "Alias löschen"
+
+#: .\templates\mailuser\alias_delete.html:16
+msgid "Do you really want to delete this alias?"
+msgstr "Diesen Alias wirklich löschen?"
+
+#: .\templates\mailuser\alias_edit.html:9
+msgid "alias edit"
+msgstr "Alias bearbeiten"
 
 #: .\templates\registration\logged_out.html:6
 msgid "You are now logged out, thanks for using this app."
@@ -266,10 +309,36 @@ msgstr ""
 msgid "Change my password"
 msgstr "Passwort erzeugen"
 
-#: .\views.py:28
+#: .\views.py:30
 msgid "No tenant selected."
 msgstr "Kein Mandant ausgewählt."
 
-#: .\views.py:51
+#: .\views.py:53
 msgid "No document available for this user"
 msgstr "Für diesen Benutzer ist kein PDF Dokument verfügbar"
+
+#: .\views.py:98
+msgid "account changed."
+msgstr "Konto geändert."
+
+#: .\views.py:101
+msgid "error in edit account."
+msgstr "Fehler beim Bearbeiten des Kontos."
+
+#: .\views.py:119
+#, python-brace-format
+msgid "Account {account} deleted."
+msgstr "Konto {account} gelöscht."
+
+#: .\views.py:143
+msgid "alias changed."
+msgstr "Alias geändert."
+
+#: .\views.py:146
+msgid "error in edit alias."
+msgstr "Fehler beim Bearbeiten des Alias."
+
+#: .\views.py:164
+#, python-brace-format
+msgid "Alias {alias} deleted."
+msgstr "Alias {alias} gelöscht."
