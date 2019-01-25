@@ -12,7 +12,6 @@ register = template.Library()
 def f_exists(account_id):
     account = Account.objects.get(pk=account_id)
     fname = get_creds_filename(account)
-    print(fname)
     if os.path.exists(fname):
         return ''
     else:
