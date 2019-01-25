@@ -4,6 +4,7 @@ import sys
 
 from rfc6266 import build_header
 from django.shortcuts import HttpResponse, render, redirect
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -11,6 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .crypt import get_creds_filename, decrypt_file, init_storage_dir
 from .models import Tenant, Account
+from .forms import AccountForm
 
 
 def bad_request(message):
@@ -71,3 +73,47 @@ def account_list(request, tenant_id):
     tenant = Tenant.objects.get(pk=tenant_id)
     accounts = Account.objects.filter(tenant=tenant)
     return render(request, 'mailuser/account_list.html', {'accountlist': accounts, 'tenant': tenant})
+
+
+@login_required(login_url='/accounts/login/')
+def account_edit(request, account_id=None):
+    if account_id is None:
+        account = Account()
+    else:
+        account = Account.objects.get(pk=account_id)
+
+    if request.method == 'GET':
+        form = AccountForm(instance=account)
+    else:
+        try:
+            if 'cancel' in request.POST:
+                return redirect(reverse('accountlist', args=(account.tenant.id,)))
+
+            form = AccountForm(request.POST, instance=account)
+            if form.is_valid():
+                form.save()
+                messages.success(request, _('account changed.'))
+                return redirect(reverse('accountlist', args=(account.tenant.id,)))
+        except Exception as e:
+            messages.error(request, _('error in edit account.'))
+    return render(request, 'mailuser/account_edit.html', {
+        'form': form,
+        'account': account,
+    })
+
+
+@login_required(login_url='/accounts/login/')
+def account_delete(request, account_id):
+
+    account = Account.objects.get(pk=account_id)
+
+    if request.method == 'POST':
+        if 'cancel' in request.POST:
+            return redirect(reverse('accountlist', args=(account.tenant.id,)))
+
+        account.delete()
+        messages.success(request, _(
+            'Account {account} deleted.').format(account=account.username))
+        return redirect(reverse('accountlist', args=(account.tenant.id,)))
+
+    return render(request, 'mailuser/account_delete.html', {'account': account})

@@ -34,18 +34,18 @@
                         <td>
                             <a class="btn btn-sm btn-secondary{% f_exists account.id %}" href="{% url 'get_account_credentials' account.id %}" role="button"
                                 title="{% trans 'load credentials pdf' %}">
-                            <i class="far fa-file-pdf"></i>
+                                <i class="far fa-file-pdf"></i>
                             </a>
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-secondary" name="edit" value="{{ event.id }}" title="{% trans 'edit' %}">
+                            <a class="btn btn-sm btn-secondary" href="{% url 'accountedit' account.id %}" role="button">
                                 <i class="far fa-edit"></i>
-                            </button>
+                            </a>
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-danger" name="delete" value="{{ event.id }}" title="{% trans 'delete' %}">
-                                <i class="far fa-times"></i>
-                            </button>
+                            <a class="btn btn-sm btn-danger" href="{% url 'accountdelete' account.id %}" role="button">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -54,9 +54,9 @@
             <button class="btn btn-primary" name="back" title="{% trans 'back' %}">
                 <i class="far fa-check"></i>
             </button>
-            <button class="btn btn-success" name="add" title="{% trans 'new' %}">
-                <i class="far fa-plus"></i> 
-            </button>
+            <a class="btn btn-success" href="{% url 'accountnew' %}" role="button">
+                <i class="far fa-plus"></i>
+            </a>
         </div>
     </div>
 </div>
