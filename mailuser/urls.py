@@ -33,10 +33,13 @@ urlpatterns = [
 
     path('', views.tenant_list, name='tenantlist'),
     path('tenantlist/', views.tenant_list, name='tenantlist'),
-    path('accountlist/<int:tenant_id>', views.account_list, name='accountlist'),
-    path('accountedit/', views.account_edit, name='accountnew'),
-    path('accountedit/<int:account_id>', views.account_edit, name='accountedit'),
-    path('accountdelete/<int:account_id>', views.account_delete, name='accountdelete'),
+    path('accountlist/<int:tenant_id>/', views.account_list, name='accountlist'),
+    path('accountedit/<int:tenant_id>/', views.account_edit, name='accountnew'),
+    path('accountedit/<int:tenant_id>/<int:account_id>/', views.account_edit, name='accountedit'),
+    path('accountdelete/<int:account_id>/', views.account_delete, name='accountdelete'),
+    path('aliasedit/<int:account_id>/', views.alias_edit, name='aliasnew'),
+    path('aliasedit/<int:account_id>/<int:alias_id>/', views.alias_edit, name='aliasedit'),
+    path('aliasdelete/<int:alias_id>/', views.alias_delete, name='aliasdelete'),
     path('get_account_credentials/<int:account_id>/', views.get_account_credentials, name='get_account_credentials'),
 
     path('get_tenant_domain/<int:tenant_id>/', views.getTenantDomain, name='get_tenant_domain'),

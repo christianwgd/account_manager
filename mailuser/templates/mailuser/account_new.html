@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load i18n static bootstrap4 %}
+
+{% block bootstrap4_extra_head %}
+{{ block.super }}
+{{ form.media }}
+<script src="{% static 'js/generate.js' %}"></script>
+{% endblock %}
+
+{% block title %}{% trans 'account edit' %}{% endblock %}
+
+{% block content %}
+
+<form id="rule_form" method="post" class="from-horizontal" role="form" action="">
+    {% csrf_token %}
+
+    <!-- for javascript username generator -->
+    <span id="id_tenant" style="display:none;">{{ account.tenant.id }}</span>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="panel">
+                {% bootstrap_form form %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="panel" style="padding: 10px 10px;">
+                {% buttons %}
+                    <button class="btn btn-primary" name="submit" type="submit" formnovalidate>
+                        <i class="far fa-check"></i>
+                    </button>
+                    <button class="btn btn-default" type="submit" name="cancel" formnovalidate>
+                        <i class="far fa-times"></i>
+                    </button>
+                    <button class="btn btn-default" id="_gen_username" type="button" title="{% trans 'generate username' %}">
+                        <i class="far fa-user"></i>
+                    </button>
+                    <button class="btn btn-default" id="_gen_password" type="button" title="{% trans 'generate password' %}">
+                        <i class="far fa-key"></i>
+                    </button>
+                {% endbuttons %}
+            </div>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

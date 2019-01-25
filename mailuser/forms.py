@@ -2,10 +2,18 @@
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 
-from .models import Account
+from .models import Account, Alias
+
 
 class AccountForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = '__all__'
+        exclude = ['tenant']
+
+
+class AliasForm(forms.ModelForm):
+
+    class Meta:
+        model = Alias
+        exclude = ['account']

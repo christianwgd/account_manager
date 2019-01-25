@@ -4,6 +4,7 @@
 {% block bootstrap4_extra_head %}
 {{ block.super }}
 {{ form.media }}
+<script src="{% static 'js/generate.js' %}"></script>
 {% endblock %}
 
 {% block title %}{% trans 'account edit' %}{% endblock %}
@@ -13,10 +14,49 @@
 <form id="rule_form" method="post" class="from-horizontal" role="form" action="">
     {% csrf_token %}
 
+    <!-- for javascript username generator -->
+    <span id="id_tenant" style="display:none;">{{ account.tenant.id }}</span>
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="panel">
                 {% bootstrap_form form %}
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="panel">
+                <h4>{% trans 'aliases' %}</h4>
+                <table id="aliases" class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'name' %}</th>
+                            <th>{% trans 'description' %}</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for alias in account.alias_set.all %}
+                        <tr>
+                            <td>{{ alias.name }}</td>
+                            <td>{{ alias.description|default_if_none:'-' }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" href="{% url 'aliasedit' account.id alias.id %}" role="button">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-danger" href="{% url 'aliasdelete' alias.id %}" role="button">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a class="btn btn-sm btn-success" href="{% url 'aliasnew' account.id %}" role="button">
+                    <i class="far fa-plus"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -30,6 +70,12 @@
                     </button>
                     <button class="btn btn-default" type="submit" name="cancel" formnovalidate>
                         <i class="far fa-times"></i>
+                    </button>
+                    <button class="btn btn-default" id="_gen_username" type="button" title="{% trans 'generate username' %}">
+                        <i class="far fa-user"></i>
+                    </button>
+                    <button class="btn btn-default" id="_gen_password" type="button" title="{% trans 'generate password' %}">
+                        <i class="far fa-key"></i>
                     </button>
                 {% endbuttons %}
             </div>

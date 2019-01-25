@@ -24,7 +24,7 @@
                 <tbody>
                     {% for account in accountlist %}
                     <tr>
-                        <td>{{ account.full_name }}</td>
+                        <td>{{ account.full_name|default_if_none:'-' }}</td>
                         <td>{{ account.username }}</td>
                         <td>
                             {% for alias in account.alias_set.all %}
@@ -38,7 +38,7 @@
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-secondary" href="{% url 'accountedit' account.id %}" role="button">
+                            <a class="btn btn-sm btn-secondary" href="{% url 'accountedit' tenant.id account.id %}" role="button">
                                 <i class="far fa-edit"></i>
                             </a>
                         </td>
@@ -54,7 +54,7 @@
             <button class="btn btn-primary" name="back" title="{% trans 'back' %}">
                 <i class="far fa-check"></i>
             </button>
-            <a class="btn btn-success" href="{% url 'accountnew' %}" role="button">
+            <a class="btn btn-success" href="{% url 'accountnew' tenant.id %}" role="button">
                 <i class="far fa-plus"></i>
             </a>
         </div>

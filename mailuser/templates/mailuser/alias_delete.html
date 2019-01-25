@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load i18n static bootstrap4 %}
+
+{% block title %}{% trans 'alias delete' %}{% endblock %}
+
+{% block content %}
+
+<form action="" method="post" class="form-inline">
+{% csrf_token %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 offset-3 text-center">
+                <h4 style="color: red;">{% trans 'Delete' %} {{ alias.name }}?</h4>
+                <p>
+                    {% trans 'Do you really want to delete this alias?' %}
+                </p>
+            </div>
+        </div>
+
+        {% buttons %}
+
+        <button type="submit" class="btn btn-danger" name="delete" title="{% trans 'Delete' %}">
+            <i class="far fa-check"></i>
+        </button>
+        <button type="submit" class="btn btn-default" name="cancel" title="{% trans 'Cancel' %}">
+            <i class="far fa-times"></i>
+        </button>
+        {% endbuttons %}
+    </div>
+
+</form>
+{% endblock %}

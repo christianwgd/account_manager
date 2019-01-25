@@ -11,8 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
 from .crypt import get_creds_filename, decrypt_file, init_storage_dir
-from .models import Tenant, Account
-from .forms import AccountForm
+from .models import Tenant, Account, Alias
+from .forms import AccountForm, AliasForm
 
 
 def bad_request(message):
@@ -76,11 +76,14 @@ def account_list(request, tenant_id):
 
 
 @login_required(login_url='/accounts/login/')
-def account_edit(request, account_id=None):
+def account_edit(request, tenant_id, account_id=None):
     if account_id is None:
-        account = Account()
+        tenant = Tenant.objects.get(pk=tenant_id)
+        account = Account(tenant=tenant)
+        template = 'mailuser/account_new.html'
     else:
         account = Account.objects.get(pk=account_id)
+        template = 'mailuser/account_edit.html'
 
     if request.method == 'GET':
         form = AccountForm(instance=account)
@@ -96,7 +99,7 @@ def account_edit(request, account_id=None):
                 return redirect(reverse('accountlist', args=(account.tenant.id,)))
         except Exception as e:
             messages.error(request, _('error in edit account.'))
-    return render(request, 'mailuser/account_edit.html', {
+    return render(request, template, {
         'form': form,
         'account': account,
     })
@@ -117,3 +120,48 @@ def account_delete(request, account_id):
         return redirect(reverse('accountlist', args=(account.tenant.id,)))
 
     return render(request, 'mailuser/account_delete.html', {'account': account})
+
+
+@login_required(login_url='/accounts/login/')
+def alias_edit(request, account_id, alias_id=None):
+    if alias_id is None:
+        account = Account.objects.get(pk=account_id)
+        alias = Alias(account=account)
+    else:
+        alias = Alias.objects.get(pk=alias_id)
+
+    if 'cancel' in request.POST:
+        return redirect(reverse('accountedit', args=(alias.account.tenant.id, alias.account.id,)))
+
+    if request.method == 'GET':
+        form = AliasForm(instance=alias)
+    else:
+        try:
+            form = AliasForm(request.POST, instance=alias)
+            if form.is_valid():
+                form.save()
+                messages.success(request, _('alias changed.'))
+                return redirect(reverse('accountedit', args=(alias.account.tenant.id, alias.account.id,)))
+        except Exception as e:
+            messages.error(request, _('error in edit alias.'))
+    return render(request, 'mailuser/alias_edit.html', {
+        'form': form,
+        'alias': alias,
+    })
+
+
+@login_required(login_url='/accounts/login/')
+def alias_delete(request, alias_id):
+
+    alias = Alias.objects.get(pk=alias_id)
+
+    if request.method == 'POST':
+        if 'cancel' in request.POST:
+            return redirect(reverse('accountedit', args=(alias.account.tenant.id, alias.account.id,)))
+
+        alias.delete()
+        messages.success(request, _(
+            'Alias {alias} deleted.').format(alias=alias.name))
+        return redirect(reverse('accountedit', args=(alias.account.tenant.id, alias.account.id,)))
+
+    return render(request, 'mailuser/alias_delete.html', {'alias': alias})

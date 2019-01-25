@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n static bootstrap4 %}
+
+{% block bootstrap4_extra_head %}
+{{ block.super }}
+{{ form.media }}
+{% endblock %}
+
+{% block title %}{% trans 'alias edit' %}{% endblock %}
+
+{% block content %}
+
+<form id="rule_form" method="post" class="from-horizontal" role="form" action="">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="panel">
+                {% bootstrap_form form %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="panel" style="padding: 10px 10px;">
+                {% buttons %}
+                    <button class="btn btn-primary" name="submit" type="submit" formnovalidate>
+                        <i class="far fa-check"></i>
+                    </button>
+                    <button class="btn btn-default" type="submit" name="cancel" formnovalidate>
+                        <i class="far fa-times"></i>
+                    </button>
+                {% endbuttons %}
+            </div>
+        </div>
+    </div>
+
+</form>
+{% endblock %}
