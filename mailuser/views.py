@@ -70,4 +70,4 @@ def tenant_list(request):
 def account_list(request, tenant_id):
     tenant = Tenant.objects.get(pk=tenant_id)
     accounts = Account.objects.filter(tenant=tenant)
-    return render(request, 'mailuser/account_list.html', {'accountlist': accounts})
+    return render(request, 'mailuser/account_list.html', {'accountlist': accounts, 'tenant': tenant})

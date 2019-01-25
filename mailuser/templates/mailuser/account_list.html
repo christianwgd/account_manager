@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load i18n static bootstrap4 mailuser_tags %}
 
+{% block title %}{% trans 'accounts for ' %}{{ tenant.domain }}{% endblock %}
+
 {% block content %}
 <form method="get" class="from-horizontal" role="form" action="">
 {% csrf_token %}
