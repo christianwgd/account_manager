@@ -27,7 +27,7 @@ class TenantAdmin(admin.ModelAdmin):
 
 @admin.register(Alias)
 class AliasAdmin(admin.ModelAdmin):
-    list_display = ['name', ]
+    list_display = ['name', 'description']
 
 
 class AliasInlineAdmin(admin.TabularInline):
