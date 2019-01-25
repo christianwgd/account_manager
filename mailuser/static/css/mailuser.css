@@ -1,1 +1,10 @@
 .dropdown-menu.right { right: 0; left: auto; }
+
+.table td, .table th {
+    padding: .5rem;
+    vertical-align: middle;
+}
+
+.form-group.required .control-label {
+    font-weight: bold;
+}
