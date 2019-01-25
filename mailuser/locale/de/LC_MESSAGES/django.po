@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-24 22:01+0100\n"
+"POT-Creation-Date: 2019-01-25 08:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: createpdf.py:50 createpdf.py:63
+#: .\createpdf.py:51 .\createpdf.py:64
 msgid "Personal account information"
 msgstr "Persönliche Kontoinformationen"
 
-#: createpdf.py:53
+#: .\createpdf.py:54
 msgid "Powered by MailUser"
 msgstr ""
 
-#: createpdf.py:65
+#: .\createpdf.py:66
 #, python-format
 msgid ""
 "\n"
@@ -35,237 +35,241 @@ msgid ""
 "the document as soon as possible.\n"
 msgstr ""
 "\n"
-"Liebe/r %s, dieses Dokument enthält die Anmeldeinformationen, die Sie benötigen "
-"um sich mit Ihrem Email-Konto zu verbinden. Prägen Sie sich bitte die Informationen ein und "
-"löschen anschliessend dieses Dokument.\n"
+"Liebe/r %s, dieses Dokument enthält die Anmeldeinformationen, die Sie "
+"benötigen um sich mit Ihrem Email-Konto zu verbinden. Prägen Sie sich bitte "
+"die Informationen ein und löschen anschliessend dieses Dokument.\n"
 
-#: createpdf.py:71
+#: .\createpdf.py:72
 msgid "Web panel:"
 msgstr "Webmail-Anwendung:"
 
-#: createpdf.py:73
+#: .\createpdf.py:74
 msgid "URL"
 msgstr ""
 
-#: createpdf.py:74
+#: .\createpdf.py:75
 msgid "Username"
 msgstr "Benutzername"
 
-#: createpdf.py:75
+#: .\createpdf.py:76
 msgid "Password"
 msgstr "Passwort"
 
-#: createpdf.py:92
+#: .\createpdf.py:88
 msgid "Please change your password!"
 msgstr "Bitte ändern Sie Ihr Passwort!"
 
-#: createpdf.py:97
+#: .\createpdf.py:93
 msgid "PC/Tablet/Smartphone configuration:"
 msgstr "PC/Tablet/Smartphone Konfiguration:"
 
-#: createpdf.py:100 models.py:35
-msgid "SMTP server address"
-msgstr "SMTP Server Adresse"
-
-#: createpdf.py:101 models.py:36
-msgid "SMTP server port"
-msgstr "SMTP Server Port"
-
-#: createpdf.py:102
-msgid "SMTP connection security"
-msgstr "SMTP Verbindungsverschlüsselung"
-
-#: createpdf.py:103 models.py:38
-msgid "IMAP server address"
-msgstr "IMAP Server Adresse"
-
-#: createpdf.py:104 models.py:39
-msgid "IMAP server port"
-msgstr "IMAP Server Port"
-
-#: createpdf.py:105
-msgid "IMAP connection security"
-msgstr "IMAP Verbindungsverschlüsselung"
-
-#: createpdf.py:115
-msgid "Use those settings for your computer, tablet or phone."
-msgstr "Verwenden Sie diese Einstellungen für Ihren Computer, Ihr Tablet oder Smartphone."
-
-#: crypt.py:26
-#, python-format
-msgid "Failed to create the directory that will contain PDF documents (%s)"
-msgstr "Das Verzeichnis (%s) für die PDF Dokumente konnte nicht erstellt werden."
-
-#: models.py:26
-msgid "mail tenant"
-msgstr "Mandant"
-
-#: models.py:27 templates/base.html:45 templates/mailuser/tenant_list.html:4
-msgid "mail tenants"
-msgstr "Mandanten"
-
-#: models.py:30 templates/mailuser/account_list.html:14
-msgid "name"
-msgstr "Name"
-
-#: models.py:31
-msgid "domain"
-msgstr "Domain"
-
-#: models.py:32
-msgid "Logo"
-msgstr ""
-
-#: models.py:34
-msgid "web url"
-msgstr ""
-
-#: models.py:41
+#: .\createpdf.py:96 .\models.py:42
 msgid "manual url"
 msgstr "URL Einrichtungsanleitung"
 
-#: models.py:42
+#: .\createpdf.py:97 .\models.py:36
+msgid "SMTP server address"
+msgstr "SMTP Server Adresse"
+
+#: .\createpdf.py:98 .\models.py:37
+msgid "SMTP server port"
+msgstr "SMTP Server Port"
+
+#: .\createpdf.py:99 .\models.py:38
+msgid "SMTP connection security"
+msgstr "SMTP Verbindungsverschlüsselung"
+
+#: .\createpdf.py:100 .\models.py:39
+msgid "IMAP server address"
+msgstr "IMAP Server Adresse"
+
+#: .\createpdf.py:101 .\models.py:40
+msgid "IMAP server port"
+msgstr "IMAP Server Port"
+
+#: .\createpdf.py:102 .\models.py:41
+msgid "IMAP connection security"
+msgstr "IMAP Verbindungsverschlüsselung"
+
+#: .\createpdf.py:114
+msgid "Use those settings for your computer, tablet or phone."
+msgstr ""
+"Verwenden Sie diese Einstellungen für Ihren Computer, Ihr Tablet oder "
+"Smartphone."
+
+#: .\crypt.py:26
+#, python-format
+msgid "Failed to create the directory that will contain PDF documents (%s)"
+msgstr ""
+"Das Verzeichnis (%s) für die PDF Dokumente konnte nicht erstellt werden."
+
+#: .\models.py:27
+msgid "mail tenant"
+msgstr "Mandant"
+
+#: .\models.py:28 .\templates\base.html:45
+#: .\templates\mailuser\tenant_list.html:4
+msgid "mail tenants"
+msgstr "Mandanten"
+
+#: .\models.py:31 .\templates\mailuser\account_list.html:14
+msgid "name"
+msgstr "Name"
+
+#: .\models.py:32
+msgid "domain"
+msgstr "Domain"
+
+#: .\models.py:33
+msgid "Logo"
+msgstr ""
+
+#: .\models.py:35
+msgid "web url"
+msgstr ""
+
+#: .\models.py:43
 msgid "manager"
 msgstr "Verwalter"
 
-#: models.py:58
+#: .\models.py:59
 msgid "mail account"
 msgstr "Email-Konto"
 
-#: models.py:59
+#: .\models.py:60
 msgid "mail accounts"
 msgstr "Email-Konten"
 
-#: models.py:62
+#: .\models.py:63
 msgid "tenant"
 msgstr "Mandant"
 
-#: models.py:63
+#: .\models.py:64
 msgid "first name"
 msgstr "Vorname"
 
-#: models.py:64
+#: .\models.py:65
 msgid "last name"
 msgstr "Nachname"
 
-#: models.py:65 templates/mailuser/account_list.html:15
+#: .\models.py:66 .\templates\mailuser\account_list.html:15
 msgid "account user"
 msgstr "Benutzername"
 
-#: models.py:66 models.py:89
+#: .\models.py:67 .\models.py:90
 msgid "description"
 msgstr "Beschreibung"
 
-#: models.py:67
+#: .\models.py:68
 msgid "default password"
 msgstr "Initiales Passwort"
 
-#: models.py:84
+#: .\models.py:85
 msgid "mail alias"
 msgstr "Alias"
 
-#: models.py:85 templates/mailuser/account_list.html:16
+#: .\models.py:86 .\templates\mailuser\account_list.html:16
 msgid "mail aliases"
 msgstr "Aliase"
 
-#: models.py:88
+#: .\models.py:89
 msgid "alias"
 msgstr "Alias"
 
-#: models.py:90
+#: .\models.py:91
 msgid "Account"
 msgstr "Konto"
 
-#: templates/base.html:4 templates/base.html:34
-msgid "MailUser"
-msgstr ""
+#: .\templates\base.html:4 .\templates\base.html:34
+msgid "Account Manager"
+msgstr "Account-Manager"
 
-#: templates/base.html:64
+#: .\templates\base.html:64
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:68
+#: .\templates\base.html:68
 msgid "Password change"
 msgstr ""
 
-#: templates/base.html:73
+#: .\templates\base.html:73
 msgid "Admin"
 msgstr ""
 
-#: templates/base.html:82
+#: .\templates\base.html:82
 msgid "Log in"
 msgstr ""
 
-#: templates/mailuser/account_list.html:10
+#: .\templates\mailuser\account_list.html:10
 msgid "Accounts"
 msgstr "Konten"
 
-#: templates/mailuser/account_list.html:34
+#: .\templates\mailuser\account_list.html:34
 msgid "load credentials pdf"
 msgstr "Kontodaten PDF laden"
 
-#: templates/mailuser/account_list.html:39
+#: .\templates\mailuser\account_list.html:39
 msgid "edit"
 msgstr "bearbeiten"
 
-#: templates/mailuser/account_list.html:44
+#: .\templates\mailuser\account_list.html:44
 msgid "delete"
 msgstr "löschen"
 
-#: templates/mailuser/account_list.html:52
+#: .\templates\mailuser\account_list.html:52
 msgid "back"
 msgstr "zurück"
 
-#: templates/mailuser/account_list.html:55
+#: .\templates\mailuser\account_list.html:55
 msgid "new"
 msgstr "Neu"
 
-#: templates/mailuser/custom_admin_account_change.html:56
+#: .\templates\mailuser\custom_admin_account_change.html:56
 msgid "generate username"
 msgstr "Benutzername erzeugen"
 
-#: templates/mailuser/custom_admin_account_change.html:57
+#: .\templates\mailuser\custom_admin_account_change.html:57
 msgid "generate password"
 msgstr "Passwort erzeugen"
 
-#: templates/registration/logged_out.html:6
+#: .\templates\registration\logged_out.html:6
 msgid "You are now logged out, thanks for using this app."
 msgstr ""
 
-#: templates/registration/login.html:18
+#: .\templates\registration\login.html:18
 #, python-format
 msgid ""
 "You are authenticated as %(username)s, but are not authorized to access this "
 "page. Would you like to login to a different account?"
 msgstr ""
 
-#: templates/registration/password_change_done.html:9
+#: .\templates\registration\password_change_done.html:9
 msgid "Your password was changed."
 msgstr ""
 
-#: templates/registration/password_change_form.html:14
+#: .\templates\registration\password_change_form.html:14
 msgid "Please correct the error below."
 msgstr ""
 
-#: templates/registration/password_change_form.html:14
+#: .\templates\registration\password_change_form.html:14
 msgid "Please correct the errors below."
 msgstr ""
 
-#: templates/registration/password_change_form.html:19
+#: .\templates\registration\password_change_form.html:19
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
 
-#: templates/registration/password_change_form.html:25
-#: templates/registration/password_change_form.html:27
+#: .\templates\registration\password_change_form.html:25
+#: .\templates\registration\password_change_form.html:27
 msgid "Change my password"
 msgstr "Passwort erzeugen"
 
-#: views.py:28
+#: .\views.py:28
 msgid "No tenant selected."
 msgstr "Kein Mandant ausgewählt."
 
-#: views.py:51
+#: .\views.py:51
 msgid "No document available for this user"
 msgstr "Für diesen Benutzer ist kein PDF Dokument verfügbar"

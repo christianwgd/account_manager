@@ -1,7 +1,7 @@
 {% extends 'bootstrap4/bootstrap4.html' %}
 {% load i18n bootstrap4 static %}
 
-{% block bootstrap4_title %}{% trans 'MailUser' %}{% endblock %}
+{% block bootstrap4_title %}{% trans 'Account Manager' %}{% endblock %}
 
 {% block bootstrap4_extra_head %}
 {{ block.super }}
@@ -31,7 +31,7 @@
 
 {% block bootstrap4_content %}
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'tenantlist' %}">{% trans 'MailUser' %}</a>
+    <a class="navbar-brand" href="{% url 'tenantlist' %}">{% trans 'Account Manager' %}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

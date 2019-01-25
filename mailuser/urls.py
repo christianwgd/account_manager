@@ -18,12 +18,11 @@ from django.urls import path, include
 from filebrowser.sites import site
 from django.conf import settings
 from django.conf.urls.static import static
+from django.utils.translation import ugettext_lazy as _
 
 from . import views
 
-admin.site.site_header = 'EHV-NRW Kontrollausschuss (KAS)'
-admin.site.site_title = 'KAS'
-admin.site.index_title = 'KAS Verwaltung'
+admin.site.site_header = _('Account Manager')
 
 
 urlpatterns = [
