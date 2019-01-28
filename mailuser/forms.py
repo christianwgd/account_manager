@@ -21,7 +21,7 @@ class AliasForm(forms.ModelForm):
 
     
 class ImportForm(forms.Form):
-    tenant = forms.ModelChoiceField(queryset=Tenant.objects.all())
+    tenant = forms.ModelChoiceField(queryset=Tenant.objects.all(), label=_('tenant'))
     scheduleFile = forms.FileField(
         label='Datei',
         validators=[FileExtensionValidator(allowed_extensions=['txt', 'csv'])]
