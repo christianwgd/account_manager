@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load i18n static bootstrap4 %}
+
+{% block bootstrap4_extra_head %}
+{{ block.super }}
+<script>
+</script>
+
+{% endblock %}
+
+{% block title %}{% trans 'import accounts' %}{% endblock %}
+
+{% block content %}
+<form role="form" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel" style="padding: 4px;">
+                {% bootstrap_form form %}
+            </div>
+         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>{% trans 'redirect' %}</th>
+                        <th>{% trans 'first name' %}</th>
+                        <th>{% trans 'last name' %}</th>
+                        <th>{% trans 'username' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for account in accounts %}
+                    <tr>
+                        <td>
+                            {% if account.redirect %}
+                                <i class="far fa-toggle-on"></i>
+                            {% else %}
+                                <i class="far fa-toggle-off"></i>
+                            {% endif %}
+                        </td>
+                        <td>{{ account.first_name|default_if_none:'-' }}</td>
+                        <td>{{ account.last_name|default_if_none:'-' }}</td>
+                        <td>{{ account.username }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row">
+    <div class="col-12">
+        <div class="panel" style="padding: 10px 10px;">
+
+            {% buttons %}
+                <button class="btn btn-primary" type="submit" name="cancel" formnovalidate>
+                    <i class="far fa-times"></i>
+                </button>
+                <button class="btn btn-default" type="submit" name="submit" formnovalidate>
+                    <i class="far fa-search"></i>
+                </button>
+                <button class="btn btn-default" type="submit" name="import" formnovalidate>
+                    <i class="far fa-upload"></i>
+                </button>
+            {% endbuttons %}
+
+        </div>
+    </div>
+</div>
+
+</form>
+{% endblock %}

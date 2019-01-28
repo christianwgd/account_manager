@@ -55,6 +55,15 @@ class Account(models.Model):
         else:
             return None
 
+    def attrs_as_json(self):
+        return dict(
+            tenant=self.tenant.id,
+            username=self.username,
+            first_name=self.first_name,
+            last_name=self.last_name,
+            redirect=self.redirect
+        )
+
     class Meta:
         verbose_name = _('mail account')
         verbose_name_plural = _('mail accounts')
@@ -66,6 +75,7 @@ class Account(models.Model):
     username = models.EmailField(_('account user'), unique=True)
     description = models.CharField(_('description'), max_length=80, null=True, blank=True)
     def_pwd = models.CharField(_('default password'), max_length=50)
+    redirect = models.BooleanField(_('redirect'), default=False)
 
 
 @receiver(post_save, sender=Account)

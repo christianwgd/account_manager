@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.utils.translation import ugettext_lazy as _
 
 from . import views
+from . import file_import
 
 admin.site.site_header = _('Account Manager')
 
@@ -44,6 +45,8 @@ urlpatterns = [
 
     path('get_tenant_domain/<int:tenant_id>/', views.getTenantDomain, name='get_tenant_domain'),
     path('get_default_password/', views.createDefaultPassword, name='get_default_password'),
+
+    path('import/', file_import.importFromFile, name='import'),
 ] 
 
 if settings.DEBUG:
