@@ -50,8 +50,7 @@ def importFromFile(request):
         form = ImportForm(request.POST, request.FILES)
         if form.is_valid():
             try:
-                # TODO: set tenant either from URL or from Form!
-                tenant = Tenant.objects.get(pk='1')
+                tenant = form.cleaned_data['tenant']
                 filepath = 'static/media/imports/'
                 schedFile = request.FILES['scheduleFile']
                 fs = FileSystemStorage(location=filepath)
@@ -80,7 +79,7 @@ def importFromFile(request):
                         alias_col = REDIRECT
                         try:
                             while row[alias_col]:
-                                user
+                                print(row[alias_col])
                                 alias_col += 1
                         except:
                             pass
