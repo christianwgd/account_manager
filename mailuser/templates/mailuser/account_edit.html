@@ -25,28 +25,28 @@
 
         <div class="col-6">
             <div class="panel">
-                <h4>{% trans 'aliases' %}</h4>
-                <table id="aliases" class="table table-condensed table-striped">
+                <h5>{% trans 'redirections' %}</h5>
+                <table id="redirections" class="table table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th>{% trans 'name' %}</th>
+                            <th>{% trans 'address' %}</th>
                             <th>{% trans 'description' %}</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for alias in account.alias_set.all %}
+                        {% for redirect in account.redirection_set.all %}
                         <tr>
-                            <td>{{ alias.name }}</td>
-                            <td>{{ alias.description|default_if_none:'-' }}</td>
+                            <td>{{ redirect.email }}</td>
+                            <td>{{ redirect.description|default_if_none:'-' }}</td>
                             <td>
-                                <a class="btn btn-sm btn-secondary" href="{% url 'aliasedit' account.id alias.id %}" role="button">
+                                <a class="btn btn-sm btn-secondary" href="{% url 'redirectedit' account.id redirect.id %}" role="button">
                                     <i class="far fa-edit"></i>
                                 </a>
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-danger" href="{% url 'aliasdelete' alias.id %}" role="button">
+                                <a class="btn btn-sm btn-danger" href="{% url 'redirectdelete' redirect.id %}" role="button">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
                             </td>
@@ -54,7 +54,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                <a class="btn btn-sm btn-success" href="{% url 'aliasnew' account.id %}" role="button">
+                <a class="btn btn-sm btn-success" href="{% url 'redirectnew' account.id %}" role="button">
                     <i class="far fa-plus"></i>
                 </a>
             </div>

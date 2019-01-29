@@ -26,7 +26,7 @@
             <table class="table table-condensed table-striped">
                 <thead>
                     <tr>
-                        <th>{% trans 'redirect' %}</th>
+                        <th>{% trans 'account type' %}</th>
                         <th>{% trans 'first name' %}</th>
                         <th>{% trans 'last name' %}</th>
                         <th>{% trans 'username' %}</th>
@@ -35,13 +35,7 @@
                 <tbody>
                     {% for account in accounts %}
                     <tr>
-                        <td>
-                            {% if account.redirect %}
-                                <i class="far fa-toggle-on"></i>
-                            {% else %}
-                                <i class="far fa-toggle-off"></i>
-                            {% endif %}
-                        </td>
+                        <td>{{ account.type }}</td>
                         <td>{{ account.first_name|default_if_none:'-' }}</td>
                         <td>{{ account.last_name|default_if_none:'-' }}</td>
                         <td>{{ account.username }}</td>

@@ -43,6 +43,11 @@ class Tenant(models.Model):
     manager = models.ManyToManyField(User, verbose_name=_('manager'))
 
 
+ACCOUNT_TYPE = (
+    ('1', _('Account')),
+    ('2', _('Alias')),
+)
+
 class Account(models.Model):
     
     def __str__(self):
@@ -70,32 +75,32 @@ class Account(models.Model):
         ordering = ['last_name']
 
     tenant = models.ForeignKey(Tenant, on_delete=models.PROTECT, verbose_name=_('tenant'))
+    type = models.CharField(_('account type'), max_length=1, choices=ACCOUNT_TYPE, default='1')
     first_name = models.CharField(_('first name'), max_length=50, null=True, blank=True)
     last_name = models.CharField(_('last name'), max_length=50, null=True, blank=True)
     username = models.EmailField(_('account user'), unique=True)
     description = models.CharField(_('description'), max_length=80, null=True, blank=True)
-    def_pwd = models.CharField(_('default password'), max_length=50)
-    redirect = models.BooleanField(_('redirect'), default=False)
+    def_pwd = models.CharField(_('default password'), max_length=50, null=True, blank=True)
 
 
 @receiver(post_save, sender=Account)
 def account_updated(sender, **kwargs):
-    """Create or update document."""
+    """Create or update account."""
     account = kwargs['instance']
     init_storage_dir()
     credentials(account)
 
 
-class Alias(models.Model):
+class Redirection(models.Model):
     
     def __str__(self):
-        return self.name
+        return self.email
 
     class Meta:
-        verbose_name = _('mail alias')
-        verbose_name_plural = _('mail aliases')
-        ordering = ['name']
+        verbose_name = _('redirection')
+        verbose_name_plural = _('redirections')
+        ordering = ['email']
 
-    name =  models.EmailField(_('alias'), unique=True)
+    email =  models.EmailField(_('email'))
     description = models.CharField(_('description'), max_length=80, null=True, blank=True)
     account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_('Account'))

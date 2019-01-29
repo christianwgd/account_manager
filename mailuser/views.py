@@ -11,8 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
 from .crypt import get_creds_filename, decrypt_file, init_storage_dir
-from .models import Tenant, Account, Alias
-from .forms import AccountForm, AliasForm
+from .models import Tenant, Account, Redirection
+from .forms import AccountForm, RedirectionForm
 
 
 def bad_request(message):
@@ -123,45 +123,45 @@ def account_delete(request, account_id):
 
 
 @login_required(login_url='/accounts/login/')
-def alias_edit(request, account_id, alias_id=None):
-    if alias_id is None:
+def redirect_edit(request, account_id, redirect_id=None):
+    if redirect_id is None:
         account = Account.objects.get(pk=account_id)
-        alias = Alias(account=account)
+        redirection = Redirection(account=account)
     else:
-        alias = Alias.objects.get(pk=alias_id)
+        redirection = Redirection.objects.get(pk=redirect_id)
 
     if 'cancel' in request.POST:
-        return redirect(reverse('accountedit', args=(alias.account.tenant.id, alias.account.id,)))
+        return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
 
     if request.method == 'GET':
-        form = AliasForm(instance=alias)
+        form = RedirectionForm(instance=redirection)
     else:
         try:
-            form = AliasForm(request.POST, instance=alias)
+            form = RedirectionForm(request.POST, instance=redirection)
             if form.is_valid():
                 form.save()
-                messages.success(request, _('alias changed.'))
-                return redirect(reverse('accountedit', args=(alias.account.tenant.id, alias.account.id,)))
+                messages.success(request, _('redirection changed.'))
+                return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
         except Exception as e:
-            messages.error(request, _('error in edit alias.'))
-    return render(request, 'mailuser/alias_edit.html', {
+            messages.error(request, _('error in edit redirection.'))
+    return render(request, 'mailuser/redirect_edit.html', {
         'form': form,
-        'alias': alias,
+        'redirection': redirection,
     })
 
 
 @login_required(login_url='/accounts/login/')
-def alias_delete(request, alias_id):
+def redirect_delete(request, redirect_id):
 
-    alias = Alias.objects.get(pk=alias_id)
+    redirection = Redirection.objects.get(pk=redirect_id)
 
     if request.method == 'POST':
         if 'cancel' in request.POST:
-            return redirect(reverse('accountedit', args=(alias.account.tenant.id, alias.account.id,)))
+            return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
 
-        alias.delete()
+        redirection.delete()
         messages.success(request, _(
-            'Alias {alias} deleted.').format(alias=alias.name))
-        return redirect(reverse('accountedit', args=(alias.account.tenant.id, alias.account.id,)))
+            'Redirection {redirection} deleted.').format(redirection=redirection.name))
+        return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
 
-    return render(request, 'mailuser/alias_delete.html', {'alias': alias})
+    return render(request, 'mailuser/redirect_delete.html', {'redirection': redirection})

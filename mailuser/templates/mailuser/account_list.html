@@ -13,9 +13,10 @@
             <table id="events" class="table table-condensed table-striped">
                 <thead>
                     <tr>
+                        <th>{% trans 'account type' %}</th>
                         <th>{% trans 'name' %}</th>
                         <th>{% trans 'account user' %}</th>
-                        <th>{% trans 'mail aliases' %}</th>
+                        <th>{% trans 'redirections' %}</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -24,11 +25,12 @@
                 <tbody>
                     {% for account in accountlist %}
                     <tr>
+                        <td>{{ account.get_type_display }}</td>
                         <td>{{ account.full_name|default_if_none:'-' }}</td>
                         <td>{{ account.username }}</td>
                         <td>
-                            {% for alias in account.alias_set.all %}
-                                {{ alias }}<br/>
+                            {% for redirection in account.redirection_set.all %}
+                                {{ redirection }}<br/>
                             {% endfor %}
                         </td>
                         <td>

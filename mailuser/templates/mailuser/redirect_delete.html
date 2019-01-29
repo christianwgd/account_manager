@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n static bootstrap4 %}
 
-{% block title %}{% trans 'alias delete' %}{% endblock %}
+{% block title %}{% trans 'redirection delete' %}{% endblock %}
 
 {% block content %}
 
@@ -11,9 +11,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-6 offset-3 text-center">
-                <h4 style="color: red;">{% trans 'Delete' %} {{ alias.name }}?</h4>
+                <h4 style="color: red;">{% trans 'Delete' %} {{ redirect.name }}?</h4>
                 <p>
-                    {% trans 'Do you really want to delete this alias?' %}
+                    {% trans 'Do you really want to delete this Redirection?' %}
                 </p>
             </div>
         </div>

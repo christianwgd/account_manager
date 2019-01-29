@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-25 15:31+0100\n"
+"POT-Creation-Date: 2019-01-29 08:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,6 +103,14 @@ msgid "Failed to create the directory that will contain PDF documents (%s)"
 msgstr ""
 "Das Verzeichnis (%s) für die PDF Dokumente konnte nicht erstellt werden."
 
+#: .\file_import.py:44
+msgid "No accounts created"
+msgstr "Keine Konten angelegt."
+
+#: .\forms.py:24 .\models.py:77
+msgid "tenant"
+msgstr "Mandant"
+
 #: .\models.py:27
 msgid "mail tenant"
 msgstr "Mandant"
@@ -112,8 +120,7 @@ msgstr "Mandant"
 msgid "mail tenants"
 msgstr "Mandanten"
 
-#: .\models.py:31 .\templates\mailuser\account_edit.html:32
-#: .\templates\mailuser\account_list.html:16
+#: .\models.py:31 .\templates\mailuser\account_list.html:16
 msgid "name"
 msgstr "Name"
 
@@ -133,56 +140,61 @@ msgstr "Web URL"
 msgid "manager"
 msgstr "Verwalter"
 
-#: .\models.py:59
-msgid "mail account"
-msgstr "Email-Konto"
-
-#: .\models.py:60
-msgid "mail accounts"
-msgstr "Email-Konten"
-
-#: .\models.py:63
-msgid "tenant"
-msgstr "Mandant"
-
-#: .\models.py:64
-msgid "first name"
-msgstr "Vorname"
-
-#: .\models.py:65
-msgid "last name"
-msgstr "Nachname"
-
-#: .\models.py:66 .\templates\mailuser\account_list.html:17
-msgid "account user"
-msgstr "Benutzername"
-
-#: .\models.py:67 .\models.py:90 .\templates\mailuser\account_edit.html:33
-msgid "description"
-msgstr "Beschreibung"
-
-#: .\models.py:68
-msgid "default password"
-msgstr "Initiales Passwort"
-
-#: .\models.py:85
-msgid "mail alias"
-msgstr "Alias"
-
-#: .\models.py:86 .\templates\mailuser\account_list.html:18
-msgid "mail aliases"
-msgstr "Aliase"
-
-#: .\models.py:89
-msgid "alias"
-msgstr "Alias"
-
-#: .\models.py:91
+#: .\models.py:47 .\models.py:107
 msgid "Account"
 msgstr "Konto"
 
-#: .\settings.py:114 .\templates\base.html:4 .\templates\base.html:36
-#: .\urls.py:25
+#: .\models.py:48
+msgid "Alias"
+msgstr "Alias"
+
+#: .\models.py:73
+msgid "mail account"
+msgstr "Email-Konto"
+
+#: .\models.py:74
+msgid "mail accounts"
+msgstr "Email-Konten"
+
+#: .\models.py:78 .\templates\mailuser\import.html:30
+msgid "first name"
+msgstr "Vorname"
+
+#: .\models.py:79 .\templates\mailuser\import.html:31
+msgid "last name"
+msgstr "Nachname"
+
+#: .\models.py:80 .\templates\mailuser\account_list.html:17
+msgid "account user"
+msgstr "Benutzername"
+
+#: .\models.py:81 .\models.py:106 .\templates\mailuser\account_edit.html:33
+msgid "description"
+msgstr "Beschreibung"
+
+#: .\models.py:82
+msgid "default password"
+msgstr "Initiales Passwort"
+
+#: .\models.py:83
+msgid "account type"
+msgstr "Kontotyp"
+
+#: .\models.py:101
+msgid "redirection"
+msgstr "Weiterleitung"
+
+#: .\models.py:102 .\templates\mailuser\account_edit.html:28
+#: .\templates\mailuser\account_list.html:18
+msgid "redirections"
+msgstr "Weiterleitungen"
+
+#: .\models.py:105
+msgid "email"
+msgstr ""
+
+#: .\settings.py:115 .\templates\base.html:4 .\templates\base.html:36
+#: .\urls.py:26
 msgid "Account Manager"
 msgstr "Account-Manager"
 
@@ -208,8 +220,8 @@ msgstr "Konto löschen"
 
 #: .\templates\mailuser\account_delete.html:14
 #: .\templates\mailuser\account_delete.html:32
-#: .\templates\mailuser\alias_delete.html:14
-#: .\templates\mailuser\alias_delete.html:23
+#: .\templates\mailuser\redirect_delete.html:14
+#: .\templates\mailuser\redirect_delete.html:23
 msgid "Delete"
 msgstr "Löschen"
 
@@ -219,10 +231,12 @@ msgstr "Dieses Konto wirklich löschen?"
 
 #: .\templates\mailuser\account_delete.html:21
 msgid "This will also delete the following aliases connected to this account:"
-msgstr "Mit diesem Konto werden die folgenden mit diesem Konto verbundenen Aliase mit gelöscht:"
+msgstr ""
+"Mit diesem Konto werden die folgenden mit diesem Konto verbundenen Aliase "
+"mit gelöscht:"
 
 #: .\templates\mailuser\account_delete.html:35
-#: .\templates\mailuser\alias_delete.html:26
+#: .\templates\mailuser\redirect_delete.html:26
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -231,9 +245,9 @@ msgstr "Abbrechen"
 msgid "account edit"
 msgstr "Konto bearbeiten"
 
-#: .\templates\mailuser\account_edit.html:28
-msgid "aliases"
-msgstr "Aliase"
+#: .\templates\mailuser\account_edit.html:32
+msgid "address"
+msgstr "Adresse"
 
 #: .\templates\mailuser\account_edit.html:74
 #: .\templates\mailuser\account_new.html:37
@@ -263,17 +277,21 @@ msgstr "Kontodaten PDF laden"
 msgid "back"
 msgstr "zurück"
 
-#: .\templates\mailuser\alias_delete.html:4
-msgid "alias delete"
-msgstr "Alias löschen"
+#: .\templates\mailuser\import.html:11
+msgid "import accounts"
+msgstr "Konten importieren"
 
-#: .\templates\mailuser\alias_delete.html:16
-msgid "Do you really want to delete this alias?"
-msgstr "Diesen Alias wirklich löschen?"
+#: .\templates\mailuser\redirect_delete.html:4
+msgid "redirection delete"
+msgstr "Weiterleitung löschen"
 
-#: .\templates\mailuser\alias_edit.html:9
-msgid "alias edit"
-msgstr "Alias bearbeiten"
+#: .\templates\mailuser\redirect_delete.html:16
+msgid "Do you really want to delete this Redirection?"
+msgstr "Diese Weiterleitung wirklich löschen?"
+
+#: .\templates\mailuser\redirect_edit.html:9
+msgid "redirection edit"
+msgstr "Weiterleitung bearbeiten"
 
 #: .\templates\registration\logged_out.html:6
 msgid "You are now logged out, thanks for using this app."
@@ -331,14 +349,14 @@ msgid "Account {account} deleted."
 msgstr "Konto {account} gelöscht."
 
 #: .\views.py:143
-msgid "alias changed."
-msgstr "Alias geändert."
+msgid "redirection changed."
+msgstr "Weiterleitung geändert."
 
 #: .\views.py:146
-msgid "error in edit alias."
-msgstr "Fehler beim Bearbeiten des Alias."
+msgid "error in edit redirection."
+msgstr "Fehler beim Bearbeiten der Weiterleitung."
 
 #: .\views.py:164
 #, python-brace-format
-msgid "Alias {alias} deleted."
-msgstr "Alias {alias} gelöscht."
+msgid "Redirection {redirection} deleted."
+msgstr "Weiterleitung {redirection} gelöscht."

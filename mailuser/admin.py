@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
 
-from .models import Tenant, Account, Alias
+from .models import Tenant, Account, Redirection
 
 
 from filebrowser.settings import ADMIN_THUMBNAIL
@@ -25,13 +25,13 @@ class TenantAdmin(admin.ModelAdmin):
     logo_thumbnail.short_description = "Logo"
 
 
-@admin.register(Alias)
-class AliasAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description']
+@admin.register(Redirection)
+class RedirectionAdmin(admin.ModelAdmin):
+    list_display = ['email', 'description']
 
 
-class AliasInlineAdmin(admin.TabularInline):
-    model = Alias
+class RedirectionInlineAdmin(admin.TabularInline):
+    model = Redirection
     extra = 0
 
 
@@ -42,5 +42,5 @@ class AccountAdmin(admin.ModelAdmin):
     ordering = ['last_name']
     change_form_template = "mailuser/custom_admin_account_change.html"
     inlines = [
-        AliasInlineAdmin,
+        RedirectionInlineAdmin,
     ]

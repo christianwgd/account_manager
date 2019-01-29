@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.core.validators import FileExtensionValidator
 
-from .models import Account, Alias, Tenant
+from .models import Account, Redirection, Tenant
 
 
 class AccountForm(forms.ModelForm):
@@ -13,10 +13,10 @@ class AccountForm(forms.ModelForm):
         exclude = ['tenant']
 
 
-class AliasForm(forms.ModelForm):
+class RedirectionForm(forms.ModelForm):
 
     class Meta:
-        model = Alias
+        model = Redirection
         exclude = ['account']
 
     
