@@ -72,8 +72,8 @@ the document as soon as possible.
     story.append(Paragraph(_("Web panel:"), styles["h3"]))
     data = [
         [_("URL"), account.tenant.weburl],
-        [_("Username"), str(account.username)],
-        [_("Password"), account.def_pwd]
+        [_("username"), str(account.username)],
+        [_("password"), account.def_pwd]
     ]
     table = Table(data)
     table.setStyle(TableStyle([

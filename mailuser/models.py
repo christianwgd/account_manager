@@ -95,4 +95,4 @@ class Redirection(models.Model):
 
     email =  models.EmailField(_('email'))
     description = models.CharField(_('description'), max_length=80, null=True, blank=True)
-    account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_('Account'))
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_('account'))

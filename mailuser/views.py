@@ -116,7 +116,7 @@ def account_delete(request, account_id):
 
         account.delete()
         messages.success(request, _(
-            'Account {account} deleted.').format(account=account.username))
+            'account {account} deleted.').format(account=account.username))
         return redirect(reverse('accountlist', args=(account.tenant.id,)))
 
     return render(request, 'mailuser/account_delete.html', {'account': account})
