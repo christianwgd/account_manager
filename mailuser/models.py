@@ -44,8 +44,8 @@ class Tenant(models.Model):
 
 
 ACCOUNT_TYPE = (
-    ('1', _('Account')),
-    ('2', _('Alias')),
+    ('1', _('account')),
+    ('2', _('redirection')),
 )
 
 class Account(models.Model):
@@ -60,25 +60,17 @@ class Account(models.Model):
         else:
             return None
 
-    def attrs_as_json(self):
-        return dict(
-            tenant=self.tenant.id,
-            username=self.username,
-            first_name=self.first_name,
-            last_name=self.last_name,
-            redirect=self.redirect
-        )
-
     class Meta:
         verbose_name = _('mail account')
         verbose_name_plural = _('mail accounts')
         ordering = ['last_name']
+        unique_together = ('type', 'username',)
 
     tenant = models.ForeignKey(Tenant, on_delete=models.PROTECT, verbose_name=_('tenant'))
     type = models.CharField(_('account type'), max_length=1, choices=ACCOUNT_TYPE, default='1')
     first_name = models.CharField(_('first name'), max_length=50, null=True, blank=True)
     last_name = models.CharField(_('last name'), max_length=50, null=True, blank=True)
-    username = models.EmailField(_('account user'), unique=True)
+    username = models.EmailField(_('account user'))
     description = models.CharField(_('description'), max_length=80, null=True, blank=True)
     def_pwd = models.CharField(_('default password'), max_length=50, null=True, blank=True)
 

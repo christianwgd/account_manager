@@ -27,18 +27,28 @@
                 <thead>
                     <tr>
                         <th>{% trans 'account type' %}</th>
-                        <th>{% trans 'first name' %}</th>
-                        <th>{% trans 'last name' %}</th>
                         <th>{% trans 'username' %}</th>
+                        <th>{% trans 'name / redirection' %}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for account in accounts %}
                     <tr>
-                        <td>{{ account.type }}</td>
-                        <td>{{ account.first_name|default_if_none:'-' }}</td>
-                        <td>{{ account.last_name|default_if_none:'-' }}</td>
+                        <td>
+                            {% if account.type == '1' %}
+                            <i class="far fa-at"></i>
+                            {% else %}
+                            <i class="far fa-reply"></i>
+                            {% endif %}
+                        </td>
                         <td>{{ account.username }}</td>
+                        <td>
+                            {% if account.type == '1' %}
+                                {{ account.first_name|default_if_none:'' }} {{ account.last_name|default_if_none:'' }}
+                            {% else %}
+                                {% for r in account.redirections %}{{ r }}, {% endfor %}
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

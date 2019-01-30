@@ -16,14 +16,14 @@ from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Account, Tenant
+from .models import Account, Tenant, Redirection
 from .forms import ImportForm
 
 
 @login_required(login_url='/accounts/login/')
 def importFromFile(request):
 
-    accounts = []
+    accounts = {}
 
     MBTYPE = 0
     USRNAME = 1
@@ -45,11 +45,12 @@ def importFromFile(request):
             else:
                 messages.success(request, '{} accounts created'.format(count))
             return redirect(reverse('tenantlist'))
-
+    
 
         form = ImportForm(request.POST, request.FILES)
         if form.is_valid():
             try:
+                accounts = []
                 tenant = form.cleaned_data['tenant']
                 filepath = 'static/media/imports/'
                 schedFile = request.FILES['scheduleFile']
@@ -63,35 +64,36 @@ def importFromFile(request):
                 
                 for row in reader:
                     if row[MBTYPE] == 'account':
-                        account = Account(
-                            tenant=tenant,
-                            username = row[USRNAME],
-                            first_name = row[FSTNAME],
-                            last_name = row[LSTNAME],
-                            redirect = False
-                        )
+                        account = {
+                            'type': '1',
+                            'tenant': tenant.id,
+                            'username': row[USRNAME],
+                            'first_name': row[FSTNAME],
+                            'last_name': row[LSTNAME],
+                        }
                     elif row[MBTYPE] == 'alias':
-                        account = Account(
-                            tenant=tenant,
-                            username = row[USRNAME],
-                            redirect = True
-                        )
+                        account = {
+                            'type': '2',
+                            'tenant': tenant.id,
+                            'username': row[USRNAME],
+                        }
                         alias_col = REDIRECT
                         try:
+                            redirections = []
                             while row[alias_col]:
-                                print(row[alias_col])
+                                redirections.append(row[alias_col])
                                 alias_col += 1
-                        except:
+                        except IndexError:
                             pass
+                        account['redirections'] = redirections
                     else:
                         print('invalid type')
                     accounts.append(account)
 
                 f.close()
-                dump_accounts(accounts)
+                dump_accounts(accounts, tenant.id)
                 # if os.path.exists(fullfile):
                 #     os.remove(fullfile)
-
             except:
                 import traceback
                 traceback.print_exc()
@@ -108,12 +110,13 @@ def importFromFile(request):
     })
 
 
-def dump_accounts(accounts):
+def dump_accounts(accounts, tenant):
     filename = '{}/imports/import.json'.format(settings.MEDIA_ROOT)
     exportdata = {}
-    exportdata['accounts'] = []
-    for acc in accounts:
-        exportdata['accounts'].append(acc.attrs_as_json())
+
+    exportdata['tenant'] = tenant
+    exportdata['accounts'] = accounts
+
     with open(filename, 'w') as outfile:
         outfile.write(json.dumps(exportdata, indent=4))
     outfile.close()
@@ -130,24 +133,30 @@ def load_accounts():
         if len(jsondata['accounts']) == 0:
             return
 
+        tenant = Tenant.objects.get(pk=jsondata['tenant'])
         count = len(jsondata['accounts'])
         for acc in jsondata['accounts']:
-            print('######################', acc, '######################')
-            t = Account(
-                # team = Team.objects.get(pk=event['team']),
-                # ort = Spielort.objects.get(pk=event['ort']),
-                # gegner = Gegner.objects.get(pk=event['gegner']),
-                # datum = date,
-                # von = tz.localize(datetime.datetime.strptime(event['von'], '%H:%M')),
-                # bis = tz.localize(datetime.datetime.strptime(event['bis'], '%H:%M')),
-                # kw = date.isocalendar()[1],
-                # typ = event['typ'],
-                # status = event['status'],
-                # version = 0,
-                # league = True,
-                # bemerkung = '',
-                # coach = Player.objects.get(team=event['team'], role__key='C').person,
-            )
-            #t.save()
+            if acc['type'] == '1':
+                account = Account(
+                    tenant = tenant,
+                    type = acc['type'], 
+                    username = acc['username'],
+                    first_name = acc['first_name'],
+                    last_name = acc['last_name'],
+                )
+                account.save()
+            else:
+                account = Account(
+                    tenant = tenant,
+                    type = acc['type'], 
+                    username = acc['username'],
+                )
+                account.save()
+                for red in acc['redirections']:
+                    redirection = Redirection(
+                        account = account,
+                        email = red,
+                    )
+                    redirection.save()
         infile.close()
         return count
