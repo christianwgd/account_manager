@@ -73,7 +73,7 @@ def tenant_list(request):
 @login_required(login_url='/accounts/login/')
 def account_list(request, tenant_id):
     tenant = Tenant.objects.get(pk=tenant_id)
-    accounts = Account.objects.filter(tenant=tenant).order_by('username')
+    accounts = Account.objects.filter(tenant=tenant).order_by('username', 'type')
     return render(request, 'mailuser/account_list.html', {
         'accountlist': accounts,
         'tenant': tenant
