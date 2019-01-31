@@ -3,6 +3,7 @@
 .panel {
     width: 100%;
     margin-bottom: 20px;
+    /* border: 1px solid lightgray; */
 }
 
 .table td, .table th {
@@ -13,6 +14,10 @@
 .td-buttons {
     text-align: right;
     white-space: nowrap;
+}
+
+.table-responsive-sm {
+    overflow: auto;
 }
 
 .form-group.required .control-label {

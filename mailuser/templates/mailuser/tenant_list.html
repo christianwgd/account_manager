@@ -8,11 +8,13 @@
     <div class="row justify-content-md-center">
         {% for tenant in  tenantlist %}
             <div class="col col-md-3 text-center">
-                <a href="{% url 'accountlist' tenant.id %}">
-                    <img src="{% version tenant.logo 'small' %}" alt="">
-                </a>
-                <h5>{{ tenant.name }}</h5>
-                <p>(@{{ tenant.domain }})</p>
+                <div class="panel">
+                    <a href="{% url 'accountlist' tenant.id %}">
+                        <img src="{% version tenant.logo 'small' %}" alt="">
+                    </a>
+                    <h5>{{ tenant.name }}</h5>
+                    <p>(@{{ tenant.domain }})</p>
+                </div>
             </div>
         {% endfor %}
     </div>

@@ -3,9 +3,11 @@
 
 {% block bootstrap4_extra_head %}
 {{ block.super }}
+{{ form.media }}
+<script src="{% static 'js/tablesize.js' %}"></script>
 <script>
+var frame_height = 400;
 </script>
-
 {% endblock %}
 
 {% block title %}{% trans 'import accounts' %}{% endblock %}
@@ -23,59 +25,61 @@
 
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-condensed table-striped">
-                <thead>
-                    <tr>
-                        <th>{% trans 'account type' %}</th>
-                        <th>{% trans 'username' %}</th>
-                        <th>{% trans 'name / redirection' %}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for account in accounts %}
-                    <tr>
-                        <td>
-                            {% if account.type == '1' %}
-                            <i class="far fa-at"></i>
-                            {% else %}
-                            <i class="far fa-reply"></i>
-                            {% endif %}
-                        </td>
-                        <td>{{ account.username }}</td>
-                        <td>
-                            {% if account.type == '1' %}
-                                {{ account.first_name|default_if_none:'' }} {{ account.last_name|default_if_none:'' }}
-                            {% else %}
-                                {% for r in account.redirections %}{{ r }}, {% endfor %}
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="panel">
+                <div class="table-responsive-sm">
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans 'account type' %}</th>
+                                <th>{% trans 'username' %}</th>
+                                <th>{% trans 'name / redirection' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for account in accounts %}
+                            <tr>
+                                <td>
+                                    {% if account.type == '1' %}
+                                    <i class="far fa-at"></i>
+                                    {% else %}
+                                    <i class="far fa-reply"></i>
+                                    {% endif %}
+                                </td>
+                                <td>{{ account.username }}</td>
+                                <td>
+                                    {% if account.type == '1' %}
+                                        {{ account.first_name|default_if_none:'' }} {{ account.last_name|default_if_none:'' }}
+                                    {% else %}
+                                        {% for r in account.redirections %}{{ r }}, {% endfor %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
 
     <div class="row">
-    <div class="col-12">
-        <div class="panel" style="padding: 10px 10px;">
-
-            {% buttons %}
-                <button class="btn btn-primary" type="submit" name="cancel" formnovalidate>
-                    <i class="far fa-times"></i>
-                </button>
-                <button class="btn btn-default" type="submit" name="submit" formnovalidate>
-                    <i class="far fa-search"></i>
-                </button>
-                <button class="btn btn-default" type="submit" name="import" formnovalidate>
-                    <i class="far fa-upload"></i>
-                </button>
-            {% endbuttons %}
-
+        <div class="col-12">
+            <div class="panel">
+                {% buttons %}
+                    <button class="btn btn-primary" type="submit" name="cancel" formnovalidate>
+                        <i class="far fa-times"></i>
+                    </button>
+                    <button class="btn btn-default" type="submit" name="submit" formnovalidate>
+                        <i class="far fa-search"></i>
+                    </button>
+                    <button class="btn btn-default" type="submit" name="import" formnovalidate>
+                        <i class="far fa-upload"></i>
+                    </button>
+                {% endbuttons %}
+            </div>
         </div>
     </div>
-</div>
 
 </form>
 {% endblock %}

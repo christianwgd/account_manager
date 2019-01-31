@@ -5,19 +5,22 @@
 {{ block.super }}
 {{ form.media }}
 <script src="{% static 'js/tablesize.js' %}"></script>
+<script>
+var frame_height = 240;
+</script>
 {% endblock %}
 
 {% block title %}{% trans 'accounts for ' %}{{ tenant.domain }}{% endblock %}
 
 {% block content %}
-<form method="get" class="from-horizontal" role="form" action="">
+<form method="get" class="from-horizontal" role="form" action="{% url 'tenantlist' %}">
 {% csrf_token %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="panel">
                 <h4>{% trans 'accounts' %}</h4>
-                <div class="table-responsive-sm" id="id_table_container" style="overflow: auto;">
+                <div class="table-responsive-sm">
                     <table id="events" class="table table-condensed table-striped">
                         <thead>
                             <tr>
