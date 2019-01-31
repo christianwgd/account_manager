@@ -35,6 +35,7 @@ urlpatterns = [
     path('', views.tenant_list, name='tenantlist'),
     path('tenantlist/', views.tenant_list, name='tenantlist'),
     path('accountlist/<int:tenant_id>/', views.account_list, name='accountlist'),
+    path('accountdisplay/<int:account_id>/', views.account_display, name='accountdisplay'),
     path('accountedit/<int:tenant_id>/', views.account_edit, name='accountnew'),
     path('accountedit/<int:tenant_id>/<int:account_id>/', views.account_edit, name='accountedit'),
     path('accountdelete/<int:account_id>/', views.account_delete, name='accountdelete'),

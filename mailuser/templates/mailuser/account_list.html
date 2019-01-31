@@ -19,15 +19,16 @@ var frame_height = 240;
         <div class="row">
             <div class="col-12">
                 <div class="panel">
-                <h4>{% trans 'accounts' %}</h4>
+                <h4>{% trans 'account' %}</h4>
                 <div class="table-responsive-sm">
                     <table id="events" class="table table-condensed table-striped">
                         <thead>
                             <tr>
                                 <th>{% trans 'account type' %}</th>
-                                <th>{% trans 'name' %}</th>
                                 <th>{% trans 'account user' %}</th>
+                                <th>{% trans 'name' %}</th>
                                 <th>{% trans 'redirected to' %}</th>
+                                <th>{% trans 'description' %}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -41,8 +42,12 @@ var frame_height = 240;
                                         <i class="far fa-reply" title="{% trans 'redirection' %}"></i>
                                     {% endif %}
                                 </td>
+                                <td>
+                                    <a href="{% url 'accountdisplay' account.id%}">
+                                        {{ account.username }}
+                                    </a>
+                                </td>
                                 <td>{{ account.full_name|default_if_none:'-' }}</td>
-                                <td>{{ account.username }}</td>
                                 <td>
                                     {% for redirection in account.redirection_set.all %}
                                         {{ redirection }}<br/>

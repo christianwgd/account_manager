@@ -65,14 +65,27 @@ def get_account_credentials(request, account_id):
 @login_required(login_url='/accounts/login/')
 def tenant_list(request):
     tenants = Tenant.objects.filter(manager=request.user)
-    return render(request, 'mailuser/tenant_list.html', {'tenantlist': tenants})
+    return render(request, 'mailuser/tenant_list.html', {
+        'tenantlist': tenants
+    })
 
 
 @login_required(login_url='/accounts/login/')
 def account_list(request, tenant_id):
     tenant = Tenant.objects.get(pk=tenant_id)
     accounts = Account.objects.filter(tenant=tenant).order_by('username')
-    return render(request, 'mailuser/account_list.html', {'accountlist': accounts, 'tenant': tenant})
+    return render(request, 'mailuser/account_list.html', {
+        'accountlist': accounts,
+        'tenant': tenant
+    })
+
+
+@login_required(login_url='/accounts/login/')
+def account_display(request, account_id):
+    account = Account.objects.get(pk=account_id)
+    return render(request, 'mailuser/account_display.html', {
+        'account': account,
+    })
 
 
 @login_required(login_url='/accounts/login/')
