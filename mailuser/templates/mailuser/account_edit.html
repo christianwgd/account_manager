@@ -17,13 +17,13 @@
     <!-- for javascript username generator -->
     <span id="id_tenant" style="display:none;">{{ account.tenant.id }}</span>
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-6 col-sm-12">
             <div class="panel">
                 {% bootstrap_form form %}
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-md-6 col-sm-12">
             <div class="panel">
                 <h5>{% trans 'redirections' %}</h5>
                 <table id="redirections" class="table table-condensed table-striped">
@@ -32,7 +32,6 @@
                             <th>{% trans 'address' %}</th>
                             <th>{% trans 'description' %}</th>
                             <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,13 +39,13 @@
                         <tr>
                             <td>{{ redirect.email }}</td>
                             <td>{{ redirect.description|default_if_none:'-' }}</td>
-                            <td>
-                                <a class="btn btn-sm btn-secondary" href="{% url 'redirectedit' account.id redirect.id %}" role="button">
+                            <td class="td-buttons">
+                                <a class="btn btn-sm btn-secondary" href="{% url 'redirectedit' account.id redirect.id %}"
+                                    role="button" title="{% trans 'redirection edit' %}">
                                     <i class="far fa-edit"></i>
                                 </a>
-                            </td>
-                            <td>
-                                <a class="btn btn-sm btn-danger" href="{% url 'redirectdelete' redirect.id %}" role="button">
+                                <a class="btn btn-sm btn-danger" href="{% url 'redirectdelete' redirect.id %}" 
+                                    role="button" title="{% trans 'redirection delete' %}">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
                             </td>
@@ -54,7 +53,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                <a class="btn btn-sm btn-success" href="{% url 'redirectnew' account.id %}" role="button">
+                <a class="btn btn-sm btn-success" href="{% url 'redirectnew' account.id %}" role="button" title="{% trans 'new redirection' %}">
                     <i class="far fa-plus"></i>
                 </a>
             </div>
@@ -63,12 +62,12 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="panel" style="padding: 10px 10px;">
+            <div class="panel">
                 {% buttons %}
-                    <button class="btn btn-primary" name="submit" type="submit" formnovalidate>
+                    <button class="btn btn-primary" name="submit" type="submit" formnovalidate title="{% trans 'Ok' %}">
                         <i class="far fa-check"></i>
                     </button>
-                    <button class="btn btn-default" type="submit" name="cancel" formnovalidate>
+                    <button class="btn btn-default" type="submit" name="cancel" formnovalidate title="{% trans 'Cancel' %}">
                         <i class="far fa-times"></i>
                     </button>
                     <button class="btn btn-default" id="_gen_username" type="button" title="{% trans 'generate username' %}">

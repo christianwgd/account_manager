@@ -1,66 +1,85 @@
 {% extends 'base.html' %}
 {% load i18n static bootstrap4 mailuser_tags %}
 
+{% block bootstrap4_extra_head %}
+{{ block.super }}
+{{ form.media }}
+<script src="{% static 'js/tablesize.js' %}"></script>
+{% endblock %}
+
 {% block title %}{% trans 'accounts for ' %}{{ tenant.domain }}{% endblock %}
 
 {% block content %}
 <form method="get" class="from-horizontal" role="form" action="">
 {% csrf_token %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <h4>{% trans 'accounts' %}</h4>
-            <table id="events" class="table table-condensed table-striped">
-                <thead>
-                    <tr>
-                        <th>{% trans 'account type' %}</th>
-                        <th>{% trans 'name' %}</th>
-                        <th>{% trans 'account user' %}</th>
-                        <th>{% trans 'redirections' %}</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for account in accountlist %}
-                    <tr>
-                        <td>{{ account.get_type_display }}</td>
-                        <td>{{ account.full_name|default_if_none:'-' }}</td>
-                        <td>{{ account.username }}</td>
-                        <td>
-                            {% for redirection in account.redirection_set.all %}
-                                {{ redirection }}<br/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="panel">
+                <h4>{% trans 'accounts' %}</h4>
+                <div class="table-responsive-sm" id="id_table_container" style="overflow: auto;">
+                    <table id="events" class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans 'account type' %}</th>
+                                <th>{% trans 'name' %}</th>
+                                <th>{% trans 'account user' %}</th>
+                                <th>{% trans 'redirected to' %}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for account in accountlist %}
+                            <tr>
+                                <td>
+                                    {% if account.type == '1' %}
+                                        <i class="far fa-at" title="{% trans 'account' %}"></i>
+                                    {% else %}
+                                        <i class="far fa-reply" title="{% trans 'redirection' %}"></i>
+                                    {% endif %}
+                                </td>
+                                <td>{{ account.full_name|default_if_none:'-' }}</td>
+                                <td>{{ account.username }}</td>
+                                <td>
+                                    {% for redirection in account.redirection_set.all %}
+                                        {{ redirection }}<br/>
+                                    {% endfor %}
+                                </td>
+                                <td class="td-buttons">
+                                    <a class="btn btn-sm btn-info{% f_exists account.id %}" href="{% url 'get_account_credentials' account.id %}" 
+                                        role="button" title="{% trans 'load credentials pdf' %}">
+                                        <i class="far fa-file-pdf"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-secondary" href="{% url 'accountedit' tenant.id account.id %}" role="button"
+                                        title="{% trans 'account edit' %}">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-danger" href="{% url 'accountdelete' account.id %}" role="button"
+                                        title="{% trans 'account delete' %}">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
                             {% endfor %}
-                        </td>
-                        <td>
-                            <a class="btn btn-sm btn-secondary{% f_exists account.id %}" href="{% url 'get_account_credentials' account.id %}" role="button"
-                                title="{% trans 'load credentials pdf' %}">
-                                <i class="far fa-file-pdf"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-sm btn-secondary" href="{% url 'accountedit' tenant.id account.id %}" role="button">
-                                <i class="far fa-edit"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-sm btn-danger" href="{% url 'accountdelete' account.id %}" role="button">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <button class="btn btn-primary" name="back" title="{% trans 'back' %}">
-                <i class="far fa-check"></i>
-            </button>
-            <a class="btn btn-success" href="{% url 'accountnew' tenant.id %}" role="button">
-                <i class="far fa-plus"></i>
-            </a>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <button class="btn btn-primary" name="back" title="{% trans 'back' %}">
+                    <i class="far fa-check"></i>
+                </button>
+                <a class="btn btn-success" href="{% url 'accountnew' tenant.id %}" role="button">
+                    <i class="far fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 </form>
 {% endblock %}

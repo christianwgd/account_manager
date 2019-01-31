@@ -97,13 +97,15 @@
 
 <div id="container" class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <h3 style="text-align: center;">{% block title %}{% endblock %}</h3>
-
-            {% bootstrap_messages %}
-            {% block content %}{% endblock %}
+        <div class="col-12">
+            <div class="panel">
+                <h3 style="text-align: center;">{% block title %}{% endblock %}</h3>
+            </div>
         </div>
     </div>
+
+    {% bootstrap_messages %}
+    {% block content %}{% endblock %}
 </div>
 
 {% endblock %}
