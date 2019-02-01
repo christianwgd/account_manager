@@ -9,6 +9,7 @@ from django.utils.crypto import get_random_string
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.signals import post_save
 
 from .crypt import get_creds_filename, decrypt_file, init_storage_dir
 from .models import Tenant, Account, Redirection
@@ -178,3 +179,18 @@ def redirect_delete(request, redirect_id):
         return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
 
     return render(request, 'mailuser/redirect_delete.html', {'redirection': redirection})
+
+
+@login_required(login_url='/accounts/login/')
+def refresh_credentials(request, tenant_id):
+    ''' refresh credentials for all accounts of tenant '''
+    accounts = Account.objects.filter(tenant__pk=tenant_id, type='1')
+    for acc in accounts:
+        post_save.send(sender=Account, instance=acc)
+
+    messages.success(request, _(
+        '{count} credentials refreshed.').format(count=accounts.count()))
+
+    if request.META.get('HTTP_REFERER') is None:
+        return redirect(reverse('accountlist', args=(tenant_id,)))
+    return redirect(request.META.get('HTTP_REFERER'))

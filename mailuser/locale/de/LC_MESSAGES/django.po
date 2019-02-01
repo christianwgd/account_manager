@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-31 10:16+0100\n"
+"POT-Creation-Date: 2019-02-01 11:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,11 +47,12 @@ msgstr "Webmail-Anwendung:"
 msgid "URL"
 msgstr ""
 
-#: .\createpdf.py:75 .\templates\mailuser\import.html:30
+#: .\createpdf.py:75 .\templates\mailuser\account_display.html:18
+#: .\templates\mailuser\import.html:34
 msgid "username"
 msgstr "Benutzername"
 
-#: .\createpdf.py:76
+#: .\createpdf.py:76 .\templates\mailuser\account_display.html:34
 msgid "password"
 msgstr "Passwort"
 
@@ -120,7 +121,7 @@ msgstr "Mandant"
 msgid "mail tenants"
 msgstr "Mandanten"
 
-#: .\models.py:31 .\templates\mailuser\account_list.html:17
+#: .\models.py:31 .\templates\mailuser\account_list.html:29
 msgid "name"
 msgstr "Name"
 
@@ -140,11 +141,13 @@ msgstr "Web URL"
 msgid "manager"
 msgstr "Verwalter"
 
-#: .\models.py:47 .\models.py:98 .\templates\mailuser\account_list.html:28
+#: .\models.py:47 .\models.py:98 .\templates\mailuser\account_display.html:4
+#: .\templates\mailuser\account_list.html:22
+#: .\templates\mailuser\account_list.html:40
 msgid "account"
 msgstr "Konto"
 
-#: .\models.py:48 .\models.py:92 .\templates\mailuser\account_list.html:30
+#: .\models.py:48 .\models.py:92 .\templates\mailuser\account_list.html:42
 msgid "redirection"
 msgstr "Weiterleitung"
 
@@ -156,24 +159,28 @@ msgstr "Email-Konto"
 msgid "mail accounts"
 msgstr "Email-Konten"
 
-#: .\models.py:70 .\templates\mailuser\account_list.html:16
-#: .\templates\mailuser\import.html:29
+#: .\models.py:70 .\templates\mailuser\account_display.html:14
+#: .\templates\mailuser\account_list.html:27
+#: .\templates\mailuser\import.html:33
 msgid "account type"
 msgstr "Kontotyp"
 
-#: .\models.py:71
+#: .\models.py:71 .\templates\mailuser\account_display.html:22
 msgid "first name"
 msgstr "Vorname"
 
-#: .\models.py:72
+#: .\models.py:72 .\templates\mailuser\account_display.html:26
 msgid "last name"
 msgstr "Nachname"
 
-#: .\models.py:73 .\templates\mailuser\account_list.html:18
+#: .\models.py:73 .\templates\mailuser\account_list.html:28
 msgid "account user"
 msgstr "Benutzername"
 
-#: .\models.py:74 .\models.py:97 .\templates\mailuser\account_edit.html:33
+#: .\models.py:74 .\models.py:97 .\templates\mailuser\account_display.html:30
+#: .\templates\mailuser\account_display.html:46
+#: .\templates\mailuser\account_edit.html:34
+#: .\templates\mailuser\account_list.html:31
 msgid "description"
 msgstr "Beschreibung"
 
@@ -181,13 +188,14 @@ msgstr "Beschreibung"
 msgid "default password"
 msgstr "Initiales Passwort"
 
-#: .\models.py:93 .\templates\mailuser\account_edit.html:28
+#: .\models.py:93 .\templates\mailuser\account_display.html:41
+#: .\templates\mailuser\account_edit.html:29
 msgid "redirections"
 msgstr "Weiterleitungen"
 
 #: .\models.py:96
 msgid "email"
-msgstr ""
+msgstr "Email"
 
 #: .\settings.py:115 .\templates\base.html:4 .\templates\base.html:36
 #: .\urls.py:26
@@ -215,93 +223,112 @@ msgid "Log in"
 msgstr ""
 
 #: .\templates\mailuser\account_delete.html:4
-#: .\templates\mailuser\account_list.html:50
+#: .\templates\mailuser\account_list.html:68
 msgid "account delete"
 msgstr "Konto löschen"
 
-#: .\templates\mailuser\account_delete.html:15
-#: .\templates\mailuser\account_delete.html:36
-#: .\templates\mailuser\redirect_delete.html:14
-#: .\templates\mailuser\redirect_delete.html:23
+#: .\templates\mailuser\account_delete.html:13
+#: .\templates\mailuser\account_delete.html:34
+#: .\templates\mailuser\redirect_delete.html:13
+#: .\templates\mailuser\redirect_delete.html:25
 msgid "Delete"
 msgstr "Löschen"
 
-#: .\templates\mailuser\account_delete.html:17
+#: .\templates\mailuser\account_delete.html:15
 msgid "Do you really want to delete this account?"
 msgstr "Dieses Konto wirklich löschen?"
 
-#: .\templates\mailuser\account_delete.html:22
+#: .\templates\mailuser\account_delete.html:20
 msgid "This will also delete the following aliases connected to this account:"
 msgstr ""
 "Mit diesem Konto werden die folgenden mit diesem Konto verbundenen Aliase "
 "mit gelöscht:"
 
-#: .\templates\mailuser\account_delete.html:39
-#: .\templates\mailuser\redirect_delete.html:26
+#: .\templates\mailuser\account_delete.html:37
+#: .\templates\mailuser\account_edit.html:71
+#: .\templates\mailuser\redirect_delete.html:28
+#: .\templates\mailuser\redirect_edit.html:31
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: .\templates\mailuser\account_display.html:45
+#: .\templates\mailuser\account_edit.html:33
+msgid "address"
+msgstr "Adresse"
+
+#: .\templates\mailuser\account_display.html:69
+#: .\templates\mailuser\account_edit.html:68
+#: .\templates\mailuser\redirect_edit.html:28
+msgid "Ok"
+msgstr ""
+
 #: .\templates\mailuser\account_edit.html:10
-#: .\templates\mailuser\account_list.html:46
+#: .\templates\mailuser\account_list.html:64
 #: .\templates\mailuser\account_new.html:10
 msgid "account edit"
 msgstr "Konto bearbeiten"
 
-#: .\templates\mailuser\account_edit.html:32
-msgid "address"
-msgstr "Adresse"
+#: .\templates\mailuser\account_edit.html:45
+#: .\templates\mailuser\redirect_edit.html:9
+msgid "redirection edit"
+msgstr "Weiterleitung bearbeiten"
+
+#: .\templates\mailuser\account_edit.html:49
+#: .\templates\mailuser\redirect_delete.html:4
+msgid "redirection delete"
+msgstr "Weiterleitung löschen"
+
+#: .\templates\mailuser\account_edit.html:57
+msgid "new redirection"
+msgstr "Neue Weiterleitung"
 
 #: .\templates\mailuser\account_edit.html:74
-#: .\templates\mailuser\account_new.html:37
+#: .\templates\mailuser\account_new.html:38
 #: .\templates\mailuser\custom_admin_account_change.html:56
 msgid "generate username"
 msgstr "Benutzername erzeugen"
 
 #: .\templates\mailuser\account_edit.html:77
-#: .\templates\mailuser\account_new.html:40
+#: .\templates\mailuser\account_new.html:41
 #: .\templates\mailuser\custom_admin_account_change.html:57
 msgid "generate password"
 msgstr "Passwort erzeugen"
 
-#: .\templates\mailuser\account_list.html:4
+#: .\templates\mailuser\account_list.html:13
 msgid "accounts for "
 msgstr "Konten für Domain "
 
-#: .\templates\mailuser\account_list.html:12
-msgid "accounts"
-msgstr "Konten"
-
-#: .\templates\mailuser\account_list.html:19
+#: .\templates\mailuser\account_list.html:30
 msgid "redirected to"
 msgstr "Weiterleitung an"
 
-#: .\templates\mailuser\account_list.html:42
+#: .\templates\mailuser\account_list.html:59
 msgid "load credentials pdf"
-msgstr "Kontodaten PDF laden"
+msgstr "Kontodatendokument laden"
 
-#: .\templates\mailuser\account_list.html:58
+#: .\templates\mailuser\account_list.html:85
 msgid "back"
 msgstr "zurück"
 
-#: .\templates\mailuser\import.html:11
+#: .\templates\mailuser\account_list.html:89
+msgid "new account"
+msgstr "Neues Konto anlegen"
+
+#: .\templates\mailuser\account_list.html:93
+msgid "refresh credentials for all accounts"
+msgstr "Alle Kontodatendokumente aktualisieren"
+
+#: .\templates\mailuser\import.html:13
 msgid "import accounts"
 msgstr "Konten importieren"
 
-#: .\templates\mailuser\import.html:31
+#: .\templates\mailuser\import.html:35
 msgid "name / redirection"
 msgstr "Name / Weiterleitung"
 
-#: .\templates\mailuser\redirect_delete.html:4
-msgid "redirection delete"
-msgstr "Weiterleitung löschen"
-
-#: .\templates\mailuser\redirect_delete.html:16
+#: .\templates\mailuser\redirect_delete.html:15
 msgid "Do you really want to delete this Redirection?"
 msgstr "Diese Weiterleitung wirklich löschen?"
-
-#: .\templates\mailuser\redirect_edit.html:9
-msgid "redirection edit"
-msgstr "Weiterleitung bearbeiten"
 
 #: .\templates\registration\logged_out.html:6
 msgid "You are now logged out, thanks for using this app."
@@ -337,36 +364,44 @@ msgstr ""
 msgid "Change my password"
 msgstr "Passwort erzeugen"
 
-#: .\views.py:30
+#: .\views.py:31
 msgid "No tenant selected."
 msgstr "Kein Mandant ausgewählt."
 
-#: .\views.py:53
+#: .\views.py:54
 msgid "No document available for this user"
 msgstr "Für diesen Benutzer ist kein PDF Dokument verfügbar"
 
-#: .\views.py:98
+#: .\views.py:112
 msgid "account changed."
 msgstr "Konto geändert."
 
-#: .\views.py:101
+#: .\views.py:115
 msgid "error in edit account."
 msgstr "Fehler beim Bearbeiten des Kontos."
 
-#: .\views.py:119
+#: .\views.py:133
 #, python-brace-format
 msgid "account {account} deleted."
 msgstr "Konto {account} gelöscht."
 
-#: .\views.py:143
+#: .\views.py:157
 msgid "redirection changed."
 msgstr "Weiterleitung geändert."
 
-#: .\views.py:146
+#: .\views.py:160
 msgid "error in edit redirection."
 msgstr "Fehler beim Bearbeiten der Weiterleitung."
 
-#: .\views.py:164
+#: .\views.py:178
 #, python-brace-format
 msgid "Redirection {redirection} deleted."
 msgstr "Weiterleitung {redirection} gelöscht."
+
+#: .\views.py:192
+#, python-brace-format
+msgid "{count} credentials refreshed."
+msgstr "{count} Kontodatendokumente aktualisiert."
+
+#~ msgid "accounts"
+#~ msgstr "Konten"

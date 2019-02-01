@@ -54,10 +54,12 @@ var frame_height = 240;
                                     {% endfor %}
                                 </td>
                                 <td class="td-buttons">
+                                    {% if account.type == '1' %}
                                     <a class="btn btn-sm btn-info{% f_exists account.id %}" href="{% url 'get_account_credentials' account.id %}" 
                                         role="button" title="{% trans 'load credentials pdf' %}">
                                         <i class="far fa-file-pdf"></i>
                                     </a>
+                                    {% endif %}
                                     <a class="btn btn-sm btn-secondary" href="{% url 'accountedit' tenant.id account.id %}" role="button"
                                         title="{% trans 'account edit' %}">
                                         <i class="far fa-edit"></i>
@@ -83,8 +85,14 @@ var frame_height = 240;
                 <button class="btn btn-primary" name="back" title="{% trans 'back' %}">
                     <i class="far fa-check"></i>
                 </button>
-                <a class="btn btn-success" href="{% url 'accountnew' tenant.id %}" role="button">
+                <a class="btn btn-success" href="{% url 'accountnew' tenant.id %}" role="button"
+                    title="{% trans 'new account' %}">
                     <i class="far fa-plus"></i>
+                </a>
+                <a class="btn btn-info" href="{% url 'refreshcredentials' tenant.id %}" role="button"
+                    title="{% trans 'refresh credentials for all accounts' %}">
+                    <i class="far fa-sync"></i>
+                    <i class="far fa-file-pdf"></i>
                 </a>
             </div>
         </div>

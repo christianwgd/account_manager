@@ -43,6 +43,7 @@ urlpatterns = [
     path('redirectedit/<int:account_id>/<int:redirect_id>/', views.redirect_edit, name='redirectedit'),
     path('redirectdelete/<int:redirect_id>/', views.redirect_delete, name='redirectdelete'),
     path('get_account_credentials/<int:account_id>/', views.get_account_credentials, name='get_account_credentials'),
+    path('refreshcredentials/<int:tenant_id>/', views.refresh_credentials, name='refreshcredentials'),
 
     path('get_tenant_domain/<int:tenant_id>/', views.getTenantDomain, name='get_tenant_domain'),
     path('get_default_password/', views.createDefaultPassword, name='get_default_password'),
