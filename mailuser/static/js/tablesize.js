@@ -3,13 +3,14 @@ function resize() {
         var contentheight = Math.floor($(window).height());
         var tableheight = contentheight - frame_height;
         $('.table-responsive-sm').css('height', tableheight + 'px');
+        return tableheight;
     } 
 }
 
 $(document).ready(function(){
-    resize();
+    tableHeight = resize();
     window.onresize = function() {
-        resize();
+        tableHeight = resize();
     };
 });
 

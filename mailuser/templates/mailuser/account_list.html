@@ -4,77 +4,95 @@
 {% block bootstrap4_extra_head %}
 {{ block.super }}
 {{ form.media }}
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="{% static 'js/tablesize.js' %}"></script>
 <script>
-var frame_height = 240;
+
+var frame_height = 350;
+
+$(document).ready( function () {
+    $('#accounts').DataTable({
+        language: {
+            url: '{% static "datatables/de_DE.json" %}'
+        },
+        scrollY:        tableHeight,
+        scrollCollapse: true,
+        paging:         false,
+        order: [[ 1, 'asc' ]],
+        columns: [
+            {},
+            {},
+            {},
+            { orderable: false },
+            { orderable: false }
+          ]
+    });
+} );
+
 </script>
 {% endblock %}
 
 {% block title %}{% trans 'accounts for ' %}{{ tenant.domain }}{% endblock %}
 
 {% block content %}
-<form method="get" class="from-horizontal" role="form" action="{% url 'tenantlist' %}">
+<form method="get" role="form" action="{% url 'tenantlist' %}">
 {% csrf_token %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="panel">
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
                 <h4>{% trans 'account' %}</h4>
-                <div class="table-responsive-sm">
-                    <table id="events" class="table table-condensed table-striped">
-                        <thead>
-                            <tr>
-                                <th>{% trans 'account type' %}</th>
-                                <th>{% trans 'account user' %}</th>
-                                <th>{% trans 'name' %}</th>
-                                <th>{% trans 'redirected to' %}</th>
-                                <th>{% trans 'description' %}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for account in accountlist %}
-                            <tr>
-                                <td>
-                                    {% if account.type == '1' %}
-                                        <i class="far fa-at" title="{% trans 'account' %}"></i>
-                                    {% else %}
-                                        <i class="far fa-reply" title="{% trans 'redirection' %}"></i>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    <a href="{% url 'accountdisplay' account.id%}">
-                                        {{ account.username }}
-                                    </a>
-                                </td>
-                                <td>{{ account.full_name|default_if_none:'-' }}</td>
-                                <td>
-                                    {% for redirection in account.redirection_set.all %}
-                                        {{ redirection }}<br/>
-                                    {% endfor %}
-                                </td>
-                                <td class="td-buttons">
-                                    {% if account.type == '1' %}
-                                    <a class="btn btn-sm btn-info{% f_exists account.id %}" href="{% url 'get_account_credentials' account.id %}" 
-                                        role="button" title="{% trans 'load credentials pdf' %}">
-                                        <i class="far fa-file-pdf"></i>
-                                    </a>
-                                    {% endif %}
-                                    <a class="btn btn-sm btn-secondary" href="{% url 'accountedit' tenant.id account.id %}" role="button"
-                                        title="{% trans 'account edit' %}">
-                                        <i class="far fa-edit"></i>
-                                    </a>
-                                    <a class="btn btn-sm btn-danger" href="{% url 'accountdelete' account.id %}" role="button"
-                                        title="{% trans 'account delete' %}">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                </div>
+                <table id="accounts" class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'account type' %}</th>
+                            <th>{% trans 'account user' %}</th>
+                            <th>{% trans 'name' %}</th>
+                            <th>{% trans 'redirected to' %}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for account in accountlist %}
+                        <tr>
+                            <td data-order="{{ account.type }}">
+                                {% if account.type == '1' %}
+                                    <i class="far fa-at" title="{% trans 'account' %}"></i>
+                                {% else %}
+                                    <i class="far fa-reply" title="{% trans 'redirection' %}"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'accountdisplay' account.id%}">
+                                    {{ account.username }}
+                                </a>
+                            </td>
+                            <td>{{ account.full_name|default_if_none:'-' }}</td>
+                            <td>
+                                {% for redirection in account.redirection_set.all %}
+                                    {{ redirection }}<br/>
+                                {% endfor %}
+                            </td>
+                            <td class="td-buttons">
+                                {% if account.type == '1' %}
+                                <a class="btn btn-sm btn-info{% f_exists account.id %}" href="{% url 'get_account_credentials' account.id %}"
+                                    role="button" title="{% trans 'load credentials pdf' %}">
+                                    <i class="far fa-file-pdf"></i>
+                                </a>
+                                {% endif %}
+                                <a class="btn btn-sm btn-secondary" href="{% url 'accountedit' tenant.id account.id %}" role="button"
+                                    title="{% trans 'account edit' %}">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <a class="btn btn-sm btn-danger" href="{% url 'accountdelete' account.id %}" role="button"
+                                    title="{% trans 'account delete' %}">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
