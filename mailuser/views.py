@@ -175,7 +175,7 @@ def redirect_delete(request, redirect_id):
 
         redirection.delete()
         messages.success(request, _(
-            'Redirection {redirection} deleted.').format(redirection=redirection.name))
+            'Redirection {redirection} deleted.').format(redirection=redirection.email))
         return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
 
     return render(request, 'mailuser/redirect_delete.html', {'redirection': redirection})
