@@ -1,50 +1,20 @@
 {% extends 'admin/change_form.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block javascripts %}
 {{ block.super }}
+<script src="{% static 'js/normalize.js' %}"></script>
+<script src="{% static 'js/generate.js' %}"></script>
 <script type="text/javascript">
 (function($) {
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#_gen_username').on('click', function(event) {
             var tenant_id = $('#id_tenant>option:selected').val();
-            if (!tenant_id) {
-                alert('Kein Mandant ausgewählt!');
-                return;
-            }
-            var firstname = $('#id_first_name').val().toLowerCase();
-            if (!firstname) {
-                alert('Vorname nicht eingegeben!');
-                return;
-            }
-            var lastname = $('#id_last_name').val().toLowerCase();
-            if (!lastname) {
-                alert('Nachname nicht eingegeben!');
-                return;
-            }
-            //get tenants domain
-            $.ajax({
-                type: 'GET',
-                url: '/get_tenant_domain/'+tenant_id+'/',
-                success: function(domain){
-                    $('#id_username').val(firstname+'.'+lastname+'@'+domain);
-                },
-                error: function (xhr, ajaxOptions, thrownError){
-                    alert(thrownError);
-                }
-            });
+            gen_username(tenant_id);
         });
+
         $('#_gen_password').on('click', function(event) {
-            $.ajax({
-                type: 'GET',
-                url: '/get_default_password/',
-                success: function(password){
-                    $('#id_def_pwd').val(password);
-                },
-                error: function (xhr, ajaxOptions, thrownError){
-                    alert(thrownError);
-                }
-            });
+            gen_password();
         });
     });
 })(django.jQuery);
