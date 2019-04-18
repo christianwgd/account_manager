@@ -2,8 +2,10 @@
 
 {% buttons %}
   {% if cancel_url %}
-    <a class="btn btn-secondary" href="{{ cancel_url }}" role="button" type="button" title="{% trans "Cancel" %}">
-        {% trans "Cancel" %}
+    <a href="{{ cancel_url }}">
+        <button class="btn btn-secondary" href="{{ cancel_url }}" role="button" type="button" title="{% trans "Cancel" %}">
+            {% trans "Cancel" %}
+        </button>
     </a>
       
   {% endif %}
