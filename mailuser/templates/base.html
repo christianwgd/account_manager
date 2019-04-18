@@ -75,6 +75,12 @@
                         <i class="far fa-key"></i>
                         {% trans 'Password change' %}
                     </a>
+                    <a class="dropdown-item" href="{% url 'two_factor:setup' %}">
+                        <!-- user-cog in fa5.0.6 nicht enthalten -->
+                        <!-- <i class="far fa-user-cog"></i> -->
+                        <i class="far fa-certificate"></i>
+                        {% trans 'Two factor authentication' %}
+                    </a>
                     {% if user.is_superuser %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'admin:index' %}">
@@ -82,13 +88,6 @@
                     </a>
                     {% endif %}
                 </div>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="dropdown-item" href="{% url 'login' %}">
-                    <span class="far fa-sign-in"></span>
-                    {% trans 'Log in' %}
-                </a>
             </li>
             {% endif %}
         </ul>
