@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-19 12:57+0200\n"
+"POT-Creation-Date: 2019-04-19 13:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -445,26 +445,30 @@ msgstr ""
 msgid "Permission Denied"
 msgstr ""
 
-#: templates/two_factor/core/otp_required.html:7
+#: templates/two_factor/core/otp_required.html:8
 msgid ""
-"The page you requested, enforces users to verify using\n"
-"    two-factor authentication for security reasons. You need to enable "
-"these\n"
-"    security features in order to access this page."
+"The page you requested, enforces users to verify using two-factor "
+"authentication for security reasons. You need to enable these security "
+"features in order to access this page."
 msgstr ""
-
-#: templates/two_factor/core/otp_required.html:11
-msgid ""
-"Two-factor authentication is not enabled for your\n"
-"    account. Enable two-factor authentication for enhanced account\n"
-"    security."
-msgstr ""
+"Die aufgerufene Seite benötigt aktivierte Zwei-Faktor-Authentifizierung auf "
+"dem Benutzerkonto. Um Zugriff auf diese Seite zu erhalten, muss diese "
+"Sicherheitsfunktion auf dem Benutzerkonto aktiviert werden."
 
 #: templates/two_factor/core/otp_required.html:16
+#: templates/two_factor/profile/profile.html:81
+msgid ""
+"Two-factor authentication is not enabled for your account. Enable two-factor "
+"authentication for enhanced account security."
+msgstr ""
+"Die Zwei-Faktor-Authentifizierung ist für dieses Benutzerkonto nicht "
+"aktiviert. Für erhöhte Sicherheit des Benutzerkontos aktivieren."
+
+#: templates/two_factor/core/otp_required.html:24
 msgid "Go back"
 msgstr "Zurück"
 
-#: templates/two_factor/core/otp_required.html:18
+#: templates/two_factor/core/otp_required.html:26
 #: templates/two_factor/profile/profile.html:89
 msgid "Enable Two-Factor Authentication"
 msgstr ""
@@ -625,7 +629,8 @@ msgstr ""
 msgid ""
 "If you don't have any device with you, you can access your account using "
 "backup tokens."
-msgstr "Sollte kein Gerät verfügbar sein, können diese Ersatz-Codes verwendet werden."
+msgstr ""
+"Sollte kein Gerät verfügbar sein, können diese Ersatz-Codes verwendet werden."
 
 #: templates/two_factor/profile/profile.html:57
 #, python-format
@@ -648,14 +653,6 @@ msgid ""
 "However we strongly discourage you to do so, you can also disable two-factor "
 "authentication for your account."
 msgstr "Wir raten davon ab, Zwei-Faktor-Authentifizierung zu deaktivieren."
-
-#: templates/two_factor/profile/profile.html:81
-msgid ""
-"Two-factor authentication is not enabled for your account. Enable two-factor "
-"authentication for enhanced account security."
-msgstr ""
-"Die Zwei-Faktor-Authentifizierung ist für dieses Benutzerkonto nicht "
-"aktiviert. Für erhöhte Sicherheit des Benutzerkontos aktivieren."
 
 #: views.py:32
 msgid "No tenant selected."
@@ -695,3 +692,17 @@ msgstr "Weiterleitung {redirection} gelöscht."
 #, python-brace-format
 msgid "{count} credentials refreshed."
 msgstr "{count} Kontodatendokumente aktualisiert."
+
+#, fuzzy
+#~| msgid ""
+#~| "Two-factor authentication is not enabled for your account. Enable two-"
+#~| "factor authentication for enhanced account security."
+#~ msgid ""
+#~ "\n"
+#~ "          Two-factor authentication is not enabled for your account.\n"
+#~ "          Enable two-factor authentication for enhanced account "
+#~ "security.\n"
+#~ "      "
+#~ msgstr ""
+#~ "Die Zwei-Faktor-Authentifizierung ist für dieses Benutzerkonto nicht "
+#~ "aktiviert. Für erhöhte Sicherheit des Benutzerkontos aktivieren."
