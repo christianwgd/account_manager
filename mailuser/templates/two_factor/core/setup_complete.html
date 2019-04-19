@@ -4,9 +4,11 @@
 {% block content %}
 <div id="content-main">
     <div class="col-md-4 offset-md-4">
-        <p>{% blocktrans %}Congratulations, you've successfully enabled two-factor
-      authentication.{% endblocktrans %}
-
+        <p>
+            {% blocktrans trimmed %}
+                Congratulations, you've successfully enabled two-factor authentication.
+            {% endblocktrans %}
+        </p>
         {% if not phone_methods %}
             <p>
                 <a href="{% url 'tenantlist' %}" >
@@ -22,7 +24,7 @@
             </p>
         {% else %}
             <p>
-                {% blocktrans %}
+                {% blocktrans trimmed %}
                     However, it might happen that you don't have access to your
                     primary token device. To enable account recovery, add a phone
                     number.
@@ -31,7 +33,8 @@
 
             <a href="{% url 'two_factor:profile' %}">
                 <button class="pull-right btn">
-                {% trans "Back to Profile" %}
+                    {% trans "Back to Profile" %}
+                </button>
             </a>
             <p>
                 <a href="{% url 'two_factor:phone_create' %}" class="btn btn-success">
