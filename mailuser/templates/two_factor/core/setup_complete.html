@@ -9,8 +9,13 @@
 
         {% if not phone_methods %}
             <p>
-                <a href="{% url 'two_factor:profile' %}" >
+                <a href="{% url 'tenantlist' %}" >
                     <button class="btn btn-primary" type="button">
+                        <i class="far fa-home"></i>
+                    </button>
+                </a>
+                <a href="{% url 'two_factor:profile' %}" >
+                    <button class="btn btn-secondary" type="button">
                         {% trans "Back to Profile" %}
                     </button>
                 </a>

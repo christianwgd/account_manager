@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.views.generic import RedirectView
 from filebrowser.sites import site
 from django.conf import settings
 from django.conf.urls.static import static
@@ -30,6 +31,7 @@ admin.site.site_header = _('Account Manager')
 urlpatterns = [
     path('', include(tf_urls)),
     path('admin/filebrowser/', site.urls),
+    path('accounts/login/', RedirectView.as_view(url='/account/login/')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
