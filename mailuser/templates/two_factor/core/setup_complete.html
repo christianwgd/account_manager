@@ -1,0 +1,44 @@
+{% extends "two_factor/_base_focus.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id="content-main">
+    <div class="col-md-4 offset-md-4">
+        <p>{% blocktrans %}Congratulations, you've successfully enabled two-factor
+      authentication.{% endblocktrans %}
+
+        {% if not phone_methods %}
+            <p>
+                <a href="{% url 'tenantlist' %}" >
+                    <button class="btn btn-primary" type="button">
+                        <i class="far fa-home"></i>
+                    </button>
+                </a>
+                <a href="{% url 'two_factor:profile' %}" >
+                    <button class="btn btn-secondary" type="button">
+                        {% trans "Back to Profile" %}
+                    </button>
+                </a>
+            </p>
+        {% else %}
+            <p>
+                {% blocktrans %}
+                    However, it might happen that you don't have access to your
+                    primary token device. To enable account recovery, add a phone
+                    number.
+                {% endblocktrans %}
+            </p>
+
+            <a href="{% url 'two_factor:profile' %}">
+                <button class="pull-right btn">
+                {% trans "Back to Profile" %}
+            </a>
+            <p>
+                <a href="{% url 'two_factor:phone_create' %}" class="btn btn-success">
+                    {% trans "Add Phone Number" %}
+                </a>
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

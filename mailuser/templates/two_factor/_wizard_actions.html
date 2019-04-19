@@ -1,0 +1,18 @@
+{% load i18n bootstrap4 %}
+
+{% buttons %}
+  {% if cancel_url %}
+    <a href="{{ cancel_url }}">
+        <button class="btn btn-secondary" href="{{ cancel_url }}" role="button" type="button" title="{% trans "Cancel" %}">
+            {% trans "Cancel" %}
+        </button>
+    </a>
+      
+  {% endif %}
+  {% if wizard.steps.prev %}
+    <button class="btn btn-secondary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" role="button">
+        {% trans "Back" %}
+    </button>
+  {% endif %}
+  <button type="submit" class="btn btn-primary">{% trans "Next" %}</button>
+{% endbuttons %}

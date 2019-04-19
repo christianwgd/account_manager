@@ -64,7 +64,7 @@ def get_account_credentials(request, account_id):
     return resp
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/account/login/')
 def tenant_list(request):
     tenants = Tenant.objects.filter(manager=request.user)
     return render(request, 'mailuser/tenant_list.html', {
@@ -72,7 +72,7 @@ def tenant_list(request):
     })
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/account/login/')
 def account_list(request, tenant_id):
     tenant = Tenant.objects.get(pk=tenant_id)
     accounts = Account.objects.filter(tenant=tenant).order_by('username', 'type')
@@ -82,7 +82,7 @@ def account_list(request, tenant_id):
     })
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/account/login/')
 def account_display(request, account_id):
     account = Account.objects.get(pk=account_id)
     return render(request, 'mailuser/account_display.html', {
@@ -90,7 +90,7 @@ def account_display(request, account_id):
     })
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/account/login/')
 def account_edit(request, tenant_id, account_id=None):
     if account_id is None:
         tenant = Tenant.objects.get(pk=tenant_id)
@@ -120,7 +120,7 @@ def account_edit(request, tenant_id, account_id=None):
     })
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/account/login/')
 def account_delete(request, account_id):
 
     account = Account.objects.get(pk=account_id)
@@ -137,7 +137,7 @@ def account_delete(request, account_id):
     return render(request, 'mailuser/account_delete.html', {'account': account})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/account/login/')
 def redirect_edit(request, account_id, redirect_id=None):
     if redirect_id is None:
         account = Account.objects.get(pk=account_id)
@@ -165,7 +165,7 @@ def redirect_edit(request, account_id, redirect_id=None):
     })
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/account/login/')
 def redirect_delete(request, redirect_id):
 
     redirection = Redirection.objects.get(pk=redirect_id)
@@ -182,7 +182,7 @@ def redirect_delete(request, redirect_id):
     return render(request, 'mailuser/redirect_delete.html', {'redirection': redirection})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url=' /account/login/')
 def refresh_credentials(request, tenant_id):
     ''' refresh credentials for all accounts of tenant '''
     accounts = Account.objects.filter(tenant__pk=tenant_id, type='1')
