@@ -5,7 +5,12 @@
 {{ block.super }}
 {{ form.media }}
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
+{#<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>#}
+<script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/responsive/2.2.2/js/responsive.bootstrap4.min.js"></script>
 <script src="{% static 'js/tablesize.js' %}"></script>
 <script>
 
@@ -20,12 +25,13 @@ $(document).ready( function () {
         scrollCollapse: true,
         paging:         false,
         order: [[ 1, 'asc' ]],
+        responsive: true,
         columns: [
-            {},
-            {},
-            {},
-            { orderable: false },
-            { orderable: false }
+            { responsivePriority: 2, targets: 0 },
+            { responsivePriority: 1, targets: 1 },
+            { responsivePriority: 4, targets: 2 },
+            { orderable: false, responsivePriority: 5, targets: 3 },
+            { orderable: false, responsivePriority: 3, targets: 4 }
           ]
     });
 } );
