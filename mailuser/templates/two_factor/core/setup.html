@@ -1,6 +1,8 @@
 {% extends "two_factor/_base_focus.html" %}
 {% load i18n %}
 
+{% block title %}{% trans "Enable Two-Factor Authentication" %}{% endblock %}
+
 {% block content %}
 <div id="content-main">
     <div class="col-md-4 offset-md-4">
@@ -14,7 +16,7 @@
         {% elif wizard.steps.current == 'method' %}
             <p>
                 {% blocktrans trimmed %}
-                    Please select which authentication method you would like to use.#
+                    Please select which authentication method you would like to use.
                 {% endblocktrans %}
             </p>
         {% elif wizard.steps.current == 'generator' %}

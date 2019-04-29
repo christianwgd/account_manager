@@ -1,6 +1,8 @@
 {% extends "two_factor/_base_focus.html" %}
 {% load i18n %}
 
+{% block title %}{% trans "Enable Two-Factor Authentication" %}{% endblock %}
+
 {% block content %}
 <div id="content-main">
     <div class="col-md-4 offset-md-4">
@@ -11,7 +13,7 @@
         </p>
         {% if not phone_methods %}
             <p>
-                <a href="{% url 'tenantlist' %}" >
+                <a href="{% url 'startpage' %}" >
                     <button class="btn btn-primary" type="button">
                         <i class="far fa-home"></i>
                     </button>
