@@ -23,6 +23,7 @@ class TenantAdmin(admin.ModelAdmin):
     filter_horizontal = ['manager', ]
     logo_thumbnail.allow_tags = True
     logo_thumbnail.short_description = "Logo"
+    autocomplete_fields = ['manager']
 
 
 @admin.register(Redirection)
