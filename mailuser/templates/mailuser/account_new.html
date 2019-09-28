@@ -4,7 +4,21 @@
 {% block bootstrap4_extra_head %}
 {{ block.super }}
 {{ form.media }}
+<script src="{% static 'js/normalize.js' %}"></script>
 <script src="{% static 'js/generate.js' %}"></script>
+
+<script>
+$(document).ready(function(){
+    $('#_gen_username').on('click', function(event) {
+        var tenant_id = $('#id_tenant').text();
+        gen_username(tenant_id);
+    });
+
+    $('#_gen_password').on('click', function(event) {
+        gen_password();
+    });
+});
+</script>
 {% endblock %}
 
 {% block title %}{% trans 'account edit' %}{% endblock %}
