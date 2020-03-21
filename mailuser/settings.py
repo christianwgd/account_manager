@@ -127,10 +127,10 @@ GRAPPELLI_ADMIN_TITLE = _('Account Manager')
 # BOOTSTRAP 4    #
 ##################
 BOOTSTRAP4 = {
-    # wird sonst 2-mal geladen...
-    'javascript_in_head': True,
+    "include_jquery": True,
+    "theme_url": "/static/css/greyson.css",
+    "javascript_in_head": True,
 }
-
 
 ##################
 # LOCAL SETTINGS #

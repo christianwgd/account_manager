@@ -1,3 +1,7 @@
+#container {
+    padding-top: 50px;
+}
+
 .dropdown-menu.right { right: 0; left: auto; }
 
 .panel {
@@ -22,4 +26,8 @@
 
 .form-group.required .control-label {
     font-weight: bold;
+}
+
+.card {
+    width: 300px;
 }

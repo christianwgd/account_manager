@@ -5,18 +5,22 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row justify-content-md-center">
-        {% for tenant in  tenantlist %}
-            <div class="col col-md-3 text-center">
-                <div class="panel">
-                    <a href="{% url 'accountlist' tenant.id %}">
-                        <img src="{% version tenant.logo 'small' %}" alt="">
-                    </a>
-                    <h5>{{ tenant.name }}</h5>
-                    <p>(@{{ tenant.domain }})</p>
+    <div class="row">
+        <div class="col">
+            <div class="card-deck justify-content-md-center">
+            {% for tenant in  tenantlist %}
+                <a href="{% url 'accountlist' tenant.id %}">
+                <div class="card bg-light">
+                    <img class="card-img-top" src="{% version tenant.logo 'medium' %}" alt="">
+                    <div class="card-body text-center bg-white">
+                        <h5>{{ tenant.name }}</h5>
+                        <p>(@{{ tenant.domain }})</p>
+                    </div>
                 </div>
+                </a>
+            {% endfor %}
             </div>
-        {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

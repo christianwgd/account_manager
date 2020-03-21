@@ -3,9 +3,14 @@
 
 {% block bootstrap4_extra_head %}
 {{ block.super }}
-{{ form.media }}
+{{ form.media.css }}
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+{{ block.super }}
+{{ form.media.js }}
 {#<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>#}
 <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
@@ -74,9 +79,13 @@ $(document).ready( function () {
                             </td>
                             <td>{{ account.full_name|default_if_none:'-' }}</td>
                             <td>
-                                {% for redirection in account.redirection_set.all %}
+                                {% for redirection in account.redirection_set.all|slice:":5" %}
                                     {{ redirection }}<br/>
                                 {% endfor %}
+                                {% if account.redirection_set.all.count > 5 %}
+                                    <i class="far fa-ellipsis-h"></i>
+                                    <small>(Gesamt {{ account.redirection_set.all.count }})</small>
+                                {% endif %}
                             </td>
                             <td class="td-buttons">
                                 {% if account.type == '1' %}

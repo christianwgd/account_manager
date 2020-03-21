@@ -4,8 +4,6 @@
 {% block bootstrap4_title %}{% trans 'Account Manager' %}{% endblock %}
 
 {% block bootstrap4_extra_head %}
-{{ block.super }}
-{% bootstrap_javascript jquery='full' %}
 <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png'%}">
 <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-icon-60x60.png'%}">
 <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicon/apple-icon-72x72.png'%}">
@@ -24,12 +22,13 @@
 <meta name="msapplication-TileImage" content="{% static 'favicon/ms-icon-144x144.png'%}">
 <meta name="theme-color" content="#ffffff">
 
-<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="{% static 'css/mailuser.css' %}">
-
 <link rel="stylesheet" href="{% static 'font-awesome-5/css/all.min.css' %}">
-<script defer src="{% static 'font-awesome-5/js/all.min.js' %}"></script>
+{% endblock %}
 
+{% block bootstrap4_extra_script %}
+{{ block.super }}
+<script defer src="{% static 'font-awesome-5/js/all.min.js' %}"></script>
 {% endblock %}
 
 {% block bootstrap4_content %}
