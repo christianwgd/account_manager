@@ -3,10 +3,15 @@
 
 {% block bootstrap4_extra_head %}
 {{ block.super }}
-{{ form.media }}
+{{ form.media.css }}
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+{{ block.super }}
+{{ form.media.js }}
 <script src="{% static 'js/tablesize.js' %}"></script>
 <script>
-var frame_height = 400;
+var frame_height = 450;
 </script>
 {% endblock %}
 
