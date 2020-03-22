@@ -31,3 +31,10 @@
 .card {
     margin-bottom: 15px !important;
 }
+
+.card-img-top {
+    width: 80%;
+    padding: 20px;
+    margin: 0 auto;
+    object-fit: contain;
+}
