@@ -38,7 +38,12 @@
                 </table>
 
                 {% if account.redirection_set.all.count > 0 %}
-                <h5>{% trans 'redirections' %}</h5>
+                <h5>
+                    {% trans 'redirections' %}
+                    <span class="badge badge-secondary">
+                        {{ account.redirection_set.all.count }}
+                    </span>
+                </h5>
                 <table id="redirections" class="table table-condensed">
                     <thead>
                         <tr>

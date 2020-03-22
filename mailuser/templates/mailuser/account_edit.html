@@ -38,7 +38,12 @@ $(document).ready(function(){
 
         <div class="col-md-6 col-sm-12">
             <div class="panel">
-                <h5>{% trans 'redirections' %}</h5>
+                <h5>
+                    {% trans 'redirections' %}
+                    <span class="badge badge-secondary">
+                        {{ account.redirection_set.all.count }}
+                    </span>
+                </h5>
                 <table id="redirections" class="table table-condensed table-striped">
                     <thead>
                         <tr>

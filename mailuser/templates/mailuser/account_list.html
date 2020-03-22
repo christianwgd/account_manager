@@ -44,7 +44,10 @@ $(document).ready( function () {
 </script>
 {% endblock %}
 
-{% block title %}{% trans 'accounts for ' %}{{ tenant.domain }}{% endblock %}
+{% block title %}
+    {% trans 'accounts for ' %}{{ tenant.domain }}
+    <span class="badge badge-secondary">{{ accountlist.count }}</span>
+{% endblock %}
 
 {% block content %}
 <form method="get" role="form" action="{% url 'tenantlist' %}">
