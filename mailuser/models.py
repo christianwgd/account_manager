@@ -45,7 +45,7 @@ class Tenant(models.Model):
 
 ACCOUNT_TYPE = (
     ('1', _('account')),
-    ('2', _('redirection')),
+    ('2', _('alias')),
 )
 
 class Account(models.Model):

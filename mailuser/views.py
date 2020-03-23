@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 
-from .crypt import get_creds_filename, decrypt_file, init_storage_dir
+from .crypt import get_creds_filename, decrypt_file
 from .models import Tenant, Account, Redirection
 from .forms import AccountForm, RedirectionForm
 

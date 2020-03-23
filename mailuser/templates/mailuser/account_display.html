@@ -12,7 +12,14 @@
                     <tbody>
                         <tr>
                             <th>{% trans 'account type' %}</th>
-                            <td>{{ account.get_type_display }}</td>
+                            <td>
+                                {% if account.type == '1' %}
+                                    <i class="far fa-user" title="{% trans 'account' %}"></i>
+                                {% else %}
+                                    <i class="far fa-user-friends" title="{% trans 'alias' %}"></i>
+                                {% endif %}
+                                {{ account.get_type_display }}
+                            </td>
                         </tr>
                         <tr>
                             <th>{% trans 'username' %}</th>
