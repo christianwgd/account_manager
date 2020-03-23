@@ -147,9 +147,9 @@ BOOTSTRAP4 = {
 f = os.path.join(PROJECT_APP_PATH, "localsettings.py")
 if os.path.exists(f):
     import sys
-    import imp
+    import importlib
     module_name = "%s.localsettings" % PROJECT_APP
-    module = imp.new_module(module_name)
+    module = importlib.import_module(module_name)
     module.__file__ = f
     sys.modules[module_name] = module
     exec(open(f, "rb").read())
