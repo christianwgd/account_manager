@@ -14,8 +14,8 @@ CONN_SECURITY = (
     ('NNE', 'None'),
     ('SSL', 'SSL'),
     ('TLS', 'TLS'),
-    ('STL', 'SSL/TLS'),
-    ('STL', 'STARTTLS'),
+    ('SST', 'SSL/TLS'),
+    ('STS', 'STARTTLS'),
 )
 
 class Tenant(models.Model):
