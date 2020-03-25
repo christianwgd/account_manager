@@ -29,7 +29,6 @@ PROJECT_APP = os.path.basename(PROJECT_APP_PATH)
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
     'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',

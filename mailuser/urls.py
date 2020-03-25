@@ -33,7 +33,6 @@ urlpatterns = [
     path('admin/filebrowser/', site.urls),
     path('accounts/login/', RedirectView.as_view(url='/account/login/')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
 
     path('', views.tenant_list, name='tenantlist'),
