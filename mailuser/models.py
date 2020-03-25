@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from filebrowser.fields import FileBrowseField
 
-from .crypt import get_creds_filename, decrypt_file, init_storage_dir
+from .crypt import init_storage_dir
 from .createpdf import credentials
 
 
