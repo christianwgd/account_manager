@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_select2',
     'mailuser',
     'django_otp',
     'django_otp.plugins.otp_static',

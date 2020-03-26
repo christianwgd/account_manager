@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load i18n static bootstrap4 fb_versions %}
 
-{% block title %}{% trans 'mail tenants' %}{% endblock %}
+{% block title %}
+    {% trans 'mail tenants' %}
+    <span class="badge badge-secondary">{{ tenantlist.count }}</span>
+    <a class="btn btn-sm btn-secondary" href="{% url 'tenantadd' %}">
+        <i class="fas fa-plus"></i>
+    </a>
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
@@ -9,15 +15,18 @@
         <div class="col">
             <div class="card-deck justify-content-center">
             {% for tenant in  tenantlist %}
-                <a href="{% url 'accountlist' tenant.id %}">
                 <div class="card bg-light">
+                    <a class="btn btn-secondary" href="{% url 'tenantedit' tenant.id %}">
+                        <i class="fas fa-edit"></i>
+                    </a>
                     <img class="card-img-top" src="{% version tenant.logo 'medium' %}" alt="">
                     <div class="card-body text-center bg-white">
-                        <h5>{{ tenant.name }}</h5>
-                        <p>(@{{ tenant.domain }})</p>
+                        <a href="{% url 'accountlist' tenant.id %}">
+                            <h5>{{ tenant.name }}</h5>
+                            <p>(@{{ tenant.domain }})</p>
+                        </a>
                     </div>
                 </div>
-                </a>
             {% endfor %}
             </div>
         </div>

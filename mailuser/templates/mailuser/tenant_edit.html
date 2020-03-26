@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load i18n static bootstrap4 %}
+
+{% block bootstrap4_extra_head %}
+{{ block.super }}
+{{ form.media.css }}
+<link rel="stylesheet" href="{% static 'css/select2-bootstrap4-theme.min.css' %}">
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+{{ block.super }}
+{{ form.media.js }}
+<script>
+$(document).ready(function(){
+    $('select').select2({
+        theme: 'bootstrap4',
+    });
+});
+</script>
+
+{% endblock %}
+
+{% block title %}{% trans 'tenant edit' %}{% endblock %}
+
+{% block content %}
+
+<form id="tenant_form" method="post" class="from-horizontal" role="form" action="">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            {% bootstrap_field form.name %}
+            {% bootstrap_field form.domain %}
+            {% bootstrap_field form.weburl %}
+        </div>
+        <div class="col-md-6 col-sm-12">
+            {% bootstrap_field form.logo %}
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h5>{% trans 'IMAP' %}</h5>
+            {% bootstrap_field form.imap_url %}
+            {% bootstrap_field form.imap_port %}
+            {% bootstrap_field form.imap_sec %}
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <h5>{% trans 'SMTP' %}</h5>
+            {% bootstrap_field form.smtp_url %}
+            {% bootstrap_field form.smtp_port %}
+            {% bootstrap_field form.smtp_sec %}
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% bootstrap_field form.man_url %}
+            {% bootstrap_field form.manager %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                {% buttons %}
+                    <button class="btn btn-primary" name="submit" type="submit" formnovalidate title="{% trans 'Ok' %}">
+                        <i class="far fa-check"></i>
+                    </button>
+                    <button class="btn btn-default" type="submit" name="cancel" formnovalidate title="{% trans 'Cancel' %}">
+                        <i class="far fa-times"></i>
+                    </button>
+                {% endbuttons %}
+            </div>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

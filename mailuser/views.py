@@ -3,6 +3,7 @@ import json
 import os
 import sys
 
+from django.views.generic import UpdateView, CreateView
 from rfc6266 import build_header
 from django.shortcuts import HttpResponse, render, redirect
 from django.urls import reverse
@@ -14,7 +15,7 @@ from django.db.models.signals import post_save
 
 from .crypt import get_creds_filename, decrypt_file
 from .models import Tenant, Account, Redirection
-from .forms import AccountForm, RedirectionForm
+from .forms import AccountForm, RedirectionForm, TenantForm
 
 
 def bad_request(message):
@@ -70,6 +71,24 @@ def tenant_list(request):
     return render(request, 'mailuser/tenant_list.html', {
         'tenantlist': tenants
     })
+
+
+class TenantUpdate(UpdateView):
+    model = Tenant
+    form_class = TenantForm
+    template_name = 'mailuser/tenant_edit.html'
+
+    def get_success_url(self):
+        return reverse('tenantlist')
+
+
+class TenantCreate(CreateView):
+    model = Tenant
+    form_class = TenantForm
+    template_name = 'mailuser/tenant_edit.html'
+
+    def get_success_url(self):
+        return reverse('tenantlist')
 
 
 @login_required(login_url='/account/login/')
