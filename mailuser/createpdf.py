@@ -94,12 +94,12 @@ the document as soon as possible.
     story.append(Spacer(1, 0.2 * cm))
     data = [
         [_("manual url"), account.tenant.man_url],
-        [_("SMTP server address"), account.tenant.smtp_url],
-        [_("SMTP server port"), account.tenant.smtp_port],
-        [_("SMTP connection security"), account.tenant.get_smtp_sec_display()],
-        [_("IMAP server address"), account.tenant.imap_url],
+        [_("IMAP server address (Posteingangsserver)"), account.tenant.imap_url],
         [_("IMAP server port"), account.tenant.imap_port],
         [_("IMAP connection security"), account.tenant.get_imap_sec_display()],
+        [_("SMTP server address (Postausgangsserver)"), account.tenant.smtp_url],
+        [_("SMTP server port"), account.tenant.smtp_port],
+        [_("SMTP connection security"), account.tenant.get_smtp_sec_display()],
     ]
     table = Table(data)
     table.setStyle(TableStyle([
