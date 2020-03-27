@@ -36,10 +36,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('select2/', include('django_select2.urls')),
 
-    path('', views.tenant_list, name='tenantlist'),
-    path('tenantlist/', views.tenant_list, name='tenantlist'),
+    path('', views.TenantList.as_view(), name='tenantlist'),
+    path('tenantlist/', views.TenantList.as_view(), name='tenantlist'),
     path('tenantadd/', views.TenantCreate.as_view(), name='tenantadd'),
     path('tenantedit/<int:pk>/', views.TenantUpdate.as_view(), name='tenantedit'),
+    path('tenantdelete/<int:pk>/', views.TenantDelete.as_view(), name='tenantdelete'),
     path('accountlist/<int:tenant_id>/', views.account_list, name='accountlist'),
     path('accountdisplay/<int:account_id>/', views.account_display, name='accountdisplay'),
     path('accountedit/<int:tenant_id>/', views.account_edit, name='accountnew'),

@@ -3,7 +3,9 @@ import json
 import os
 import sys
 
-from django.views.generic import UpdateView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import UpdateView, CreateView, ListView, DeleteView
 from rfc6266 import build_header
 from django.shortcuts import HttpResponse, render, redirect
 from django.urls import reverse
@@ -65,30 +67,69 @@ def get_account_credentials(request, account_id):
     return resp
 
 
-@login_required(login_url='/account/login/')
-def tenant_list(request):
-    tenants = Tenant.objects.filter(manager=request.user)
-    return render(request, 'mailuser/tenant_list.html', {
-        'tenantlist': tenants
-    })
+class TenantList(LoginRequiredMixin, ListView):
+    model = Tenant
+    template_name = 'mailuser/tenant_list.html'
+
+    def get(self, request, *args, **kwargs):
+        request.session['edit'] = request.GET.get('edit', '0')
+        return super(TenantList, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Tenant.objects.filter(manager=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        ctx = super(TenantList, self).get_context_data(**kwargs)
+        ctx['edit'] = self.request.session['edit']
+        return ctx
 
 
-class TenantUpdate(UpdateView):
+class TenantUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Tenant
     form_class = TenantForm
-    template_name = 'mailuser/tenant_edit.html'
+    success_message = _('Tenant changed')
 
     def get_success_url(self):
-        return reverse('tenantlist')
+        return '{url}?edit=1'.format(
+            url=reverse('tenantlist')
+        )
+
+    def post(self, request, *args, **kwargs):
+        if 'cancel' in request.POST:
+            messages.info(request, _('Cancelled'))
+            return redirect(self.get_success_url())
+        return super(TenantUpdate, self).post(request, *args, **kwargs)
 
 
-class TenantCreate(CreateView):
+class TenantCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Tenant
     form_class = TenantForm
-    template_name = 'mailuser/tenant_edit.html'
+    success_message = _('Tenant created')
 
     def get_success_url(self):
-        return reverse('tenantlist')
+        return '{url}?edit=1'.format(
+            url=reverse('tenantlist')
+        )
+
+    def post(self, request, *args, **kwargs):
+        if 'cancel' in request.POST:
+            messages.info(request, _('Cancelled'))
+            return redirect(self.get_success_url())
+        return super(TenantCreate, self).post(request, *args, **kwargs)
+
+class TenantDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Tenant
+
+    def get_success_url(self):
+        return '{url}?edit=1'.format(
+            url=reverse('tenantlist')
+        )
+
+    def post(self, request, *args, **kwargs):
+        if 'cancel' in request.POST:
+            messages.info(request, _('Cancelled'))
+            return redirect(self.get_success_url())
+        return super(DeleteView, self).post(request, *args, **kwargs)
 
 
 @login_required(login_url='/account/login/')

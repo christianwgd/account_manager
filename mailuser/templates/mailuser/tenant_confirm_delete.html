@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n static bootstrap4 %}
+
+{% block bootstrap4_extra_head %}
+{{ block.super }}
+{% endblock %}
+
+{% block title %}{% trans 'Delete tenant' %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-6 offset-3">
+
+        <form id="rule_form" method="post" class="from-horizontal" role="form" action="" novalidate>
+        {% csrf_token %}
+
+            <div class="jumbotron">
+                <h4>
+                    <i class="fas fa-lg fa-exclamation-triangle" style="color:orange;"></i>
+                    {% blocktrans trimmed %}
+                    Delete <b>{{ tenant }}</b> tenant?
+                    {% endblocktrans %}
+                </h4>
+            </div>
+
+            {% buttons %}
+                <button class="btn btn-danger" name="delete" type="submit" title="{% trans 'Ok' %}">
+                    <i class="far fa-trash"></i>
+                </button>
+                <button class="btn btn-default" type="submit" name="cancel" title="{% trans 'Cancel' %}">
+                    <i class="far fa-times"></i>
+                </button>
+            {% endbuttons %}
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

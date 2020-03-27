@@ -20,7 +20,13 @@ $(document).ready(function(){
 
 {% endblock %}
 
-{% block title %}{% trans 'tenant edit' %}{% endblock %}
+{% block title %}
+    {% if object %}
+        {% trans 'Edit tenant' %}
+    {% else %}
+        {% trans 'Create tenant' %}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
 
@@ -42,14 +48,14 @@ $(document).ready(function(){
 
     <div class="row">
         <div class="col-md-6 col-sm-12">
-            <h5>{% trans 'IMAP' %}</h5>
+            <h5>{% trans 'Incoming mail server' %}</h5>
             {% bootstrap_field form.imap_url %}
             {% bootstrap_field form.imap_port %}
             {% bootstrap_field form.imap_sec %}
         </div>
 
         <div class="col-md-6 col-sm-12">
-            <h5>{% trans 'SMTP' %}</h5>
+            <h5>{% trans 'Outgoing mail server' %}</h5>
             {% bootstrap_field form.smtp_url %}
             {% bootstrap_field form.smtp_port %}
             {% bootstrap_field form.smtp_sec %}

@@ -4,13 +4,9 @@
 {% block bootstrap4_extra_head %}
 {{ block.super }}
 <style>
-#enable_edit, #disable_edit {
-    cursor: pointer;
-    color: #bbbbbb;
-    position: absolute;
-    top: 10px;
-    right: 34px;
-}
+.tool { width: 100%; }
+.left { padding-right: 0;}
+.right { padding-left: 0;}
 .add {
     background-color: green;
     color: white;
@@ -18,34 +14,19 @@
 </style>
 {% endblock %}
 
-{% block bootstrap4_extra_script %}
-{{ block.super }}
-<script>
-$(document).ready(function(){
-    $('#enable_edit').click(function() {
-        $('.edit').show();
-        $('#disable_edit').show();
-        $(this).hide();
-    });
-    $('#disable_edit').click(function() {
-        $('.edit').hide();
-        $('#enable_edit').show();
-        $(this).hide();
-    });
-});
-</script>
-{% endblock %}
-
 {% block title %}
     {% trans 'mail tenants' %}
-    <span class="badge badge-secondary">{{ tenantlist.count }}</span>
-    <a  href="{% url 'tenantadd' %}" class="link edit" style="display:none;">
+    <span class="badge badge-secondary">{{ tenant_list.count }}</span>
+    {% if edit == '1' %}
+    <a  href="{% url 'tenantadd' %}" class="link">
         <span class="badge add">
             <i class="far fa-plus"></i>
         </span>
     </a>
-    <i id="enable_edit" class="fal fa-xs fa-pen-square"></i>
-    <i id="disable_edit" class="fal fa-xs fa-times-square edit" style="display: none"></i>
+    <a href="{% url 'tenantlist' %}?edit=0"><i class="fal fa-xs fa-times-square"></i></a>
+    {% else %}
+    <a href="{% url 'tenantlist' %}?edit=1"><i class="fal fa-xs fa-pen-square"></i></a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -53,11 +34,22 @@ $(document).ready(function(){
     <div class="row">
         <div class="col">
             <div class="card-deck justify-content-center">
-            {% for tenant in  tenantlist %}
+            {% for tenant in  tenant_list %}
                 <div class="card bg-light">
-                    <a class="btn btn-secondary edit" href="{% url 'tenantedit' tenant.id %}" style="display:none;">
-                        <i class="fas fa-edit"></i>
-                    </a>
+                    {% if edit == '1' %}
+                    <div class="row">
+                        <div class="col-6 left">
+                            <a class="btn btn-secondary tool" href="{% url 'tenantedit' tenant.id %}">
+                                <i class="far fa-edit"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 right">
+                            <a class="btn btn-danger tool" href="{% url 'tenantdelete' tenant.id %}">
+                                <i class="far fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
                     <img class="card-img-top" src="{% version tenant.logo 'medium' %}" alt="">
                     <div class="card-body text-center bg-white">
                         <a href="{% url 'accountlist' tenant.id %}">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-23 20:07+0100\n"
+"POT-Creation-Date: 2020-03-27 15:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,12 +47,12 @@ msgstr "Webmail-Anwendung:"
 msgid "URL"
 msgstr ""
 
-#: createpdf.py:75 templates/mailuser/account_display.html:18
+#: createpdf.py:75 templates/mailuser/account_display.html:25
 #: templates/mailuser/import.html:39
 msgid "username"
 msgstr "Benutzername"
 
-#: createpdf.py:76 templates/mailuser/account_display.html:34
+#: createpdf.py:76 templates/mailuser/account_display.html:41
 msgid "password"
 msgstr "Passwort"
 
@@ -68,29 +68,29 @@ msgstr "PC/Tablet/Smartphone Konfiguration:"
 msgid "manual url"
 msgstr "URL Einrichtungsanleitung"
 
-#: createpdf.py:97 models.py:36
-msgid "SMTP server address"
-msgstr "SMTP Server Adresse"
+#: createpdf.py:97
+msgid "IMAP server address (Incoming mail server)"
+msgstr "IMAP Server Adresse (Posteingangsserver)"
 
-#: createpdf.py:98 models.py:37
-msgid "SMTP server port"
-msgstr "SMTP Server Port"
-
-#: createpdf.py:99 models.py:38
-msgid "SMTP connection security"
-msgstr "SMTP Verbindungsverschlüsselung"
-
-#: createpdf.py:100 models.py:39
-msgid "IMAP server address"
-msgstr "IMAP Server Adresse"
-
-#: createpdf.py:101 models.py:40
+#: createpdf.py:98 models.py:40
 msgid "IMAP server port"
 msgstr "IMAP Server Port"
 
-#: createpdf.py:102 models.py:41
+#: createpdf.py:99 models.py:41
 msgid "IMAP connection security"
 msgstr "IMAP Verbindungsverschlüsselung"
+
+#: createpdf.py:100
+msgid "SMTP server address (Outgoing mail server)"
+msgstr "SMTP Server Adresse (Postausgangsserver)"
+
+#: createpdf.py:101 models.py:37
+msgid "SMTP server port"
+msgstr "SMTP Server Port"
+
+#: createpdf.py:102 models.py:38
+msgid "SMTP connection security"
+msgstr "SMTP Verbindungsverschlüsselung"
 
 #: createpdf.py:114
 msgid "Use those settings for your computer, tablet or phone."
@@ -108,7 +108,7 @@ msgstr ""
 msgid "No accounts created"
 msgstr "Keine Konten angelegt."
 
-#: forms.py:24 models.py:69
+#: forms.py:25 models.py:69
 msgid "tenant"
 msgstr "Mandant"
 
@@ -116,7 +116,7 @@ msgstr "Mandant"
 msgid "mail tenant"
 msgstr "Mandant"
 
-#: models.py:28 templates/base.html:47 templates/mailuser/tenant_list.html:4
+#: models.py:28 templates/base.html:43 templates/mailuser/tenant_list.html:18
 msgid "mail tenants"
 msgstr "Mandanten"
 
@@ -136,16 +136,26 @@ msgstr ""
 msgid "web url"
 msgstr "Web URL"
 
+#: models.py:36
+msgid "SMTP server address"
+msgstr "SMTP Server Adresse"
+
+#: models.py:39
+msgid "IMAP server address"
+msgstr "IMAP Server Adresse"
+
 #: models.py:43
 msgid "manager"
 msgstr "Verwalter"
 
 #: models.py:47 models.py:98 templates/mailuser/account_display.html:4
+#: templates/mailuser/account_display.html:17
 #: templates/mailuser/account_list.html:73
 msgid "account"
 msgstr "Konto"
 
-#: models.py:48
+#: models.py:48 templates/mailuser/account_display.html:19
+#: templates/mailuser/account_list.html:75
 msgid "alias"
 msgstr "Alias"
 
@@ -162,11 +172,11 @@ msgstr "Email-Konten"
 msgid "account type"
 msgstr "Kontotyp"
 
-#: models.py:71 templates/mailuser/account_display.html:22
+#: models.py:71 templates/mailuser/account_display.html:29
 msgid "first name"
 msgstr "Vorname"
 
-#: models.py:72 templates/mailuser/account_display.html:26
+#: models.py:72 templates/mailuser/account_display.html:33
 msgid "last name"
 msgstr "Nachname"
 
@@ -174,8 +184,8 @@ msgstr "Nachname"
 msgid "account user"
 msgstr "Benutzername"
 
-#: models.py:74 models.py:97 templates/mailuser/account_display.html:30
-#: templates/mailuser/account_display.html:51
+#: models.py:74 models.py:97 templates/mailuser/account_display.html:37
+#: templates/mailuser/account_display.html:58
 #: templates/mailuser/account_edit.html:51
 msgid "description"
 msgstr "Beschreibung"
@@ -184,11 +194,11 @@ msgstr "Beschreibung"
 msgid "default password"
 msgstr "Initiales Passwort"
 
-#: models.py:92 templates/mailuser/account_list.html:75
+#: models.py:92
 msgid "redirection"
 msgstr "Weiterleitung"
 
-#: models.py:93 templates/mailuser/account_display.html:42
+#: models.py:93 templates/mailuser/account_display.html:49
 #: templates/mailuser/account_edit.html:42
 msgid "redirections"
 msgstr "Weiterleitungen"
@@ -197,27 +207,27 @@ msgstr "Weiterleitungen"
 msgid "email"
 msgstr "Email"
 
-#: settings.py:124 templates/base.html:4 templates/base.html:36 urls.py:28
+#: settings.py:124 templates/base.html:4 templates/base.html:32 urls.py:28
 msgid "Account Manager"
 msgstr "Account-Manager"
 
-#: templates/base.html:53
+#: templates/base.html:49
 msgid "import"
 msgstr "Import"
 
-#: templates/base.html:72
+#: templates/base.html:68
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:76
+#: templates/base.html:72
 msgid "Password change"
 msgstr ""
 
-#: templates/base.html:80
+#: templates/base.html:76
 msgid "Two factor authentication"
 msgstr "Zwei-Faktor-Authentifizierung"
 
-#: templates/base.html:86
+#: templates/base.html:82
 msgid "Admin"
 msgstr ""
 
@@ -247,19 +257,23 @@ msgstr ""
 #: templates/mailuser/account_edit.html:88
 #: templates/mailuser/redirect_delete.html:28
 #: templates/mailuser/redirect_edit.html:31
+#: templates/mailuser/tenant_confirm_delete.html:30
+#: templates/mailuser/tenant_form.html:81
 #: templates/two_factor/_wizard_actions.html:6
 #: templates/two_factor/_wizard_actions.html:7
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: templates/mailuser/account_display.html:50
+#: templates/mailuser/account_display.html:57
 #: templates/mailuser/account_edit.html:50
 msgid "address"
 msgstr "Adresse"
 
-#: templates/mailuser/account_display.html:74
+#: templates/mailuser/account_display.html:81
 #: templates/mailuser/account_edit.html:85
 #: templates/mailuser/redirect_edit.html:28
+#: templates/mailuser/tenant_confirm_delete.html:27
+#: templates/mailuser/tenant_form.html:78
 msgid "Ok"
 msgstr ""
 
@@ -330,6 +344,31 @@ msgstr "Name / Weiterleitung"
 #: templates/mailuser/redirect_delete.html:15
 msgid "Do you really want to delete this Redirection?"
 msgstr "Diese Weiterleitung wirklich löschen?"
+
+#: templates/mailuser/tenant_confirm_delete.html:8
+msgid "Delete tenant"
+msgstr "Mandant löschen"
+
+#: templates/mailuser/tenant_confirm_delete.html:20
+#, python-format
+msgid "Delete <b>%(tenant)s</b> tenant?"
+msgstr "Mandant <b>%(tenant)s</b> löschen?"
+
+#: templates/mailuser/tenant_form.html:25
+msgid "Edit tenant"
+msgstr "Mandant bearbeiten"
+
+#: templates/mailuser/tenant_form.html:27
+msgid "Create tenant"
+msgstr "Mandant anlegen"
+
+#: templates/mailuser/tenant_form.html:51
+msgid "Incoming mail server"
+msgstr "Posteingangsserver"
+
+#: templates/mailuser/tenant_form.html:58
+msgid "Outgoing mail server"
+msgstr "Postausgangsserver"
 
 #: templates/registration/logged_out.html:6
 msgid "You are now logged out, thanks for using this app."
@@ -660,41 +699,53 @@ msgid ""
 "authentication for your account."
 msgstr "Wir raten davon ab, Zwei-Faktor-Authentifizierung zu deaktivieren."
 
-#: views.py:32
+#: views.py:35
 msgid "No tenant selected."
 msgstr "Kein Mandant ausgewählt."
 
-#: views.py:55
+#: views.py:58
 msgid "No document available for this user"
 msgstr "Für diesen Benutzer ist kein PDF Dokument verfügbar"
 
-#: views.py:113
+#: views.py:90
+msgid "Tenant changed"
+msgstr "Mandant geändert."
+
+#: views.py:99 views.py:116 views.py:130
+msgid "Cancelled"
+msgstr "Abgebrochen"
+
+#: views.py:107
+msgid "Tenant created"
+msgstr "Mandant angelegt"
+
+#: views.py:173
 msgid "account changed."
 msgstr "Konto geändert."
 
-#: views.py:116
+#: views.py:176
 msgid "error in edit account."
 msgstr "Fehler beim Bearbeiten des Kontos."
 
-#: views.py:134
+#: views.py:194
 #, python-brace-format
 msgid "account {account} deleted."
 msgstr "Konto {account} gelöscht."
 
-#: views.py:158
+#: views.py:218
 msgid "redirection changed."
 msgstr "Weiterleitung geändert."
 
-#: views.py:161
+#: views.py:221
 msgid "error in edit redirection."
 msgstr "Fehler beim Bearbeiten der Weiterleitung."
 
-#: views.py:179
+#: views.py:239
 #, python-brace-format
 msgid "Redirection {redirection} deleted."
 msgstr "Weiterleitung {redirection} gelöscht."
 
-#: views.py:193
+#: views.py:253
 #, python-brace-format
 msgid "{count} credentials refreshed."
 msgstr "{count} Kontodatendokumente aktualisiert."
