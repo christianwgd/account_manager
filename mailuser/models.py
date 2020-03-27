@@ -10,6 +10,15 @@ from .crypt import init_storage_dir
 from .createpdf import credentials
 
 
+def user_str_patch(self):
+    if self.first_name and self.last_name:
+        name = self.get_full_name()
+    else:
+        name = self.username
+    return name
+User.__str__ = user_str_patch
+
+
 CONN_SECURITY = (
     ('NNE', 'None'),
     ('SSL', 'SSL'),
