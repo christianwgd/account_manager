@@ -111,11 +111,17 @@ class TenantCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
             url=reverse('tenantlist')
         )
 
+    def get_initial(self):
+        initial = super(TenantCreate, self).get_initial()
+        initial = {"manager": self.request.user}
+        return initial
+
     def post(self, request, *args, **kwargs):
         if 'cancel' in request.POST:
             messages.info(request, _('Cancelled'))
             return redirect(self.get_success_url())
         return super(TenantCreate, self).post(request, *args, **kwargs)
+
 
 class TenantDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Tenant
