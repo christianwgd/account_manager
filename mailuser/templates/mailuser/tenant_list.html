@@ -1,12 +1,51 @@
 {% extends 'base.html' %}
 {% load i18n static bootstrap4 fb_versions %}
 
+{% block bootstrap4_extra_head %}
+{{ block.super }}
+<style>
+#enable_edit, #disable_edit {
+    cursor: pointer;
+    color: #bbbbbb;
+    position: absolute;
+    top: 10px;
+    right: 34px;
+}
+.add {
+    background-color: green;
+    color: white;
+}
+</style>
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+{{ block.super }}
+<script>
+$(document).ready(function(){
+    $('#enable_edit').click(function() {
+        $('.edit').show();
+        $('#disable_edit').show();
+        $(this).hide();
+    });
+    $('#disable_edit').click(function() {
+        $('.edit').hide();
+        $('#enable_edit').show();
+        $(this).hide();
+    });
+});
+</script>
+{% endblock %}
+
 {% block title %}
     {% trans 'mail tenants' %}
     <span class="badge badge-secondary">{{ tenantlist.count }}</span>
-    <a class="btn btn-sm btn-secondary" href="{% url 'tenantadd' %}">
-        <i class="fas fa-plus"></i>
+    <a  href="{% url 'tenantadd' %}" class="link edit" style="display:none;">
+        <span class="badge add">
+            <i class="far fa-plus"></i>
+        </span>
     </a>
+    <i id="enable_edit" class="fal fa-xs fa-pen-square"></i>
+    <i id="disable_edit" class="fal fa-xs fa-times-square edit" style="display: none"></i>
 {% endblock %}
 
 {% block content %}
@@ -16,7 +55,7 @@
             <div class="card-deck justify-content-center">
             {% for tenant in  tenantlist %}
                 <div class="card bg-light">
-                    <a class="btn btn-secondary" href="{% url 'tenantedit' tenant.id %}">
+                    <a class="btn btn-secondary edit" href="{% url 'tenantedit' tenant.id %}" style="display:none;">
                         <i class="fas fa-edit"></i>
                     </a>
                     <img class="card-img-top" src="{% version tenant.logo 'medium' %}" alt="">
