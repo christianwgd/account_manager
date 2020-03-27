@@ -1,0 +1,18 @@
+.edit_toggle {
+    position: absolute;
+    top: 0px;
+    right: 40px;
+}
+
+.edit_toggle svg {
+    color: #aaaaaa;
+}
+
+.tool { width: 100%; }
+.left { padding-right: 0;}
+.right { padding-left: 0;}
+
+.add {
+    background-color: green;
+    color: white;
+}

@@ -3,15 +3,7 @@
 
 {% block bootstrap4_extra_head %}
 {{ block.super }}
-<style>
-.tool { width: 100%; }
-.left { padding-right: 0;}
-.right { padding-left: 0;}
-.add {
-    background-color: green;
-    color: white;
-}
-</style>
+<link rel="stylesheet" href="{% static 'css/tenant_list.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -23,9 +15,13 @@
             <i class="far fa-plus"></i>
         </span>
     </a>
-    <a href="{% url 'tenantlist' %}?edit=0"><i class="fal fa-xs fa-times-square"></i></a>
+    <a class="edit_toggle" href="{% url 'tenantlist' %}?edit=0">
+        <i class="fal fa-xs fa-times-square"></i>
+    </a>
     {% else %}
-    <a href="{% url 'tenantlist' %}?edit=1"><i class="fal fa-xs fa-pen-square"></i></a>
+    <a class="edit_toggle" href="{% url 'tenantlist' %}?edit=1">
+        <i class="fal fa-xs fa-pen-square"></i>
+    </a>
     {% endif %}
 {% endblock %}
 
