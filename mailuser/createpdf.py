@@ -80,6 +80,7 @@ the document as soon as possible.
         ('TEXTCOLOR', (1, 0), (1, 0), colors.blue),
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
         ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
+        ('FONTNAME', (1, 2), (1, 2), 'Times-Roman'),
     ]))
     story.append(table)
     story.append(Spacer(1, 0.5 * cm))
