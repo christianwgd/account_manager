@@ -60,7 +60,7 @@ def credentials(account):
         Frame(0, 0, 21 * cm, 2 * cm).addFromList(footer, canvas)
 
     rl_config.TTFSearchPath.append(str(settings.BASE_DIR) + '/mailuser/reportlab/font')
-    pdfmetrics.registerFont(TTFont('IBMPlex', 'plex.ttf'))
+    pdfmetrics.registerFont(TTFont('IBMPlex', 'IBMPlexSansCondensed-Regular.ttf'))
 
     filename = crypt.get_creds_filename(account)
     buff = BytesIO()
@@ -115,7 +115,7 @@ the document as soon as possible.
         ('TEXTCOLOR', (1, 0), (1, 0), colors.blue),
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
         ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
-        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('FONTSIZE', (0, 0), (-1, -1), 8),
         ('FONTNAME', (0, 0), (-1, -1), 'IBMPlex'),
     ]))
     story.append(table)
