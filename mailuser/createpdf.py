@@ -59,8 +59,8 @@ def credentials(account):
                             styles["Footer"])]
         Frame(0, 0, 21 * cm, 2 * cm).addFromList(footer, canvas)
 
-    rl_config.TTFSearchPath.append(str(settings.BASE_DIR) + '/media/reportlabs/fonts')
-    pdfmetrics.registerFont(TTFont('IBMPlex', 'IBMPlexSans-Text.ttf'))
+    rl_config.TTFSearchPath.append(str(settings.BASE_DIR) + '/mailuser/reportlab/font')
+    pdfmetrics.registerFont(TTFont('IBMPlex', 'plex.ttf'))
 
     filename = crypt.get_creds_filename(account)
     buff = BytesIO()
