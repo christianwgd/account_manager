@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """The code used to generate PDF files (based on Reportlab)."""
-
 from io import BytesIO
 
 from reportlab.lib import colors
@@ -8,34 +7,38 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib import utils
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Frame,
     Image
 )
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab import rl_config
 
 from django.utils.translation import ugettext as _
+from django.conf import settings
 
-from . import crypt
+from mailuser import crypt
+
 
 styles = getSampleStyleSheet()
 styles.add(ParagraphStyle(
-    name="Footer", alignment=TA_CENTER, fontName="Helvetica-Oblique",
+    name="Footer", alignment=TA_CENTER,
     textColor=colors.lightgrey
 ))
 styles.add(ParagraphStyle(
-    name="Warning", fontName="Helvetica-Oblique",
-    textColor=colors.red, fontSize=12
+    name="Warning", textColor=colors.red, fontSize=12, fontName="IBMPlex",
 ))
 styles.add(ParagraphStyle(
-    name="Link",
-    textColor=colors.blue
+    name="Link", textColor=colors.blue, fontName="IBMPlex",
 ))
 styles.add(ParagraphStyle(
-    name="Greeting", alignment=TA_CENTER, fontName="Helvetica-Oblique",
-    fontSize=14
+    name="Left", fontSize=12, fontName="IBMPlex", leading=16
 ))
-
+styles.add(ParagraphStyle(
+    name="Tableheader", alignment=TA_CENTER, fontSize=12, fontName="IBMPlex",
+))
 
 def resized_image(path, width=1*cm):
     img = utils.ImageReader(path)
@@ -51,9 +54,13 @@ def credentials(account):
         canvas.setTitle(_("Personal account information"))
         canvas.setAuthor(account.full_name)
         canvas.setCreator("MailUser")
+        canvas.setFont("IBMPlex", 12)  # choose your font type and font size
         footer = [Paragraph(_("Powered by MailUser"),
                             styles["Footer"])]
         Frame(0, 0, 21 * cm, 2 * cm).addFromList(footer, canvas)
+
+    rl_config.TTFSearchPath.append(str(settings.BASE_DIR) + '/app/lib/reportlabs/fonts')
+    pdfmetrics.registerFont(TTFont('IBMPlex', 'IBMPlexSans-Text.ttf'))
 
     filename = crypt.get_creds_filename(account)
     buff = BytesIO()
@@ -67,9 +74,10 @@ def credentials(account):
 Dear %s, this document contains the credentials you will need
 to connect to Modoboa. Learn the content and destroy
 the document as soon as possible.
-""") % account.full_name, styles["Normal"]))
+""") % account.full_name, styles["Left"]))
+    story.append(Spacer(1, 0.4 * cm))
+    story.append(Paragraph(_("Web panel:"), styles["Tableheader"]))
     story.append(Spacer(1, 0.2 * cm))
-    story.append(Paragraph(_("Web panel:"), styles["h3"]))
     data = [
         [_("URL"), account.tenant.weburl],
         [_("username"), str(account.username)],
@@ -80,7 +88,7 @@ the document as soon as possible.
         ('TEXTCOLOR', (1, 0), (1, 0), colors.blue),
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
         ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
-        ('FONTNAME', (1, 2), (1, 2), 'Times-Roman'),
+        ('FONTNAME', (0, 0), (-1, -1), 'IBMPlex'),
     ]))
     story.append(table)
     story.append(Spacer(1, 0.5 * cm))
@@ -91,7 +99,7 @@ the document as soon as possible.
 
     story.append(Spacer(1, 1 * cm))
     story.append(Paragraph(
-        _("PC/Tablet/Smartphone configuration:"), styles["h3"]))
+        _("PC/Tablet/Smartphone configuration:"), styles["Tableheader"]))
     story.append(Spacer(1, 0.2 * cm))
     data = [
         [_("manual url"), account.tenant.man_url],
@@ -107,13 +115,14 @@ the document as soon as possible.
         ('TEXTCOLOR', (1, 0), (1, 0), colors.blue),
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
         ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
-        ('FONTSIZE', (0, 0), (-1, -1), 8),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('FONTNAME', (0, 0), (-1, -1), 'IBMPlex'),
     ]))
     story.append(table)
     story.append(Spacer(1, 0.5 * cm))
     story.append(Paragraph(
         _("Use those settings for your computer, tablet or phone."),
-        styles["Normal"])
+        styles["Left"])
     )
 
     # if conf["custom_message"]:
