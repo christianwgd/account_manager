@@ -102,8 +102,6 @@ LOGIN_REDIRECT_URL = '/'
 #LOGIN_REDIRECT_URL = 'two_factor:profile'
 LOGOUT_REDIRECT_URL = '/'
 
-GRAPPELLI_ADMIN_TITLE = _('Account Manager')
-
 ##################
 # BOOTSTRAP 4    #
 ##################
