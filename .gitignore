@@ -7,5 +7,7 @@ localsettings.py
 log/
 fixtures/
 db.*
+*.db
 .project
 _versions/
+

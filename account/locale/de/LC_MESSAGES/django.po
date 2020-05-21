@@ -1,0 +1,751 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-27 16:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: createpdf.py:51 createpdf.py:64
+msgid "Personal account information"
+msgstr "Persönliche Kontoinformationen"
+
+#: createpdf.py:54
+msgid "Powered by AccountManager"
+msgstr ""
+
+#: createpdf.py:66
+#, python-format
+msgid ""
+"\n"
+"Dear %s, this document contains the credentials you will need\n"
+"to connect to Modoboa. Learn the content and destroy\n"
+"the document as soon as possible.\n"
+msgstr ""
+"\n"
+"Liebe/r %s, dieses Dokument enthält die Anmeldeinformationen, die Sie "
+"benötigen um sich mit Ihrem Email-Konto zu verbinden. Prägen Sie sich bitte "
+"die Informationen ein und löschen anschliessend dieses Dokument.\n"
+
+#: createpdf.py:72
+msgid "Web panel:"
+msgstr "Webmail-Anwendung:"
+
+#: createpdf.py:74
+msgid "URL"
+msgstr ""
+
+#: createpdf.py:75 templates/account/account_display.html:25
+#: templates/account/import.html:39
+msgid "username"
+msgstr "Benutzername"
+
+#: createpdf.py:76 templates/account/account_display.html:41
+msgid "password"
+msgstr "Passwort"
+
+#: createpdf.py:88
+msgid "Please change your password!"
+msgstr "Bitte ändern Sie Ihr Passwort!"
+
+#: createpdf.py:93
+msgid "PC/Tablet/Smartphone configuration:"
+msgstr "PC/Tablet/Smartphone Konfiguration:"
+
+#: createpdf.py:96 models.py:42
+msgid "manual url"
+msgstr "URL Einrichtungsanleitung"
+
+#: createpdf.py:97
+msgid "IMAP server address (Incoming mail server)"
+msgstr "IMAP Server Adresse (Posteingangsserver)"
+
+#: createpdf.py:98 models.py:40
+msgid "IMAP server port"
+msgstr "IMAP Server Port"
+
+#: createpdf.py:99 models.py:41
+msgid "IMAP connection security"
+msgstr "IMAP Verbindungsverschlüsselung"
+
+#: createpdf.py:100
+msgid "SMTP server address (Outgoing mail server)"
+msgstr "SMTP Server Adresse (Postausgangsserver)"
+
+#: createpdf.py:101 models.py:37
+msgid "SMTP server port"
+msgstr "SMTP Server Port"
+
+#: createpdf.py:102 models.py:38
+msgid "SMTP connection security"
+msgstr "SMTP Verbindungsverschlüsselung"
+
+#: createpdf.py:114
+msgid "Use those settings for your computer, tablet or phone."
+msgstr ""
+"Verwenden Sie diese Einstellungen für Ihren Computer, Ihr Tablet oder "
+"Smartphone."
+
+#: crypt.py:26
+#, python-format
+msgid "Failed to create the directory that will contain PDF documents (%s)"
+msgstr ""
+"Das Verzeichnis (%s) für die PDF Dokumente konnte nicht erstellt werden."
+
+#: file_import.py:44
+msgid "No accounts created"
+msgstr "Keine Konten angelegt."
+
+#: forms.py:25 models.py:69
+msgid "tenant"
+msgstr "Mandant"
+
+#: models.py:27
+msgid "mail tenant"
+msgstr "Mandant"
+
+#: models.py:28 templates/base.html:43 templates/account/tenant_list.html:18
+msgid "mail tenants"
+msgstr "Mandanten"
+
+#: models.py:31 templates/account/account_list.html:63
+msgid "name"
+msgstr "Name"
+
+#: models.py:32
+msgid "domain"
+msgstr "Domain"
+
+#: models.py:33
+msgid "Logo"
+msgstr ""
+
+#: models.py:35
+msgid "web url"
+msgstr "Web URL"
+
+#: models.py:36
+msgid "SMTP server address"
+msgstr "SMTP Server Adresse"
+
+#: models.py:39
+msgid "IMAP server address"
+msgstr "IMAP Server Adresse"
+
+#: models.py:43
+msgid "manager"
+msgstr "Verwalter"
+
+#: models.py:47 models.py:98 templates/account/account_display.html:4
+#: templates/account/account_display.html:17
+#: templates/account/account_list.html:73
+msgid "account"
+msgstr "Konto"
+
+#: models.py:48 templates/account/account_display.html:19
+#: templates/account/account_list.html:75
+msgid "alias"
+msgstr "Alias"
+
+#: models.py:64
+msgid "mail account"
+msgstr "Email-Konto"
+
+#: models.py:65
+msgid "mail accounts"
+msgstr "Email-Konten"
+
+#: models.py:70 templates/account/account_display.html:14
+#: templates/account/account_list.html:61 templates/account/import.html:38
+msgid "account type"
+msgstr "Kontotyp"
+
+#: models.py:71 templates/account/account_display.html:29
+msgid "first name"
+msgstr "Vorname"
+
+#: models.py:72 templates/account/account_display.html:33
+msgid "last name"
+msgstr "Nachname"
+
+#: models.py:73 templates/account/account_list.html:62
+msgid "account user"
+msgstr "Benutzername"
+
+#: models.py:74 models.py:97 templates/account/account_display.html:37
+#: templates/account/account_display.html:58
+#: templates/account/account_edit.html:51
+msgid "description"
+msgstr "Beschreibung"
+
+#: models.py:75
+msgid "default password"
+msgstr "Initiales Passwort"
+
+#: models.py:92
+msgid "redirection"
+msgstr "Weiterleitung"
+
+#: models.py:93 templates/account/account_display.html:49
+#: templates/account/account_edit.html:42
+msgid "redirections"
+msgstr "Weiterleitungen"
+
+#: models.py:96
+msgid "email"
+msgstr "Email"
+
+#: settings.py:124 templates/base.html:4 templates/base.html:32 urls.py:28
+msgid "Account Manager"
+msgstr "Account-Manager"
+
+#: templates/base.html:49
+msgid "import"
+msgstr "Import"
+
+#: templates/base.html:68
+msgid "Log out"
+msgstr ""
+
+#: templates/base.html:72
+msgid "Password change"
+msgstr ""
+
+#: templates/base.html:76
+msgid "Two factor authentication"
+msgstr "Zwei-Faktor-Authentifizierung"
+
+#: templates/base.html:82
+msgid "Admin"
+msgstr ""
+
+#: templates/account/account_delete.html:4
+#: templates/account/account_list.html:105
+msgid "account delete"
+msgstr "Konto löschen"
+
+#: templates/account/account_delete.html:13
+#: templates/account/account_delete.html:34
+#: templates/account/redirect_delete.html:13
+#: templates/account/redirect_delete.html:25
+msgid "Delete"
+msgstr "Löschen"
+
+#: templates/account/account_delete.html:15
+msgid "Do you really want to delete this account?"
+msgstr "Dieses Konto wirklich löschen?"
+
+#: templates/account/account_delete.html:20
+msgid "This will also delete the following aliases connected to this account:"
+msgstr ""
+"Mit diesem Konto werden die folgenden mit diesem Konto verbundenen Aliase "
+"mit gelöscht:"
+
+#: templates/account/account_delete.html:37
+#: templates/account/account_edit.html:88
+#: templates/account/redirect_delete.html:28
+#: templates/account/redirect_edit.html:31
+#: templates/account/tenant_confirm_delete.html:30
+#: templates/account/tenant_form.html:81
+#: templates/two_factor/_wizard_actions.html:6
+#: templates/two_factor/_wizard_actions.html:7
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: templates/account/account_display.html:57
+#: templates/account/account_edit.html:50
+msgid "address"
+msgstr "Adresse"
+
+#: templates/account/account_display.html:81
+#: templates/account/account_edit.html:85
+#: templates/account/redirect_edit.html:28
+#: templates/account/tenant_confirm_delete.html:27
+#: templates/account/tenant_form.html:78
+msgid "Ok"
+msgstr ""
+
+#: templates/account/account_edit.html:22
+#: templates/account/account_list.html:101
+#: templates/account/account_new.html:24
+msgid "account edit"
+msgstr "Konto bearbeiten"
+
+#: templates/account/account_edit.html:62
+#: templates/account/redirect_edit.html:9
+msgid "redirection edit"
+msgstr "Weiterleitung bearbeiten"
+
+#: templates/account/account_edit.html:66
+#: templates/account/redirect_delete.html:4
+msgid "redirection delete"
+msgstr "Weiterleitung löschen"
+
+#: templates/account/account_edit.html:74
+msgid "new redirection"
+msgstr "Neue Weiterleitung"
+
+#: templates/account/account_edit.html:91
+#: templates/account/account_new.html:52
+#: templates/account/custom_admin_account_change.html:26
+msgid "generate username"
+msgstr "Benutzername erzeugen"
+
+#: templates/account/account_edit.html:94
+#: templates/account/account_new.html:55
+#: templates/account/custom_admin_account_change.html:27
+msgid "generate password"
+msgstr "Passwort erzeugen"
+
+#: templates/account/account_list.html:48
+msgid "accounts for "
+msgstr "Konten für Domain "
+
+#: templates/account/account_list.html:64
+msgid "redirected to"
+msgstr "Weiterleitung an"
+
+#: templates/account/account_list.html:96
+msgid "load credentials pdf"
+msgstr "Kontodatendokument laden"
+
+#: templates/account/account_list.html:120
+msgid "back"
+msgstr "zurück"
+
+#: templates/account/account_list.html:124
+msgid "new account"
+msgstr "Neues Konto anlegen"
+
+#: templates/account/account_list.html:128
+msgid "refresh credentials for all accounts"
+msgstr "Alle Kontodatendokumente aktualisieren"
+
+#: templates/account/import.html:18
+msgid "import accounts"
+msgstr "Konten importieren"
+
+#: templates/account/import.html:40
+msgid "name / redirection"
+msgstr "Name / Weiterleitung"
+
+#: templates/account/redirect_delete.html:15
+msgid "Do you really want to delete this Redirection?"
+msgstr "Diese Weiterleitung wirklich löschen?"
+
+#: templates/account/tenant_confirm_delete.html:8
+msgid "Delete tenant"
+msgstr "Mandant löschen"
+
+#: templates/account/tenant_confirm_delete.html:20
+#, python-format
+msgid "Delete <b>%(tenant)s</b> tenant?"
+msgstr "Mandant <b>%(tenant)s</b> löschen?"
+
+#: templates/account/tenant_form.html:25
+msgid "Edit tenant"
+msgstr "Mandant bearbeiten"
+
+#: templates/account/tenant_form.html:27
+msgid "Create tenant"
+msgstr "Mandant anlegen"
+
+#: templates/account/tenant_form.html:51
+msgid "Incoming mail server"
+msgstr "Posteingangsserver"
+
+#: templates/account/tenant_form.html:58
+msgid "Outgoing mail server"
+msgstr "Postausgangsserver"
+
+#: templates/registration/logged_out.html:6
+msgid "You are now logged out, thanks for using this app."
+msgstr ""
+
+#: templates/registration/login.html:16
+#: templates/two_factor/core/login.html:11
+#, python-format
+msgid ""
+"You are authenticated as %(username)s, but are not authorized to access this "
+"page. Would you like to login to a different account?"
+msgstr ""
+
+#: templates/registration/password_change_done.html:9
+msgid "Your password was changed."
+msgstr ""
+
+#: templates/registration/password_change_form.html:14
+msgid "Please correct the error below."
+msgstr ""
+
+#: templates/registration/password_change_form.html:14
+msgid "Please correct the errors below."
+msgstr ""
+
+#: templates/registration/password_change_form.html:19
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: templates/registration/password_change_form.html:25
+#: templates/registration/password_change_form.html:27
+msgid "Change my password"
+msgstr "Passwort erzeugen"
+
+#: templates/two_factor/_wizard_actions.html:14
+msgid "Back"
+msgstr ""
+
+#: templates/two_factor/_wizard_actions.html:17
+msgid "Next"
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:8
+msgid ""
+"Backup tokens can be used when your primary and backup phone numbers aren't "
+"available. The backup tokens below can be used for login verification. If "
+"you've used up all your backup tokens, you can generate a new set of backup "
+"tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+"Ersatz-Codes können verwendet werden, falls keine Primäre "
+"Authentifizierungsmethode verfügbar ist. Die folgenden Codes können jeweils "
+"einmal für die Anmeldung verwendet werden. Falls alle Ersatz-Codes "
+"aufgebraucht sind, können hier neue generiert werden. Nur die hier "
+"gelisteten Codes sind gültig."
+
+#: templates/two_factor/core/backup_tokens.html:24
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:29
+msgid "You don't have any backup codes yet."
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:36
+msgid "Generate Tokens"
+msgstr "Codes generieren"
+
+#: templates/two_factor/core/backup_tokens.html:43
+msgid "Back to Account Security"
+msgstr "Zurück zu Benutzerkonto Sicherheit"
+
+#: templates/two_factor/core/login.html:4
+msgid "Login"
+msgstr ""
+
+#: templates/two_factor/core/login.html:22
+msgid "Enter your credentials."
+msgstr "Bitte Zugangsdaten eingeben"
+
+#: templates/two_factor/core/login.html:29
+#: templates/two_factor/core/setup.html:51
+msgid "We are calling your phone right now, please enter the digits you hear."
+msgstr ""
+
+#: templates/two_factor/core/login.html:36
+#: templates/two_factor/core/setup.html:58
+msgid "We sent you a text message, please enter the tokens we sent."
+msgstr ""
+"Wir haben Ihnen eine Nachricht gesendet, bitte geben Sie die Zeichenfolge "
+"ein, die wir Ihnen gesendet haben."
+
+#: templates/two_factor/core/login.html:42
+msgid "Please enter the tokens generated by your token generator."
+msgstr ""
+
+#: templates/two_factor/core/login.html:49
+msgid ""
+"Use this form for entering backup tokens for logging in. These tokens have "
+"been generated for you to print and keep safe. Please enter one of these "
+"backup tokens to login to your account."
+msgstr ""
+
+#: templates/two_factor/core/login.html:64
+msgid "Or, alternatively, use one of your backup phones:"
+msgstr ""
+
+#: templates/two_factor/core/login.html:74
+msgid "As a last resort, you can use a backup token:"
+msgstr ""
+
+#: templates/two_factor/core/login.html:77
+msgid "Use Backup Token"
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:5
+msgid "Permission Denied"
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:8
+msgid ""
+"The page you requested, enforces users to verify using two-factor "
+"authentication for security reasons. You need to enable these security "
+"features in order to access this page."
+msgstr ""
+"Die aufgerufene Seite benötigt aktivierte Zwei-Faktor-Authentifizierung auf "
+"dem Benutzerkonto. Um Zugriff auf diese Seite zu erhalten, muss diese "
+"Sicherheitsfunktion auf dem Benutzerkonto aktiviert werden."
+
+#: templates/two_factor/core/otp_required.html:16
+#: templates/two_factor/profile/profile.html:83
+msgid ""
+"Two-factor authentication is not enabled for your account. Enable two-factor "
+"authentication for enhanced account security."
+msgstr ""
+"Die Zwei-Faktor-Authentifizierung ist für dieses Benutzerkonto nicht "
+"aktiviert. Für erhöhte Sicherheit des Benutzerkontos aktivieren."
+
+#: templates/two_factor/core/otp_required.html:24
+msgid "Go back"
+msgstr "Zurück"
+
+#: templates/two_factor/core/otp_required.html:26
+#: templates/two_factor/core/setup.html:4
+#: templates/two_factor/core/setup_complete.html:4
+#: templates/two_factor/profile/profile.html:91
+msgid "Enable Two-Factor Authentication"
+msgstr ""
+
+#: templates/two_factor/core/phone_register.html:5
+msgid "Add Backup Phone"
+msgstr ""
+
+#: templates/two_factor/core/phone_register.html:9
+msgid ""
+"You'll be adding a backup phone number to your account. This number will be "
+"used if your primary method of registration is not available."
+msgstr ""
+
+#: templates/two_factor/core/phone_register.html:17
+msgid ""
+"We've sent a token to your phone number. Please enter the token you've "
+"received."
+msgstr ""
+"Wir haben Ihnen eine Nachricht gesendet, bitte geben Sie die Zeichenfolge "
+"ein, die wir Ihnen gesendet haben."
+
+#: templates/two_factor/core/setup.html:11
+msgid ""
+"You are about to take your account security to the next level. Follow the "
+"steps in this wizard to enable two-factor authentication."
+msgstr ""
+"In diesem Assistenten wird Zwei-Faktor-Authentifizierung für das "
+"Benutzerkonto aktiviert."
+
+#: templates/two_factor/core/setup.html:18
+msgid "Please select which authentication method you would like to use."
+msgstr "Bitte gewünschte Authentifizierungs-Methode auswählen."
+
+#: templates/two_factor/core/setup.html:24
+msgid ""
+"To start using a token generator, please use your smartphone to scan the QR "
+"code below. For example, use Google Authenticator. Then, enter the token "
+"generated by the app."
+msgstr ""
+"Um einen Code Generator zu verwenden, bitte die gewünschte App auf einem "
+"Smartphone öffnen und untenstehenden QR code einscannen. Zum Beispiel kann "
+"Google Authenticator verwendet werden. Anschliessend den generierten Code "
+"unten eingeben."
+
+#: templates/two_factor/core/setup.html:35
+msgid ""
+"Please enter the phone number you wish to receive the text messages on. This "
+"number will be validated in the next step."
+msgstr ""
+"Bitte Telefonnummer eingeben, die Nachrichten empfangen soll. Im nächsten "
+"Schritt wird diese bestätigt."
+
+#: templates/two_factor/core/setup.html:42
+msgid ""
+"Please enter the phone number you wish to be called on. This number will be "
+"validated in the next step."
+msgstr ""
+"Bitte Telefonnummer eingeben, die angerufen werden soll. Im nächsten Schritt "
+"wird diese bestätigt."
+
+#: templates/two_factor/core/setup.html:66
+msgid ""
+"We've encountered an issue with the selected authentication method. Please "
+"go back and verify that you entered your information correctly, try again, "
+"or use a different authentication method instead. If the issue persists, "
+"contact the site administrator."
+msgstr ""
+"Es wurde ein Problem mit der ausgewählten Authentifizierungsmethode "
+"entdeckt. Bitte überprüfen Sie, ob Sie die richtigen Informationen "
+"eingegeben haben. Wenn ja, versuchen Sie es noch einmal oder verwenden Sie "
+"eine andere Authentifizierungsmethode. Falls das Problem weiter besteht, "
+"kontaktieren Sie den Administrator der Seite."
+
+#: templates/two_factor/core/setup.html:76
+msgid ""
+"To identify and verify your YubiKey, please insert a token in the field "
+"below. Your YubiKey will be linked to your account."
+msgstr ""
+
+#: templates/two_factor/core/setup_complete.html:10
+msgid "Congratulations, you've successfully enabled two-factor authentication."
+msgstr "Zwei-Faktor-Authentifizierung wurde erfolgreich aktiviert."
+
+#: templates/two_factor/core/setup_complete.html:23
+#: templates/two_factor/core/setup_complete.html:38
+msgid "Back to Profile"
+msgstr "Zurück zum Profil"
+
+#: templates/two_factor/core/setup_complete.html:29
+msgid ""
+"However, it might happen that you don't have access to your primary token "
+"device. To enable account recovery, add a phone number."
+msgstr ""
+"Es könnte vorkommen, dass Sie keinen Zugriff auf das Gerät haben, welches "
+"Sie normalerweise benutzen um Codes zu generieren. Geben Sie eine "
+"Telefonnummer an um in diesem Fall den Zugriff auf ihr Benutzerkonto zu "
+"gewährleisten."
+
+#: templates/two_factor/core/setup_complete.html:43
+#: templates/two_factor/profile/profile.html:47
+msgid "Add Phone Number"
+msgstr ""
+
+#: templates/two_factor/profile/disable.html:4
+msgid "Disable Two-factor Authentication"
+msgstr "Zwei-Faktor-Authentifizierung"
+
+#: templates/two_factor/profile/disable.html:10
+msgid ""
+"You are about to disable two-factor authentication. This weakens your "
+"account security, are you sure?"
+msgstr ""
+"Die Zwei-Faktor Authentifizierung wird hiermit abgeschaltet. Dies bedeutet "
+"eine geringer Sicherheit. Trotzdem abschalten?"
+
+#: templates/two_factor/profile/disable.html:21
+msgid "Disable"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:4
+msgid "Account Security"
+msgstr "Benutzerkonto Sicherheit"
+
+#: templates/two_factor/profile/profile.html:11
+msgid "Tokens will be generated by your token generator."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:14
+#, python-format
+msgid "Primary method: %(primary)s"
+msgstr "Primäre Methode: %(primary)s"
+
+#: templates/two_factor/profile/profile.html:19
+msgid "Tokens will be generated by your YubiKey."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:23
+msgid "Backup Phone Numbers"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:25
+msgid ""
+"If your primary method is not available, we are able to send backup tokens "
+"to the phone numbers listed below."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:38
+msgid "Unregister"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:53
+msgid "Backup Tokens"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:55
+msgid ""
+"If you don't have any device with you, you can access your account using "
+"backup tokens."
+msgstr ""
+"Sollte kein Gerät verfügbar sein, können diese Ersatz-Codes verwendet werden."
+
+#: templates/two_factor/profile/profile.html:59
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "You have %(counter)s backup tokens remaining."
+msgstr[0] "Sie haben nur noch einen ungenutzten Ersatz-Code."
+msgstr[1] "Sie haben %(counter)s ungenutzte Ersatz-Codes."
+
+#: templates/two_factor/profile/profile.html:65
+msgid "Show Codes"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:67
+#: templates/two_factor/profile/profile.html:77
+msgid "Disable Two-Factor Authentication"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:69
+msgid ""
+"However we strongly discourage you to do so, you can also disable two-factor "
+"authentication for your account."
+msgstr "Wir raten davon ab, Zwei-Faktor-Authentifizierung zu deaktivieren."
+
+#: views.py:35
+msgid "No tenant selected."
+msgstr "Kein Mandant ausgewählt."
+
+#: views.py:58
+msgid "No document available for this user"
+msgstr "Für diesen Benutzer ist kein PDF Dokument verfügbar"
+
+#: views.py:90
+msgid "Tenant changed"
+msgstr "Mandant geändert."
+
+#: views.py:99 views.py:116 views.py:130
+msgid "Cancelled"
+msgstr "Abgebrochen"
+
+#: views.py:107
+msgid "Tenant created"
+msgstr "Mandant angelegt"
+
+#: views.py:173
+msgid "account changed."
+msgstr "Konto geändert."
+
+#: views.py:176
+msgid "error in edit account."
+msgstr "Fehler beim Bearbeiten des Kontos."
+
+#: views.py:194
+#, python-brace-format
+msgid "account {account} deleted."
+msgstr "Konto {account} gelöscht."
+
+#: views.py:218
+msgid "redirection changed."
+msgstr "Weiterleitung geändert."
+
+#: views.py:221
+msgid "error in edit redirection."
+msgstr "Fehler beim Bearbeiten der Weiterleitung."
+
+#: views.py:239
+#, python-brace-format
+msgid "Redirection {redirection} deleted."
+msgstr "Weiterleitung {redirection} gelöscht."
+
+#: views.py:253
+#, python-brace-format
+msgid "{count} credentials refreshed."
+msgstr "{count} Kontodatendokumente aktualisiert."

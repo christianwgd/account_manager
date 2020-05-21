@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load i18n static bootstrap4 %}
+
+{% block bootstrap4_extra_script %}
+{{ block.super }}
+<script src="{% static 'js/normalize.js' %}"></script>
+<script src="{% static 'js/generate.js' %}"></script>
+<script>
+$(document).ready(function(){
+    $('#_gen_username').on('click', function(event) {
+        var tenant_id = $('#id_tenant').text();
+        gen_username(tenant_id);
+    });
+
+    $('#_gen_password').on('click', function(event) {
+        gen_password();
+    });
+}); 
+</script>
+{% endblock %}
+
+{% block title %}{% trans 'account edit' %}{% endblock %}
+
+{% block content %}
+
+<form id="rule_form" method="post" class="from-horizontal" role="form" action="">
+    {% csrf_token %}
+
+    <!-- for javascript username generator -->
+    <span id="id_tenant" style="display:none;">{{ account.tenant.id }}</span>
+    
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="panel">
+                {% bootstrap_form form %}
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="panel">
+                <h5>
+                    {% trans 'redirections' %}
+                    <span class="badge badge-secondary">
+                        {{ account.redirection_set.all.count }}
+                    </span>
+                </h5>
+                <table id="redirections" class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'address' %}</th>
+                            <th>{% trans 'description' %}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for redirect in account.redirection_set.all %}
+                        <tr>
+                            <td>{{ redirect.email }}</td>
+                            <td>{{ redirect.description|default_if_none:'-' }}</td>
+                            <td class="td-buttons">
+                                <a class="btn btn-sm btn-secondary" href="{% url 'redirectedit' account.id redirect.id %}"
+                                    role="button" title="{% trans 'redirection edit' %}">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <a class="btn btn-sm btn-danger" href="{% url 'redirectdelete' redirect.id %}" 
+                                    role="button" title="{% trans 'redirection delete' %}">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a class="btn btn-sm btn-success" href="{% url 'redirectnew' account.id %}" role="button" title="{% trans 'new redirection' %}">
+                    <i class="far fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                {% buttons %}
+                    <button class="btn btn-primary" name="submit" type="submit" formnovalidate title="{% trans 'Ok' %}">
+                        <i class="far fa-check"></i>
+                    </button>
+                    <button class="btn btn-default" type="submit" name="cancel" formnovalidate title="{% trans 'Cancel' %}">
+                        <i class="far fa-times"></i>
+                    </button>
+                    <button class="btn btn-default" id="_gen_username" type="button" title="{% trans 'generate username' %}">
+                        <i class="far fa-user"></i>
+                    </button>
+                    <button class="btn btn-default" id="_gen_password" type="button" title="{% trans 'generate password' %}">
+                        <i class="far fa-key"></i>
+                    </button>
+                {% endbuttons %}
+            </div>
+        </div>
+    </div>
+
+</form>
+{% endblock %}
