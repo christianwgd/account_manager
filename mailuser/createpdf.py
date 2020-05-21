@@ -70,11 +70,15 @@ def credentials(account):
     story.append(Spacer(1, 1 * cm))
     story.append(Paragraph(_("Personal account information"), styles["Title"]))
     story.append(Spacer(1, 1 * cm))
+    if account.full_name:
+        name = account.full_name
+    else:
+        name = account.username.split('@')[0]
     story.append(Paragraph(_("""
 Dear %s, this document contains the credentials you will need
 to connect to Modoboa. Learn the content and destroy
 the document as soon as possible.
-""") % account.full_name, styles["Left"]))
+""") % name, styles["Left"]))
     story.append(Spacer(1, 0.4 * cm))
     story.append(Paragraph(_("Web panel:"), styles["Tableheader"]))
     story.append(Spacer(1, 0.2 * cm))
