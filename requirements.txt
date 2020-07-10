@@ -11,7 +11,7 @@ django-formtools==2.2
 django-otp==0.9.1
 django-phonenumber-field==4.0.0
 django-select2==7.2.4
-django-two-factor-auth==1.11.0
+django-two-factor-auth==1.12
 isort==4.3.21
 lazy-object-proxy==1.4.3
 LEPL==5.1.3
