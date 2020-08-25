@@ -76,7 +76,7 @@ def credentials(account):
         name = account.username.split('@')[0]
     story.append(Paragraph(_("""
 Dear %s, this document contains the credentials you will need
-to connect to Modoboa. Learn the content and destroy
+to connect to your email account. Learn the content and destroy
 the document as soon as possible.
 """) % name, styles["Left"]))
     story.append(Spacer(1, 0.4 * cm))
