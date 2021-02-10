@@ -564,8 +564,6 @@ msgid ""
 "Please enter the phone number you wish to receive the text messages on. This "
 "number will be validated in the next step."
 msgstr ""
-"Bitte Telefonnummer eingeben, die Nachrichten empfangen soll. Im nächsten "
-"Schritt wird diese bestätigt."
 
 #: templates/two_factor/core/setup.html:42
 msgid ""
