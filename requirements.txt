@@ -1,9 +1,9 @@
-cryptography==3.4.4
-Django==3.1.6
+cryptography==3.4.7
+Django==3.1.7
 django-bootstrap4==2.3.1
-django-filebrowser-no-grappelli2==3.8.2
-django-select2==7.6.1
+django-filebrowser-no-grappelli2==3.8.4
+django-select2==7.7.0
 django-two-factor-auth==1.13
-reportlab==3.5.59
+reportlab==3.5.66
 rfc6266==0.0.4
-phonenumbers==8.12.18
+phonenumbers==8.12.20
