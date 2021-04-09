@@ -77,6 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'account.wsgi.application'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
