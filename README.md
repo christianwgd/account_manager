@@ -11,3 +11,6 @@ all account data including some advice how to configure their email clients.
 Since i was going mad about this mail traffic, i build this app to generate 
 passwords and a PDF that i can mail to the users. The PDF includes all relevant 
 information to access the mails with an email client.
+
+There's one thing i'm still missing: Unfortunately no email provider will ever
+provide a webservice to manage email accounts. Hints are welcome!
