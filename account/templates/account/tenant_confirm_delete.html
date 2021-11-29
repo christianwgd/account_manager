@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n static bootstrap4 %}
-
-{% block bootstrap4_extra_head %}
-{{ block.super }}
-{% endblock %}
+{% load i18n static django_bootstrap5 %}
 
 {% block title %}{% trans 'Delete tenant' %}{% endblock %}
 
@@ -23,14 +19,12 @@
                 </h4>
             </div>
 
-            {% buttons %}
-                <button class="btn btn-danger" name="delete" type="submit" title="{% trans 'Ok' %}">
-                    <i class="far fa-trash"></i>
-                </button>
-                <button class="btn btn-default" type="submit" name="cancel" title="{% trans 'Cancel' %}">
-                    <i class="far fa-times"></i>
-                </button>
-            {% endbuttons %}
+            <button class="btn btn-danger" name="delete" type="submit" title="{% trans 'Ok' %}">
+                <i class="far fa-trash"></i>
+            </button>
+            <button class="btn btn-default" type="submit" name="cancel" title="{% trans 'Cancel' %}">
+                <i class="far fa-times"></i>
+            </button>
 
         </form>
 

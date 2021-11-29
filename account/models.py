@@ -30,7 +30,10 @@ CONN_SECURITY = (
 class Tenant(models.Model):
     
     def __str__(self):
-        return self.name
+        if self.name is not None:
+            return self.name
+        else:
+            return 'Tenant'
 
     class Meta:
         verbose_name = _('mail tenant')

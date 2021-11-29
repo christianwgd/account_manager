@@ -40,7 +40,5 @@ class TenantForm(forms.ModelForm):
             'man_url', 'manager',
         ]
         widgets = {
-            'imap_sec': Select2Widget,
-            'smtp_sec': Select2Widget,
             'manager': Select2MultipleWidget
         }

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n static bootstrap4 %}
+{% load i18n static django_bootstrap5 %}
 
 {% block title %}{% trans 'account delete' %}{% endblock %}
 
@@ -30,14 +30,12 @@
     <div class="row">
         <div class="col-12">
             <div class="panel">
-                {% buttons %}
                 <button type="submit" class="btn btn-danger" name="delete" title="{% trans 'Delete' %}">
                     <i class="far fa-check"></i>
                 </button>
-                <button type="submit" class="btn btn-default" name="cancel" title="{% trans 'Cancel' %}">
+                <button type="submit" class="btn btn-secondary" name="cancel" title="{% trans 'Cancel' %}">
                     <i class="far fa-times"></i>
                 </button>
-                {% endbuttons %}
             </div>
         </div>
     </div>

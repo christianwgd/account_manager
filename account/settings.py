@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
     'two_factor',
-    'bootstrap4',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -106,10 +106,9 @@ LOGOUT_REDIRECT_URL = '/'
 ##################
 # BOOTSTRAP 4    #
 ##################
-BOOTSTRAP4 = {
-    "include_jquery": True,
+BOOTSTRAP5 = {
+    "javascript_url": "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js",
     "theme_url": "/static/css/greyson.css",
-    "javascript_in_head": True,
 }
 
 ##################

@@ -1,47 +1,18 @@
 {% extends 'base.html' %}
-{% load i18n static bootstrap4 account_tags %}
+{% load i18n static django_bootstrap5 account_tags %}
 
-{% block bootstrap4_extra_head %}
+{% block bootstrap5_extra_head %}
 {{ block.super }}
 {{ form.media.css }}
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
 {% endblock %}
 
-{% block bootstrap4_extra_script %}
+{% block bootstrap5_extra_script %}
 {{ block.super }}
 {{ form.media.js }}
-{#<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>#}
-<script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/responsive/2.2.2/js/responsive.bootstrap4.min.js"></script>
-<script src="{% static 'js/tablesize.js' %}"></script>
-<script>
-
-var frame_height = 430;
-
-$(document).ready( function () {
-    $('#accounts').DataTable({
-        language: {
-            url: '{% static "datatables/de_DE.json" %}'
-        },
-        scrollY:        tableHeight,
-        scrollCollapse: true,
-        paging:         false,
-        order: [[ 1, 'asc' ]],
-        responsive: true,
-        columns: [
-            { responsivePriority: 2, targets: 0 },
-            { responsivePriority: 1, targets: 1 },
-            { responsivePriority: 4, targets: 2 },
-            { orderable: false, responsivePriority: 5, targets: 3 },
-            { orderable: false, responsivePriority: 3, targets: 4 }
-          ]
-    });
-} );
-
-</script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table-locale-all.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/mobile/bootstrap-table-mobile.min.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -55,12 +26,14 @@ $(document).ready( function () {
     <div class="row">
         <div class="col-12">
             <div class="panel">
-                <table id="accounts" class="table table-condensed table-striped">
+                <table id="wertelist" data-toggle="table" data-classes="table table-striped table-bordered"
+                       data-locale="de-DE" data-search="true" data-mobile-responsive="true" data-min-width="768"
+                       data-sortable="true">
                     <thead>
                         <tr>
                             <th>{% trans 'account type' %}</th>
-                            <th>{% trans 'account user' %}</th>
-                            <th>{% trans 'name' %}</th>
+                            <th data-sortable="true">{% trans 'account user' %}</th>
+                            <th data-sortable="true">{% trans 'name' %}</th>
                             <th>{% trans 'redirected to' %}</th>
                             <th></th>
                         </tr>

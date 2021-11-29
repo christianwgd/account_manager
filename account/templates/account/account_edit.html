@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load i18n static bootstrap4 %}
+{% load i18n static django_bootstrap5 %}
 
-{% block bootstrap4_extra_script %}
+{% block bootstrap5_extra_script %}
 {{ block.super }}
 <script src="{% static 'js/normalize.js' %}"></script>
 <script src="{% static 'js/generate.js' %}"></script>
@@ -32,7 +32,7 @@ $(document).ready(function(){
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="panel">
-                {% bootstrap_form form %}
+                {% bootstrap_form form layout='floating' %}
             </div>
         </div>
 
@@ -81,20 +81,18 @@ $(document).ready(function(){
     <div class="row">
         <div class="col-12">
             <div class="panel">
-                {% buttons %}
-                    <button class="btn btn-primary" name="submit" type="submit" formnovalidate title="{% trans 'Ok' %}">
-                        <i class="far fa-check"></i>
-                    </button>
-                    <button class="btn btn-default" type="submit" name="cancel" formnovalidate title="{% trans 'Cancel' %}">
-                        <i class="far fa-times"></i>
-                    </button>
-                    <button class="btn btn-default" id="_gen_username" type="button" title="{% trans 'generate username' %}">
-                        <i class="far fa-user"></i>
-                    </button>
-                    <button class="btn btn-default" id="_gen_password" type="button" title="{% trans 'generate password' %}">
-                        <i class="far fa-key"></i>
-                    </button>
-                {% endbuttons %}
+                <button class="btn btn-primary" name="submit" type="submit" formnovalidate title="{% trans 'Ok' %}">
+                    <i class="far fa-check"></i>
+                </button>
+                <button class="btn btn-secondary" type="submit" name="cancel" formnovalidate title="{% trans 'Cancel' %}">
+                    <i class="far fa-times"></i>
+                </button>
+                <button class="btn btn-secondary" id="_gen_username" type="button" title="{% trans 'generate username' %}">
+                    <i class="far fa-user"></i>
+                </button>
+                <button class="btn btn-secondary" id="_gen_password" type="button" title="{% trans 'generate password' %}">
+                    <i class="far fa-key"></i>
+                </button>
             </div>
         </div>
     </div>

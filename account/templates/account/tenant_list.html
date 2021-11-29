@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load i18n static bootstrap4 fb_versions %}
+{% load i18n static django_bootstrap5 fb_versions %}
 
-{% block bootstrap4_extra_head %}
+{% block bootstrap5_extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/tenant_list.css' %}">
 {% endblock %}
@@ -27,10 +27,9 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <div class="card-deck justify-content-center">
-            {% for tenant in  tenant_list %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4">
+        {% for tenant in tenant_list %}
+            <div class="col">
                 <div class="card bg-light">
                     {% if edit == '1' %}
                     <div class="row">
@@ -54,9 +53,8 @@
                         </a>
                     </div>
                 </div>
-            {% endfor %}
             </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

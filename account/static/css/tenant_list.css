@@ -1,7 +1,7 @@
 .edit_toggle {
     position: absolute;
-    top: 0px;
-    right: 40px;
+    top: 110px;
+    right: 25px;
 }
 
 .edit_toggle svg {
@@ -16,5 +16,3 @@
     background-color: green;
     color: white;
 }
-
-.card { min-width: 250px;}

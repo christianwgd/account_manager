@@ -1,21 +1,14 @@
 {% extends 'base.html' %}
-{% load i18n static bootstrap4 %}
+{% load i18n static django_bootstrap5 %}
 
-{% block bootstrap4_extra_head %}
+{% block bootstrap5_extra_head %}
 {{ block.super }}
 {{ form.media.css }}
-<link rel="stylesheet" href="{% static 'css/select2-bootstrap4-theme.min.css' %}">
 {% endblock %}
 
-{% block bootstrap4_extra_script %}
+{% block bootstrap5_extra_script %}
 {{ block.super }}
 {{ form.media.js }}
-<script>
-$(document).ready(function(){
-    $('select').select2({
-        theme: 'bootstrap4',
-    });
-});
 </script>
 
 {% endblock %}
@@ -35,12 +28,12 @@ $(document).ready(function(){
 
     <div class="row">
         <div class="col-md-6 col-sm-12">
-            {% bootstrap_field form.name %}
-            {% bootstrap_field form.domain %}
-            {% bootstrap_field form.weburl %}
+            {% bootstrap_field form.name layout='floating' %}
+            {% bootstrap_field form.domain layout='floating' %}
+            {% bootstrap_field form.weburl layout='floating' %}
         </div>
         <div class="col-md-6 col-sm-12">
-            {% bootstrap_field form.logo %}
+            {% bootstrap_field form.logo layout='floating' %}
         </div>
     </div>
 
@@ -49,16 +42,16 @@ $(document).ready(function(){
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <h5>{% trans 'Incoming mail server' %}</h5>
-            {% bootstrap_field form.imap_url %}
-            {% bootstrap_field form.imap_port %}
-            {% bootstrap_field form.imap_sec %}
+            {% bootstrap_field form.imap_url layout='floating' %}
+            {% bootstrap_field form.imap_port layout='floating' %}
+            {% bootstrap_field form.imap_sec layout='floating' %}
         </div>
 
         <div class="col-md-6 col-sm-12">
             <h5>{% trans 'Outgoing mail server' %}</h5>
-            {% bootstrap_field form.smtp_url %}
-            {% bootstrap_field form.smtp_port %}
-            {% bootstrap_field form.smtp_sec %}
+            {% bootstrap_field form.smtp_url layout='floating' %}
+            {% bootstrap_field form.smtp_port layout='floating' %}
+            {% bootstrap_field form.smtp_sec layout='floating' %}
         </div>
     </div>
 
@@ -66,7 +59,7 @@ $(document).ready(function(){
 
     <div class="row">
         <div class="col-md-12">
-            {% bootstrap_field form.man_url %}
+            {% bootstrap_field form.man_url layout='floating' %}
             {% bootstrap_field form.manager %}
         </div>
     </div>
@@ -74,14 +67,12 @@ $(document).ready(function(){
     <div class="row">
         <div class="col-12">
             <div class="panel">
-                {% buttons %}
-                    <button class="btn btn-primary" name="submit" type="submit" formnovalidate title="{% trans 'Ok' %}">
-                        <i class="far fa-check"></i>
-                    </button>
-                    <button class="btn btn-default" type="submit" name="cancel" formnovalidate title="{% trans 'Cancel' %}">
-                        <i class="far fa-times"></i>
-                    </button>
-                {% endbuttons %}
+                <button class="btn btn-primary" name="submit" type="submit" formnovalidate title="{% trans 'Ok' %}">
+                    <i class="far fa-check"></i>
+                </button>
+                <button class="btn btn-secondary" type="submit" name="cancel" formnovalidate title="{% trans 'Cancel' %}">
+                    <i class="far fa-times"></i>
+                </button>
             </div>
         </div>
     </div>
