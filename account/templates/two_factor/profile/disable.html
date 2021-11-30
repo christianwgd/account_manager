@@ -1,5 +1,5 @@
 {% extends "two_factor/_base_focus.html" %}
-{% load i18n bootstrap4 %}
+{% load i18n django_bootstrap5 %}
 
 {% block title %}{% trans "Disable Two-factor Authentication" %}{% endblock %}
 
@@ -15,12 +15,10 @@
 
         <form method="post">
             {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
+            {% bootstrap_form form layout='floating' %}
             <button class="btn btn-danger" type="submit">
                 {% trans "Disable" %}
             </button>
-            {% endbuttons %}
         </form>
     </div>
 </div>

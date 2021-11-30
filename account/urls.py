@@ -14,15 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, reverse_lazy
 from django.views.generic import RedirectView
 from filebrowser.sites import site
 from django.conf import settings
 from django.conf.urls.static import static
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import views as auth_views
 
-from . import views
-from . import file_import
+from account import views
+from account import file_import
 from two_factor.urls import urlpatterns as tf_urls
 
 admin.site.site_header = _('Account Manager')
@@ -56,6 +57,22 @@ urlpatterns = [
     path('get_default_password/', views.createDefaultPassword, name='get_default_password'),
 
     path('import/', file_import.importFromFile, name='import'),
+
+    path(
+        'pwd_change/',
+        auth_views.PasswordChangeView.as_view(
+            template_name='registration/password_change_form.html',
+            success_url=reverse_lazy('pwd_change_done')
+        ),
+        name='pwd_change'
+    ),
+    path(
+        'pwd_change_done/',
+        auth_views.PasswordChangeDoneView.as_view(
+            template_name='registration/password_change_done_form.html'
+        ),
+        name='pwd_change_done'
+    ),
 ] 
 
 if settings.DEBUG:

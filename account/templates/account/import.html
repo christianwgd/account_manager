@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% load i18n static bootstrap4 %}
+{% load i18n static django_bootstrap5 %}
 
-{% block bootstrap4_extra_head %}
+{% block bootstrap5_extra_head %}
 {{ block.super }}
 {{ form.media.css }}
 {% endblock %}
 
-{% block bootstrap4_extra_script %}
+{% block bootstrap5_extra_script %}
 {{ block.super }}
 {{ form.media.js }}
 <script src="{% static 'js/tablesize.js' %}"></script>
@@ -71,17 +71,15 @@ var frame_height = 450;
     <div class="row">
         <div class="col-12">
             <div class="panel">
-                {% buttons %}
-                    <button class="btn btn-primary" type="submit" name="cancel" formnovalidate>
-                        <i class="far fa-times"></i>
-                    </button>
-                    <button class="btn btn-default" type="submit" name="submit" formnovalidate>
-                        <i class="far fa-search"></i>
-                    </button>
-                    <button class="btn btn-default" type="submit" name="import" formnovalidate>
-                        <i class="far fa-upload"></i>
-                    </button>
-                {% endbuttons %}
+                <button class="btn btn-primary" type="submit" name="cancel" formnovalidate>
+                    <i class="far fa-times"></i>
+                </button>
+                <button class="btn btn-secondary" type="submit" name="submit" formnovalidate>
+                    <i class="far fa-search"></i>
+                </button>
+                <button class="btn btn-secondary" type="submit" name="import" formnovalidate>
+                    <i class="far fa-upload"></i>
+                </button>
             </div>
         </div>
     </div>
