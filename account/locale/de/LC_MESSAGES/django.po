@@ -398,6 +398,9 @@ msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
+"Aus Sicherheitsgründen bitte zuerst das alte Passwort und darunter dann "
+"zweimal das neue Passwort eingeben, um sicherzustellen, dass es es korrekt "
+"eingegeben wurde."
 
 #: templates/registration/password_change_form.html:25
 #: templates/registration/password_change_form.html:27

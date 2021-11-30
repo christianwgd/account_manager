@@ -45,13 +45,13 @@
                         </div>
                     </div>
                     {% endif %}
+                    <a href="{% url 'accountlist' tenant.id %}">
                     <img class="card-img-top" src="{% version tenant.logo 'medium' %}" alt="">
-                    <div class="card-body text-center bg-white">
-                        <a href="{% url 'accountlist' tenant.id %}">
+                        <div class="card-body text-center bg-white">
                             <h5>{{ tenant.name }}</h5>
                             <p>(@{{ tenant.domain }})</p>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         {% endfor %}

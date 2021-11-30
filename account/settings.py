@@ -30,7 +30,6 @@ PROJECT_APP = os.path.basename(PROJECT_APP_PATH)
 
 INSTALLED_APPS = [
     'filebrowser',
-    'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_select2',
+    'account',
     'django_otp',
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
