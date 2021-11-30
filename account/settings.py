@@ -107,6 +107,8 @@ LOGOUT_REDIRECT_URL = '/'
 # BOOTSTRAP 4    #
 ##################
 BOOTSTRAP5 = {
+    # There's a typo in django-bootstrap5 -> https://github.com/zostera/django-bootstrap5/issues/208
+    # Override the javascript_url until typo is fixed...
     "javascript_url": "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js",
     "theme_url": "/static/css/greyson.css",
 }
