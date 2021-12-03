@@ -1,6 +1,19 @@
 /*! Themestr.app `Greyson` Bootstrap 4.3.1 theme */
-@import url(https://fonts.googleapis.com/css?family=Muli:200,300,400,700);
-@import url(https://fonts.googleapis.com/css?family=Oswald:200,300,400,700);
+@font-face {
+    font-family: Muli;
+    src: url('../font/Muli.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Oswald;
+    src: url('../font/Oswald.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 /*! Import Bootstrap 4 variables */
 /*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
