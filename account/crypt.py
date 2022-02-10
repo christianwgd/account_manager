@@ -1,7 +1,4 @@
 """Internal library."""
-
-from __future__ import unicode_literals
-
 from io import BytesIO
 import os
 import struct
@@ -11,7 +8,7 @@ from cryptography.hazmat.backends import default_backend
 
 from django.conf import settings
 from django.utils.encoding import force_bytes, smart_bytes
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 def init_storage_dir():

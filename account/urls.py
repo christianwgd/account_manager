@@ -19,7 +19,7 @@ from django.views.generic import RedirectView
 from filebrowser.sites import site
 from django.conf import settings
 from django.conf.urls.static import static
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import views as auth_views
 
 from account import views
