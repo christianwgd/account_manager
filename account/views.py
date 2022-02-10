@@ -6,13 +6,12 @@ import sys
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import UpdateView, CreateView, ListView, DeleteView
-from rfc6266 import build_header
 from django.shortcuts import HttpResponse, render, redirect
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
 
 from .crypt import get_creds_filename, decrypt_file
@@ -63,7 +62,7 @@ def get_account_credentials(request, account_id):
     resp = HttpResponse(content)
     resp["Content-Type"] = "application/pdf"
     resp["Content-Length"] = len(content)
-    resp["Content-Disposition"] = build_header(os.path.basename(fname))
+    resp["Content-Disposition"] = f'attachment; filename={os.path.basename(fname)}'
     return resp
 
 
