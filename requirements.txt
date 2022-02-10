@@ -1,5 +1,5 @@
 cryptography==36.0.0
-Django==3.2.9
+Django==3.2.12
 django-bootstrap4==21.1
 django-bootstrap5==21.1
 django-filebrowser-no-grappelli2==3.8.4
