@@ -3,7 +3,12 @@
 
 {% block bootstrap5_extra_head %}
 {{ block.super }}
-{{ form.media }}
+{{ form.media.css }}
+{% endblock %}
+
+{% block bootstrap5_extra_script %}
+{{ block.super }}
+{{ form.media.js }}
 <script src="{% static 'js/normalize.js' %}"></script>
 <script src="{% static 'js/generate.js' %}"></script>
 
