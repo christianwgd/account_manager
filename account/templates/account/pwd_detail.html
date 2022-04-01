@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load i18n static django_bootstrap5 %}
+
+{% block title %}{% trans 'account' %}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12">
+            <div class="panel">
+                <table class="table table-condensed">
+                    <tbody>
+                        <tr>
+                            <th>{% trans 'name' %}</th>
+                            <td>{{ account.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans 'username' %}</th>
+                            <td>{{ account.user }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans 'email' %}</th>
+                            <td>{{ account.username|default_if_none:'-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans 'first name' %}</th>
+                            <td>{{ account.first_name|default_if_none:'-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans 'last name' %}</th>
+                            <td>{{ account.last_name|default_if_none:'-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans 'description' %}</th>
+                            <td>{{ account.description|default_if_none:'-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans 'password' %}</th>
+                            <td>{{ account.def_pwd|default_if_none:'-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans 'PIN' %}</th>
+                            <td>{{ account.pin|default_if_none:'-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans 'comment' %}</th>
+                            <td>{{ account.comment }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                {% if account.redirection_set.all.count > 0 %}
+                <h5>
+                    {% trans 'redirections' %}
+                    <span class="badge badge-secondary">
+                        {{ account.redirection_set.all.count }}
+                    </span>
+                </h5>
+                <table id="redirections" class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'address' %}</th>
+                            <th>{% trans 'description' %}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for redirect in account.redirection_set.all %}
+                        <tr>
+                            <td>{{ redirect.email }}</td>
+                            <td>{{ redirect.description|default_if_none:'-' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                 <a class="btn btn-primary" href="{% url 'pwdlist' account.tenant.id %}" role="button"
+                    title="{% trans 'Ok' %}">
+                    <i class="far fa-check"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

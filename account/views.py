@@ -5,7 +5,7 @@ import sys
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import UpdateView, CreateView, ListView, DeleteView
+from django.views.generic import UpdateView, CreateView, ListView, DeleteView, DetailView
 from django.shortcuts import HttpResponse, render, redirect
 from django.urls import reverse
 from django.utils.crypto import get_random_string
@@ -16,33 +16,30 @@ from django.db.models.signals import post_save
 
 from .crypt import get_creds_filename, decrypt_file
 from .models import Tenant, Account, Redirection
-from .forms import AccountForm, RedirectionForm, TenantForm
+from .forms import AccountForm, RedirectionForm, TenantForm, PwdForm
 
 
 def bad_request(message):
-    response = HttpResponse(json.dumps({'message': message}), 
-        content_type='application/json')
+    response = HttpResponse(json.dumps({'message': message}),
+                            content_type='application/json')
     response.status_code = 400
     return response
 
 
-def getTenantDomain(request, tenant_id):
+def get_tenant_domain(request, tenant_id):
     try:
         tenant = Tenant.objects.get(pk=tenant_id)
         domain = tenant.domain
     except Tenant.DoesNotExist:
         return bad_request(message=_('No tenant selected.'))
-    except:
-        exc_type, exc_value, exc_traceback = sys.exc_info()
-        return bad_request(message=exc_value)
     return HttpResponse(domain)
 
 
-def createDefaultPassword(request):
+def create_default_password(request):
     try:
-        allowed_chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
+        allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
         pw_str = get_random_string(length=12, allowed_chars=allowed_chars)
-        pw = '-'.join(pw_str[i:i+3] for i in range(0, len(pw_str), 3))
+        pw = '-'.join(pw_str[i:i + 3] for i in range(0, len(pw_str), 3))
     except:
         exc_type, exc_value, exc_traceback = sys.exc_info()
         return bad_request(message=exc_value)
@@ -75,7 +72,7 @@ class TenantList(LoginRequiredMixin, ListView):
         return super(TenantList, self).get(request, *args, **kwargs)
 
     def get_queryset(self):
-        return Tenant.objects.filter(manager=self.request.user)
+        return Tenant.objects.filter(manager=self.request.user).order_by('type')
 
     def get_context_data(self, **kwargs):
         ctx = super(TenantList, self).get_context_data(**kwargs)
@@ -187,17 +184,19 @@ def account_edit(request, tenant_id, account_id=None):
 
 @login_required(login_url='/account/login/')
 def account_delete(request, account_id):
-
     account = Account.objects.get(pk=account_id)
+    if account.type == '3':
+        redirect_to = reverse('pwdlist', kwargs={'tenant_id': account.tenant.id})
+    else:
+        redirect_to = reverse('accountlist', kwargs={'tenant_id': account.tenant.id})
 
     if request.method == 'POST':
         if 'cancel' in request.POST:
-            return redirect(reverse('accountlist', args=(account.tenant.id,)))
-
+            return redirect(redirect_to)
         account.delete()
         messages.success(request, _(
             'account {account} deleted.').format(account=account.username))
-        return redirect(reverse('accountlist', args=(account.tenant.id,)))
+        return redirect(redirect_to)
 
     return render(request, 'account/account_delete.html', {'account': account})
 
@@ -232,7 +231,6 @@ def redirect_edit(request, account_id, redirect_id=None):
 
 @login_required(login_url='/account/login/')
 def redirect_delete(request, redirect_id):
-
     redirection = Redirection.objects.get(pk=redirect_id)
 
     if request.method == 'POST':
@@ -249,8 +247,8 @@ def redirect_delete(request, redirect_id):
 
 @login_required(login_url=' /account/login/')
 def refresh_credentials(request, tenant_id):
-    ''' refresh credentials for all accounts of tenant '''
-    accounts = Account.objects.filter(tenant__pk=tenant_id, type='1')
+    """ refresh credentials for all accounts of tenant """
+    accounts = Account.objects.filter(tenant__pk=tenant_id, type__in=['1', '3'])
     for acc in accounts:
         post_save.send(sender=Account, instance=acc)
 
@@ -260,3 +258,62 @@ def refresh_credentials(request, tenant_id):
     if request.META.get('HTTP_REFERER') is None:
         return redirect(reverse('accountlist', args=(tenant_id,)))
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+class PwdList(LoginRequiredMixin, ListView):
+    model = Account
+    template_name = 'account/pwd_list.html'
+
+    def get_queryset(self):
+        return Account.objects.filter(
+            type='3', tenant__id=self.kwargs['tenant_id']
+        )
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        ctx = super().get_context_data(object_list=None, **kwargs)
+        ctx['tenant'] = Tenant.objects.get(pk=self.kwargs['tenant_id'])
+        return ctx
+
+
+class PwdDetail(LoginRequiredMixin, DetailView):
+    model = Account
+    template_name = 'account/pwd_detail.html'
+
+
+class PwdCreate(LoginRequiredMixin, CreateView):
+    model = Account
+    form_class = PwdForm
+    template_name = 'account/pwd_form.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        ctx = super().get_context_data(object_list=None, **kwargs)
+        ctx['tenant'] = Tenant.objects.get(pk=self.kwargs['tenant_id'])
+        return ctx
+
+    def form_valid(self, form):
+        pwd = form.save(commit=False)
+        pwd.tenant = Tenant.objects.get(pk=self.kwargs['tenant_id'])
+        pwd.type = '3'
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('pwdlist', kwargs={'tenant_id': self.kwargs['tenant_id']})
+
+    def post(self, request, *args, **kwargs):
+        if 'cancel' in request.POST:
+            return redirect(self.get_success_url())
+        return super().post(request, *args, **kwargs)
+
+
+class PwdUpdate(LoginRequiredMixin, UpdateView):
+    model = Account
+    form_class = PwdForm
+    template_name = 'account/pwd_form.html'
+
+    def get_success_url(self):
+        return reverse('pwdlist', kwargs={'tenant_id': self.get_object().tenant.id})
+
+    def post(self, request, *args, **kwargs):
+        if 'cancel' in request.POST:
+            return redirect(self.get_success_url())
+        return super().post(request, *args, **kwargs)

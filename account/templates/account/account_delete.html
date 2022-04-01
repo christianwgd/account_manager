@@ -10,7 +10,10 @@
     <div class="row">
         <div class="col-md-6 offset-md-3 col-sm-12 text-center">
             <div class="panel">
-                <h4 style="color: red;">{% trans 'Delete' %} {{ account.username }}?</h4>
+                <h4 style="color: red;">
+                    {% trans 'Delete' %}
+                    {% if account.type == 'mail' %}{{ account.username }}{% else %}{{ account.name }}{% endif %}?
+                </h4>
                 <p>
                     {% trans 'Do you really want to delete this account?' %}
                 </p>
@@ -28,7 +31,7 @@
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-6 offset-md-3 col-sm-12">
             <div class="panel">
                 <button type="submit" class="btn btn-danger" name="delete" title="{% trans 'Delete' %}">
                     <i class="far fa-check"></i>

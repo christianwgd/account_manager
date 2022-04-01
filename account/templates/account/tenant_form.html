@@ -27,6 +27,14 @@
     {% csrf_token %}
 
     <div class="row">
+        <div class="col-md-12 col-sm-12">
+            {% bootstrap_field form.type layout='floating' %}
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
         <div class="col-md-6 col-sm-12">
             {% bootstrap_field form.name layout='floating' %}
             {% bootstrap_field form.domain layout='floating' %}

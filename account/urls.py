@@ -42,19 +42,26 @@ urlpatterns = [
     path('tenantadd/', views.TenantCreate.as_view(), name='tenantadd'),
     path('tenantedit/<int:pk>/', views.TenantUpdate.as_view(), name='tenantedit'),
     path('tenantdelete/<int:pk>/', views.TenantDelete.as_view(), name='tenantdelete'),
+
     path('accountlist/<int:tenant_id>/', views.account_list, name='accountlist'),
     path('accountdisplay/<int:account_id>/', views.account_display, name='accountdisplay'),
     path('accountedit/<int:tenant_id>/', views.account_edit, name='accountnew'),
     path('accountedit/<int:tenant_id>/<int:account_id>/', views.account_edit, name='accountedit'),
     path('accountdelete/<int:account_id>/', views.account_delete, name='accountdelete'),
+
     path('redirectedit/<int:account_id>/', views.redirect_edit, name='redirectnew'),
     path('redirectedit/<int:account_id>/<int:redirect_id>/', views.redirect_edit, name='redirectedit'),
     path('redirectdelete/<int:redirect_id>/', views.redirect_delete, name='redirectdelete'),
     path('get_account_credentials/<int:account_id>/', views.get_account_credentials, name='get_account_credentials'),
     path('refreshcredentials/<int:tenant_id>/', views.refresh_credentials, name='refreshcredentials'),
+    
+    path('pwdlist/<int:tenant_id>/', views.PwdList.as_view(), name='pwdlist'),
+    path('pwddetail/<int:pk>/', views.PwdDetail.as_view(), name='pwddetail'),
+    path('pwdcreate/<int:tenant_id>/', views.PwdCreate.as_view(), name='pwdcreate'),
+    path('pwdupdate/<int:pk>/', views.PwdUpdate.as_view(), name='pwdupdate'),
 
-    path('get_tenant_domain/<int:tenant_id>/', views.getTenantDomain, name='get_tenant_domain'),
-    path('get_default_password/', views.createDefaultPassword, name='get_default_password'),
+    path('get_tenant_domain/<int:tenant_id>/', views.get_tenant_domain, name='get_tenant_domain'),
+    path('get_default_password/', views.create_default_password, name='get_default_password'),
 
     path('import/', file_import.importFromFile, name='import'),
 

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n static django_bootstrap5 %}
+
+{% block bootstrap5_extra_script %}
+{{ block.super }}
+<script src="{% static 'js/normalize.js' %}"></script>
+<script src="{% static 'js/generate.js' %}"></script>
+<script>
+$(document).ready(function(){
+    $('#_gen_username').on('click', function(event) {
+        var tenant_id = $('#id_tenant').text();
+        gen_username(tenant_id);
+    });
+
+    $('#_gen_password').on('click', function(event) {
+        gen_password();
+    });
+}); 
+</script>
+{% endblock %}
+
+{% block title %}{% trans 'account edit' %}{% endblock %}
+
+{% block content %}
+
+<form id="rule_form" method="post" class="from-horizontal" role="form" action="">
+    {% csrf_token %}
+
+    <!-- for javascript username generator -->
+    {% if account.id %}
+    <span id="id_tenant" style="display:none;">{{ account.tenant.id }}</span>
+    {% else %}
+    <span id="id_tenant" style="display:none;">{{ tenant.id }}</span>
+    {% endif %}
+    
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12">
+            <div class="panel">
+                {% bootstrap_form form layout='floating' %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <button class="btn btn-primary" name="submit" type="submit" formnovalidate title="{% trans 'Ok' %}">
+                    <i class="far fa-check"></i>
+                </button>
+                <button class="btn btn-secondary" type="submit" name="cancel" formnovalidate title="{% trans 'Cancel' %}">
+                    <i class="far fa-times"></i>
+                </button>
+                <button class="btn btn-secondary" id="_gen_username" type="button" title="{% trans 'generate username' %}">
+                    <i class="far fa-user"></i>
+                </button>
+                <button class="btn btn-secondary" id="_gen_password" type="button" title="{% trans 'generate password' %}">
+                    <i class="far fa-key"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

@@ -40,6 +40,7 @@ styles.add(ParagraphStyle(
     name="Tableheader", alignment=TA_CENTER, fontSize=12, fontName="IBMPlex",
 ))
 
+
 def resized_image(path, width=1*cm):
     img = utils.ImageReader(path)
     iw, ih = img.getSize()

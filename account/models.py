@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -8,6 +9,7 @@ from filebrowser.fields import FileBrowseField
 
 from .crypt import init_storage_dir
 from .createpdf import credentials
+from .password_pdf import password_credentials
 
 
 def user_str_patch(self):
@@ -16,8 +18,9 @@ def user_str_patch(self):
     else:
         name = self.username
     return name
-User.__str__ = user_str_patch
 
+
+User.__str__ = user_str_patch
 
 CONN_SECURITY = (
     ('NNE', 'None'),
@@ -27,8 +30,14 @@ CONN_SECURITY = (
     ('STS', 'STARTTLS'),
 )
 
+TENANT_TYPE = (
+    ('mail', _('mail accounts')),
+    ('othr', _('passwords')),
+)
+
+
 class Tenant(models.Model):
-    
+
     def __str__(self):
         if self.name is not None:
             return self.name
@@ -53,17 +62,26 @@ class Tenant(models.Model):
     imap_sec = models.CharField(_('IMAP connection security'), max_length=3, choices=CONN_SECURITY, default='SST')
     man_url = models.URLField(_('manual url'), null=True, blank=True)
     manager = models.ManyToManyField(User, verbose_name=_('manager'))
+    type = models.CharField(_('Type'), max_length=4, choices=TENANT_TYPE, default='mail')
 
 
 ACCOUNT_TYPE = (
     ('1', _('account')),
     ('2', _('alias')),
+    ('3', _('password')),
 )
 
+
 class Account(models.Model):
-    
+
     def __str__(self):
-        return self.username
+        if self.username:
+            return self.username
+        else:
+            if self.name:
+                return self.name
+            else:
+                return 'no name'
 
     @property
     def full_name(self):
@@ -76,15 +94,26 @@ class Account(models.Model):
         verbose_name = _('mail account')
         verbose_name_plural = _('mail accounts')
         ordering = ['last_name']
-        unique_together = ('type', 'username',)
 
     tenant = models.ForeignKey(Tenant, on_delete=models.PROTECT, verbose_name=_('tenant'))
     type = models.CharField(_('account type'), max_length=1, choices=ACCOUNT_TYPE, default='1')
     first_name = models.CharField(_('first name'), max_length=50, null=True, blank=True)
     last_name = models.CharField(_('last name'), max_length=50, null=True, blank=True)
-    username = models.EmailField(_('account user'))
+    username = models.EmailField(_('email'), null=True, blank=True)
     description = models.CharField(_('description'), max_length=80, null=True, blank=True)
     def_pwd = models.CharField(_('default password'), max_length=50, null=True, blank=True)
+    # Other accounts
+    name = models.CharField(_('name'), max_length=50, null=True, blank=True)
+    user = models.CharField(_('username'), max_length=50, null=True, blank=True)
+    date = models.DateField(_('date'), null=True, blank=True)
+    comment = models.TextField(_('comment'), max_length=50, null=True, blank=True)
+    pin = models.CharField(_('PIN'), max_length=10, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.date:
+            self.date = timezone.now()
+        return super().save(*args, **kwargs)
+
 
 
 @receiver(post_save, sender=Account)
@@ -92,11 +121,14 @@ def account_updated(sender, **kwargs):
     """Create or update account."""
     account = kwargs['instance']
     init_storage_dir()
-    credentials(account)
+    if account.type == 'mail':
+        credentials(account)
+    else:
+        password_credentials(account)
 
 
 class Redirection(models.Model):
-    
+
     def __str__(self):
         return self.email
 
@@ -105,6 +137,6 @@ class Redirection(models.Model):
         verbose_name_plural = _('redirections')
         ordering = ['email']
 
-    email =  models.EmailField(_('email'))
+    email = models.EmailField(_('email'))
     description = models.CharField(_('description'), max_length=80, null=True, blank=True)
     account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_('account'))

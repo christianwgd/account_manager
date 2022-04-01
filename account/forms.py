@@ -7,18 +7,52 @@ from django_select2.forms import Select2MultipleWidget, Select2Widget
 from .models import Account, Redirection, Tenant
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class AccountForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        exclude = ['tenant']
+        fields = [
+            'type', 'first_name', 'last_name',
+            'username', 'description', 'def_pwd'
+        ]
+
+    def clean_username(self):
+        data = self.cleaned_data['username']
+        if data is None:
+            raise forms.ValidationError(_('This field is required.'))
+        return data
 
 
 class RedirectionForm(forms.ModelForm):
 
     class Meta:
         model = Redirection
-        exclude = ['account']
+        fields = ['email', 'description']
+
+
+class PwdForm(forms.ModelForm):
+
+    class Meta:
+        model = Account
+        fields = [
+            'name', 'user', 'username',
+            'first_name', 'last_name',
+            'description', 'def_pwd', 'pin',
+            'date', 'comment'
+        ]
+        widgets = {
+            'date': DateInput(),
+        }
+
+    def clean_name(self):
+        data = self.cleaned_data['name']
+        if data is None:
+            raise forms.ValidationError(_('This field is required.'))
+        return data
 
     
 class ImportForm(forms.Form):
@@ -34,6 +68,7 @@ class TenantForm(forms.ModelForm):
     class Meta:
         model = Tenant
         fields = [
+            'type',
             'name', 'domain', 'logo', 'weburl',
             'imap_url', 'imap_port', 'imap_sec',
             'smtp_url', 'smtp_port', 'smtp_sec',

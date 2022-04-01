@@ -29,7 +29,11 @@ def get_creds_filename(account):
     """Return the full path of a document."""
     base_dir = getattr(settings, "BASE_DIR", None)
     storage_dir = getattr(settings, "STORAGE_DIR", 'media/credentials/')
-    return os.path.join(base_dir, storage_dir, account.username + ".pdf")
+    if account.type == '1':
+        name = account.username
+    else:
+        name = f'{account.name}_{account.tenant.name}'
+    return os.path.join(base_dir, storage_dir, name + ".pdf")
 
 
 def delete_credentials(account):

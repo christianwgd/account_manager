@@ -38,10 +38,20 @@ class RedirectionInlineAdmin(admin.TabularInline):
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['username', ]
+    list_display = ['get_name', 'date']
     list_filter = ['tenant', ]
     ordering = ['last_name']
     change_form_template = "account/custom_admin_account_change.html"
+    readonly_fields = ['date']
     inlines = [
         RedirectionInlineAdmin,
     ]
+
+    def get_name(self, obj):
+        if obj.username:
+            return obj.username
+        else:
+            if obj.name:
+                return obj.name
+            else:
+                return 'no name'
