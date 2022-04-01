@@ -106,7 +106,7 @@ class Account(models.Model):
     name = models.CharField(_('name'), max_length=50, null=True, blank=True)
     user = models.CharField(_('username'), max_length=50, null=True, blank=True)
     date = models.DateField(_('date'), null=True, blank=True)
-    comment = models.TextField(_('comment'), max_length=50, null=True, blank=True)
+    comment = models.TextField(_('comment'), null=True, blank=True)
     pin = models.CharField(_('PIN'), max_length=10, null=True, blank=True)
 
     def save(self, *args, **kwargs):
