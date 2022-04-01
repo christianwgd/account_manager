@@ -2,6 +2,7 @@
 """The code used to generate PDF files (based on Reportlab)."""
 from io import BytesIO
 
+from django.utils import formats
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
@@ -75,6 +76,7 @@ def password_credentials(account):
         [_("name"), account.full_name],
         [_("description"), account.description],
         [_("password"), account.def_pwd],
+        [_("date"), formats.date_format(account.date, 'DATE_FORMAT')],
         [_("comment"), account.comment],
     ]
     table = Table(data)
