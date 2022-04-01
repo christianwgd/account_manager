@@ -46,6 +46,7 @@ class PwdForm(forms.ModelForm):
         ]
         widgets = {
             'date': DateInput(),
+            'comment': forms.TextInput(attrs={'rows': 4})
         }
 
     def clean_name(self):
