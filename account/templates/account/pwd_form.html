@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load i18n static django_bootstrap5 %}
 
+{% block bootstrap5_extra_head %}
+{{ block.super }}
+{# Fix for non functional widget attrs in django-bs5 #}
+<style>
+#id_comment { height: 8rem; }
+</style>
+{% endblock %}
+
 {% block bootstrap5_extra_script %}
 {{ block.super }}
 <script src="{% static 'js/normalize.js' %}"></script>
