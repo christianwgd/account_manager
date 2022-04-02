@@ -71,8 +71,8 @@ def password_credentials(account):
     story.append(Spacer(1, 1 * cm))
     data = [
         [_("name"), account.name],
-        [_("user"), account.user],
-        [_("username"), account.username],
+        [_("username"), account.user],
+        [_("email"), account.username],
         [_("name"), account.full_name],
         [_("description"), account.description],
         [_("password"), account.def_pwd],
