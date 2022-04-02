@@ -76,6 +76,7 @@ def password_credentials(account):
         [_("name"), account.full_name],
         [_("description"), account.description],
         [_("password"), account.def_pwd],
+        [_("PIN"), account.pin],
         [_("date"), formats.date_format(account.date, 'DATE_FORMAT')],
         [_("comment"), account.comment],
     ]
