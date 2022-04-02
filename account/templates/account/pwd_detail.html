@@ -16,7 +16,7 @@
                         </tr>
                         <tr>
                             <th>{% trans 'username' %}</th>
-                            <td>{{ account.user }}</td>
+                            <td>{{ account.user|default_if_none:'-' }}</td>
                         </tr>
                         <tr>
                             <th>{% trans 'email' %}</th>
