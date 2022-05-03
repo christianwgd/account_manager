@@ -115,16 +115,16 @@ class Account(models.Model):
         return super().save(*args, **kwargs)
 
 
-
 @receiver(post_save, sender=Account)
 def account_updated(sender, **kwargs):
     """Create or update account."""
     account = kwargs['instance']
     init_storage_dir()
-    if account.type == 'mail':
-        credentials(account)
-    else:
+    if account.type == '3':
         password_credentials(account)
+    else:
+        credentials(account)
+
 
 
 class Redirection(models.Model):
