@@ -72,7 +72,7 @@ class TenantList(LoginRequiredMixin, ListView):
         return super(TenantList, self).get(request, *args, **kwargs)
 
     def get_queryset(self):
-        return Tenant.objects.filter(manager=self.request.user).order_by('type')
+        return Tenant.objects.filter(manager=self.request.user).order_by('type', 'name')
 
     def get_context_data(self, **kwargs):
         ctx = super(TenantList, self).get_context_data(**kwargs)
