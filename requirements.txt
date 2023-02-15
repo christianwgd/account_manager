@@ -1,5 +1,5 @@
 cryptography==39.0.1
-Django==4.1.6
+Django==4.1.7
 django-bootstrap5==22.2
 django-filebrowser-no-grappelli==4.0.1
 django-phonenumber-field==6.4.0
