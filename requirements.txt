@@ -1,5 +1,5 @@
 cryptography==41.0.4
-Django==4.2.5
+Django==4.2.7
 django-bootstrap5==23.3
 django-filebrowser-no-grappelli==4.0.2
 # django-two-factor-auth depends on
