@@ -174,7 +174,7 @@ def account_edit(request, tenant_id, account_id=None):
                 form.save()
                 messages.success(request, _('account changed.'))
                 return redirect(reverse('accountlist', args=(account.tenant.id,)))
-        except Exception as e:
+        except Exception:
             messages.error(request, _('error in edit account.'))
     return render(request, template, {
         'form': form,
@@ -221,7 +221,7 @@ def redirect_edit(request, account_id, redirect_id=None):
                 form.save()
                 messages.success(request, _('redirection changed.'))
                 return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
-        except Exception as e:
+        except Exception:
             messages.error(request, _('error in edit redirection.'))
     return render(request, 'account/redirect_edit.html', {
         'form': form,
