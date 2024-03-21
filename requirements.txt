@@ -9,4 +9,4 @@ django-phonenumber-field==6.4.0
 django-select2==8.1.2
 django-two-factor-auth==1.16.0
 reportlab==4.1.0
-phonenumbers==8.13.31
+phonenumbers==8.13.32
