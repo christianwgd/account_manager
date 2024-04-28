@@ -107,7 +107,8 @@ LOGOUT_REDIRECT_URL = '/'
 # BOOTSTRAP 5    #
 ##################
 BOOTSTRAP5 = {
-    "theme_url": "/static/css/greyson.css",
+    "color_mode": None,
+    # "theme_url": "/static/css/greyson.css",
 }
 
 ##################

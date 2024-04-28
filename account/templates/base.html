@@ -29,12 +29,35 @@
 {{ block.super }}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script defer src="{% static 'font-awesome-5/js/all.min.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const htmlElement = document.documentElement;
+    const switchElement = document.getElementById('darkModeSwitch');
+
+    // Set the default theme to dark if no setting is found in local storage
+    const currentTheme = localStorage.getItem('bsTheme') || 'dark';
+    console.log(currentTheme);
+    htmlElement.setAttribute('data-bs-theme', currentTheme);
+    switchElement.checked = currentTheme === 'dark';
+
+    switchElement.addEventListener('change', function () {
+        console.log('toggle changed');
+        if (this.checked) {
+            htmlElement.setAttribute('data-bs-theme', 'dark');
+            localStorage.setItem('bsTheme', 'dark');
+        } else {
+            htmlElement.setAttribute('data-bs-theme', 'light');
+            localStorage.setItem('bsTheme', 'light');
+        }
+    });
+});
+</script>
 {% endblock %}
 
 {% block bootstrap5_title %}{% trans 'Account Manager' %}{% endblock %}
 
 {% block bootstrap5_content %}
-<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary">
+<nav class="navbar fixed-top navbar-expand-md">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'tenantlist' %}">{% trans 'Account Manager' %}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,6 +123,10 @@
 <div id="container" class="container-fluid">
     <div class="row">
         <div class="col-12">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="darkModeSwitch" checked>
+                <label class="form-check-label" for="darkModeSwitch">Dark Mode</label>
+            </div>
             <div class="panel">
                 <h3 style="text-align: center;">{% block title %}{% endblock %}</h3>
             </div>
