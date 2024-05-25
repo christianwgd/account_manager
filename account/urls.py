@@ -28,7 +28,6 @@ from two_factor.urls import urlpatterns as tf_urls
 
 admin.site.site_header = _('Account Manager')
 
-
 urlpatterns = [
     path('', include(tf_urls)),
     path('admin/filebrowser/', site.urls),

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_totp',
     'two_factor.plugins.phonenumber',
     'two_factor',
+    'dark_mode_switch',
     'django_bootstrap5',
 ]
 
