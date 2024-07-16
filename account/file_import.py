@@ -50,9 +50,8 @@ def importFromFile(request):
             try:
                 accounts = []
                 tenant = form.cleaned_data['tenant']
-                filepath = 'static/media/imports/'
                 schedFile = request.FILES['scheduleFile']
-                fs = FileSystemStorage(location=filepath)
+                fs = FileSystemStorage(location='imports/')
                 filename = fs.save(schedFile.name, schedFile)
                 fullfile = '{}/{}'.format(filepath, filename)
                 enc = 'utf-8'
