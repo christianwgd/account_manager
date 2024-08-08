@@ -66,7 +66,6 @@ def password_credentials(account):
     story.append(Spacer(1, 1 * cm))
     story.append(Paragraph(_("Personal account information"), styles["Title"]))
     story.append(Spacer(1, 1 * cm))
-    name = account.name
 
     story.append(Spacer(1, 1 * cm))
     data = [

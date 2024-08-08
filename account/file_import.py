@@ -53,10 +53,9 @@ def importFromFile(request):
                 schedFile = request.FILES['scheduleFile']
                 fs = FileSystemStorage(location='imports/')
                 filename = fs.save(schedFile.name, schedFile)
-                fullfile = '{}/{}'.format(filepath, filename)
                 enc = 'utf-8'
                 # enc = 'cp1252'
-                f = codecs.open(fullfile, 'r', encoding=enc)
+                f = codecs.open(filename, 'r', encoding=enc)
                 reader = csv.reader(f, delimiter=';', quotechar='"')
                 
                 for row in reader:
