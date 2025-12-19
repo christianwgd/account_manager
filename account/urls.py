@@ -42,7 +42,7 @@ urlpatterns = [
     path('tenantedit/<int:pk>/', views.TenantUpdate.as_view(), name='tenantedit'),
     path('tenantdelete/<int:pk>/', views.TenantDelete.as_view(), name='tenantdelete'),
 
-    path('accountlist/<int:tenant_id>/', views.account_list, name='accountlist'),
+    path('accountlist/<int:tenant_id>/', views.AccountListView.as_view(), name='accountlist'),
     path('accountdisplay/<int:account_id>/', views.account_display, name='accountdisplay'),
     path('accountedit/<int:tenant_id>/', views.account_edit, name='accountnew'),
     path('accountedit/<int:tenant_id>/<int:account_id>/', views.account_edit, name='accountedit'),

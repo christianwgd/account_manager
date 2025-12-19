@@ -25,6 +25,12 @@ PROJECT_APP = Path(PROJECT_APP_PATH).name
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 
+# Settings for tests, override in production with localsettings!
+DEBUG = True
+
+SECRET_KEY = 'django-insecure-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'  # noqa: S105
+
+
 # Application definition
 
 INSTALLED_APPS = [

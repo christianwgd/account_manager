@@ -79,7 +79,7 @@ class Account(models.Model):
     def full_name(self):
         if self.first_name is not None and self.last_name is not None:
             return self.first_name + ' ' + self.last_name
-        return None
+        return 'no name'
 
     class Meta:
         verbose_name = _('mail account')

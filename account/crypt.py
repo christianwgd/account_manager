@@ -31,7 +31,7 @@ def get_creds_filename(account):
     base_dir = getattr(settings, "BASE_DIR", None)
     storage_dir = getattr(settings, "STORAGE_DIR", 'media/credentials/')
     name = account.username if account.type == '1' else f'{account.name}_{account.tenant.name}'
-    return Path(base_dir) / storage_dir / (name + ".pdf")
+    return Path(base_dir) / storage_dir / f"{name}.pdf"
 
 
 def delete_credentials(account):

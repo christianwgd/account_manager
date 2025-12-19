@@ -12,10 +12,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
+from django_filters.views import FilterView
 
-from .crypt import get_creds_filename, decrypt_file
-from .models import Tenant, Account, Redirection
-from .forms import AccountForm, RedirectionForm, TenantForm, PwdForm
+from account.crypt import get_creds_filename, decrypt_file
+from account.filters import AccountFilter
+from account.models import Tenant, Account, Redirection
+from account.forms import AccountForm, RedirectionForm, TenantForm, PwdForm
 
 
 def bad_request(message):
@@ -133,14 +135,28 @@ class TenantDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         return super(DeleteView, self).post(request, *args, **kwargs)
 
 
-@login_required(login_url='/account/login/')
-def account_list(request, tenant_id):
-    tenant = Tenant.objects.get(pk=tenant_id)
-    accounts = Account.objects.filter(tenant=tenant).order_by('username', 'type')
-    return render(request, 'account/account_list.html', {
-        'accountlist': accounts,
-        'tenant': tenant
-    })
+# @login_required(login_url='/account/login/')
+# def account_list(request, tenant_id):
+#     tenant = Tenant.objects.get(pk=tenant_id)
+#     accounts = Account.objects.filter(tenant=tenant).order_by('username', 'type')
+#     return render(request, 'account/account_list.html', {
+#         'accountlist': accounts,
+#         'tenant': tenant
+#     })
+
+class AccountListView(LoginRequiredMixin, FilterView):
+    model = Account
+    filterset_class = AccountFilter
+    template_name = 'account/account_list.html'
+
+    def get_queryset(self):
+        tenant = Tenant.objects.get(pk=self.kwargs['tenant_id'])
+        return Account.objects.filter(tenant=tenant).order_by('username', 'type')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=None, **kwargs)
+        context['tenant'] = Tenant.objects.get(pk=self.kwargs['tenant_id'])
+        return context
 
 
 @login_required(login_url='/account/login/')

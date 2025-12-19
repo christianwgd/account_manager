@@ -60,7 +60,8 @@ def password_credentials(account):
     buff = BytesIO()
     doc = SimpleDocTemplate(buff, pagesize=A4)
     story = []
-    story.append(resized_image(crypt.get_document_logo(account.tenant.logo), 6*cm))
+    if account.tenant.logo:
+        story.append(resized_image(crypt.get_document_logo(account.tenant.logo), 6*cm))
     story.append(Paragraph(account.tenant.name, styles["Title"]))
     story.append(Spacer(1, 1 * cm))
     story.append(Paragraph(_("Personal account information"), styles["Title"]))
