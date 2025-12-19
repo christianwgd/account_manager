@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 from django.contrib import admin
 from django.utils.html import mark_safe
@@ -6,17 +5,13 @@ from django.utils.html import mark_safe
 from .models import Tenant, Account, Redirection
 
 
-from filebrowser.settings import ADMIN_THUMBNAIL
-
-
 @admin.register(Tenant)
 class TenantAdmin(admin.ModelAdmin):
 
     def logo_thumbnail(self, obj):
         if obj.logo and obj.logo.filetype == "Image":
-            return mark_safe('<img src="%s" />' % obj.logo.version_generate(ADMIN_THUMBNAIL).url)
-        else:
-            return ""
+            return mark_safe('<img src="{obj.logo.version_generate(ADMIN_THUMBNAIL).url}" />')
+        return ""
 
     list_display = ['name', 'domain', 'logo_thumbnail']
     ordering = ['name']
@@ -50,8 +45,6 @@ class AccountAdmin(admin.ModelAdmin):
     def get_name(self, obj):
         if obj.username:
             return obj.username
-        else:
-            if obj.name:
-                return obj.name
-            else:
-                return 'no name'
+        if obj.name:
+            return obj.name
+        return 'no name'

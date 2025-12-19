@@ -10,15 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
+from pathlib import Path
 import sys
 
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_APP_PATH = os.path.dirname(os.path.abspath(__file__))
-PROJECT_APP = os.path.basename(PROJECT_APP_PATH)
+BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_APP_PATH = Path(__file__).resolve().parent
+PROJECT_APP = Path(PROJECT_APP_PATH).name
 
 
 # Quick-start development settings - unsuitable for production
@@ -78,6 +78,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'account.wsgi.application'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'account.db',
+    }
+}
+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Internationalization
@@ -94,10 +101,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGIN_URL = reverse_lazy('two_factor:login')
 LOGIN_REDIRECT_URL = '/'
@@ -124,12 +131,11 @@ BOOTSTRAP5 = {
 # local_settings has full access to everything defined in this module.
 # Also force into sys.modules so it's visible to Django's autoreload.
 
-f = os.path.join(PROJECT_APP_PATH, "localsettings.py")
-if os.path.exists(f):
-    import sys
+f = Path(PROJECT_APP_PATH) / "localsettings.py"
+if Path(f).exists():
     import importlib
-    module_name = "%s.localsettings" % PROJECT_APP
+    module_name = f"{PROJECT_APP}.localsettings"
     module = importlib.import_module(module_name)
     module.__file__ = f
     sys.modules[module_name] = module
-    exec(open(f, "rb").read())
+    exec(Path.open(f, "rb").read())  # noqa: S102

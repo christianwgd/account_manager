@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """The code used to generate PDF files (based on Reportlab)."""
 from io import BytesIO
 
