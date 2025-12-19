@@ -1,6 +1,6 @@
 [![Django CI run test](https://github.com/christianwgd/account_manager/actions/workflows/django-test.yml/badge.svg)](https://github.com/christianwgd/account_manager/actions/workflows/django-test.yml)
 
-# account_manager
+# Account Manager
 Manage email accounts for different tenants and domains
 
 I'm an admin of different mail servers and now and then people call 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 22:06+0200\n"
+"POT-Creation-Date: 2025-12-19 20:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: createpdf.py:55 createpdf.py:72 password_pdf.py:49 password_pdf.py:66
+#: createpdf.py:54 createpdf.py:72 password_pdf.py:49 password_pdf.py:67
 msgid "Personal account information"
 msgstr "Persönliche Kontoinformationen"
 
-#: createpdf.py:59 password_pdf.py:53
+#: createpdf.py:58 password_pdf.py:53
 msgid "Powered by AccountManager"
 msgstr ""
 
-#: createpdf.py:78
+#: createpdf.py:75
 #, python-format
 msgid ""
 "\n"
@@ -39,205 +39,210 @@ msgstr ""
 "benötigen, um sich mit Ihrem Email-Konto zu verbinden. Prägen Sie sich bitte "
 "die Informationen ein und löschen anschließend dieses Dokument.\n"
 
-#: createpdf.py:84
+#: createpdf.py:81
 msgid "Web panel:"
 msgstr "Webmail-Anwendung:"
 
-#: createpdf.py:87
+#: createpdf.py:84
 msgid "URL"
 msgstr ""
 
-#: createpdf.py:88 models.py:107 password_pdf.py:74
+#: createpdf.py:85 models.py:98 password_pdf.py:73
 #: templates/account/account_display.html:25 templates/account/import.html:39
 #: templates/account/pwd_detail.html:18
 msgid "username"
 msgstr "Benutzername"
 
-#: createpdf.py:89 models.py:71 password_pdf.py:77
+#: createpdf.py:86 models.py:65 password_pdf.py:77
 #: templates/account/account_display.html:41
 #: templates/account/pwd_detail.html:38 templates/account/pwd_list.html:45
 msgid "password"
 msgstr "Passwort"
 
-#: createpdf.py:102
+#: createpdf.py:99
 msgid "Please change your password!"
 msgstr "Bitte ändern Sie Ihr Passwort!"
 
-#: createpdf.py:107
+#: createpdf.py:104
 msgid "PC/Tablet/Smartphone configuration:"
 msgstr "PC/Tablet/Smartphone Konfiguration:"
 
-#: createpdf.py:110 models.py:63
+#: createpdf.py:107 models.py:57
 msgid "manual url"
 msgstr "URL Einrichtungsanleitung"
 
-#: createpdf.py:111
+#: createpdf.py:108
 msgid "IMAP server address (Incoming mail server)"
 msgstr "IMAP Server Adresse (Posteingangsserver)"
 
-#: createpdf.py:112 models.py:61
+#: createpdf.py:109 models.py:55
 msgid "IMAP server port"
 msgstr "IMAP Server Port"
 
-#: createpdf.py:113 models.py:62
+#: createpdf.py:110 models.py:56
 msgid "IMAP connection security"
 msgstr "IMAP Verbindungsverschlüsselung"
 
-#: createpdf.py:114
+#: createpdf.py:111
 msgid "SMTP server address (Outgoing mail server)"
 msgstr "SMTP Server Adresse (Postausgangsserver)"
 
-#: createpdf.py:115 models.py:58
+#: createpdf.py:112 models.py:52
 msgid "SMTP server port"
 msgstr "SMTP Server Port"
 
-#: createpdf.py:116 models.py:59
+#: createpdf.py:113 models.py:53
 msgid "SMTP connection security"
 msgstr "SMTP Verbindungsverschlüsselung"
 
-#: createpdf.py:129
+#: createpdf.py:126
 msgid "Use those settings for your computer, tablet or phone."
 msgstr ""
 "Verwenden Sie diese Einstellungen für Ihren Computer, Ihr Tablet oder "
 "Smartphone."
 
-#: crypt.py:23
+#: crypt.py:24
 #, python-format
 msgid "Failed to create the directory that will contain PDF documents (%s)"
 msgstr ""
 "Das Verzeichnis (%s) für die PDF Dokumente konnte nicht erstellt werden."
 
-#: file_import.py:43
+#: file_import.py:39
 msgid "No accounts created"
 msgstr "Keine Konten angelegt."
 
-#: forms.py:22 forms.py:46
+#: filters.py:15
+msgid "Search"
+msgstr "Suchen"
+
+#: forms.py:25 forms.py:54
 msgid "This field is required."
 msgstr ""
 
-#: forms.py:51 models.py:98
+#: forms.py:59 models.py:89
 msgid "tenant"
 msgstr "Mandant"
 
-#: models.py:34 models.py:95
+#: models.py:29 models.py:86
 msgid "mail accounts"
 msgstr "Email-Konten"
 
-#: models.py:35
+#: models.py:30
 msgid "passwords"
 msgstr "Passworte"
 
-#: models.py:48
+#: models.py:42
 msgid "mail tenant"
 msgstr "Mandant"
 
-#: models.py:49 templates/account/tenant_list.html:10 templates/base.html:51
+#: models.py:43 templates/account/tenant_list.html:10 templates/base.html:53
 msgid "mail tenants"
 msgstr "Mandanten"
 
-#: models.py:52 models.py:106 password_pdf.py:72 password_pdf.py:75
-#: templates/account/account_list.html:36 templates/account/pwd_detail.html:14
+#: models.py:46 models.py:97 password_pdf.py:72 password_pdf.py:75
+#: templates/account/account_list.html:59 templates/account/pwd_detail.html:14
 msgid "name"
 msgstr "Name"
 
-#: models.py:53
+#: models.py:47
 msgid "domain"
 msgstr "Domain"
 
-#: models.py:54
+#: models.py:48
 msgid "Logo"
 msgstr ""
 
-#: models.py:56
+#: models.py:50
 msgid "web url"
 msgstr "Web URL"
 
-#: models.py:57
+#: models.py:51
 msgid "SMTP server address"
 msgstr "SMTP Server Adresse"
 
-#: models.py:60
+#: models.py:54
 msgid "IMAP server address"
 msgstr "IMAP Server Adresse"
 
-#: models.py:64
+#: models.py:58
 msgid "manager"
 msgstr "Verwalter"
 
-#: models.py:65
+#: models.py:59
 msgid "Type"
 msgstr "Typ"
 
-#: models.py:69 models.py:135 templates/account/account_display.html:4
+#: models.py:63 models.py:133 templates/account/account_display.html:4
 #: templates/account/account_display.html:17
-#: templates/account/account_list.html:46 templates/account/pwd_detail.html:4
+#: templates/account/account_list.html:69 templates/account/pwd_detail.html:4
 msgid "account"
 msgstr "Konto"
 
-#: models.py:70 templates/account/account_display.html:19
-#: templates/account/account_list.html:48
+#: models.py:64 templates/account/account_display.html:19
+#: templates/account/account_list.html:71
 msgid "alias"
 msgstr "Alias"
 
-#: models.py:94
+#: models.py:85
 msgid "mail account"
 msgstr "Email-Konto"
 
-#: models.py:99 templates/account/account_display.html:14
-#: templates/account/account_list.html:34 templates/account/import.html:38
+#: models.py:90 templates/account/account_display.html:14
+#: templates/account/account_list.html:57 templates/account/import.html:38
 #: templates/account/pwd_list.html:34
 msgid "account type"
 msgstr "Kontotyp"
 
-#: models.py:100 templates/account/account_display.html:29
+#: models.py:91 templates/account/account_display.html:29
 #: templates/account/pwd_detail.html:26
 msgid "first name"
 msgstr "Vorname"
 
-#: models.py:101 templates/account/account_display.html:33
+#: models.py:92 templates/account/account_display.html:33
 #: templates/account/pwd_detail.html:30
 msgid "last name"
 msgstr "Nachname"
 
-#: models.py:102 models.py:133 templates/account/pwd_detail.html:22
+#: models.py:93 models.py:131 password_pdf.py:74
+#: templates/account/pwd_detail.html:22
 msgid "email"
 msgstr "Email"
 
-#: models.py:103 models.py:134 password_pdf.py:76
+#: models.py:94 models.py:132 password_pdf.py:76
 #: templates/account/account_display.html:37
 #: templates/account/account_display.html:58
 #: templates/account/account_edit.html:51 templates/account/pwd_detail.html:34
-#: templates/account/pwd_detail.html:59
+#: templates/account/pwd_detail.html:63
 msgid "description"
 msgstr "Beschreibung"
 
-#: models.py:104
+#: models.py:95
 msgid "default password"
 msgstr "Passwort"
 
-#: models.py:108
+#: models.py:99 password_pdf.py:79
 msgid "date"
 msgstr "Datum"
 
-#: models.py:109 password_pdf.py:78 templates/account/pwd_detail.html:42
+#: models.py:100 password_pdf.py:80 templates/account/pwd_detail.html:46
 msgid "comment"
 msgstr "Bemerkung"
 
-#: models.py:129
+#: models.py:101 password_pdf.py:78 templates/account/pwd_detail.html:42
+msgid "PIN"
+msgstr ""
+
+#: models.py:127
 msgid "redirection"
 msgstr "Weiterleitung"
 
-#: models.py:130 templates/account/account_display.html:49
-#: templates/account/account_edit.html:42 templates/account/pwd_detail.html:50
+#: models.py:128 templates/account/account_display.html:49
+#: templates/account/account_edit.html:42 templates/account/pwd_detail.html:54
 msgid "redirections"
 msgstr "Weiterleitungen"
 
-#: password_pdf.py:73
-msgid "user"
-msgstr "Benutzername"
-
 #: templates/account/account_delete.html:4
-#: templates/account/account_list.html:78 templates/account/pwd_list.html:70
+#: templates/account/account_list.html:101 templates/account/pwd_list.html:70
 msgid "account delete"
 msgstr "Konto löschen"
 
@@ -259,7 +264,7 @@ msgstr ""
 "mit gelöscht:"
 
 #: templates/account/account_delete.html:39
-#: templates/account/account_edit.html:87 templates/account/pwd_form.html:50
+#: templates/account/account_edit.html:87 templates/account/pwd_form.html:58
 #: templates/account/redirect_delete.html:27
 #: templates/account/redirect_edit.html:30
 #: templates/account/tenant_confirm_delete.html:25
@@ -270,22 +275,21 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: templates/account/account_display.html:57
-#: templates/account/account_edit.html:50 templates/account/pwd_detail.html:58
+#: templates/account/account_edit.html:50 templates/account/pwd_detail.html:62
 msgid "address"
 msgstr "Adresse"
 
 #: templates/account/account_display.html:80
-#: templates/account/account_edit.html:84 templates/account/pwd_detail.html:81
-#: templates/account/pwd_form.html:47 templates/account/redirect_edit.html:27
+#: templates/account/account_edit.html:84 templates/account/pwd_detail.html:85
+#: templates/account/pwd_form.html:55 templates/account/redirect_edit.html:27
 #: templates/account/tenant_confirm_delete.html:22
 #: templates/account/tenant_form.html:78
 msgid "Ok"
 msgstr ""
 
 #: templates/account/account_edit.html:22
-#: templates/account/account_list.html:74
-#: templates/account/account_new.html:29 templates/account/pwd_form.html:22
-#: templates/account/pwd_list.html:66
+#: templates/account/account_list.html:97 templates/account/account_new.html:29
+#: templates/account/pwd_form.html:30 templates/account/pwd_list.html:66
 msgid "account edit"
 msgstr "Konto bearbeiten"
 
@@ -303,47 +307,53 @@ msgstr "Weiterleitung löschen"
 msgid "new redirection"
 msgstr "Neue Weiterleitung"
 
-#: templates/account/account_edit.html:90
-#: templates/account/account_new.html:56
+#: templates/account/account_edit.html:90 templates/account/account_new.html:56
 #: templates/account/custom_admin_account_change.html:26
-#: templates/account/pwd_form.html:53
+#: templates/account/pwd_form.html:61
 msgid "generate username"
 msgstr "Benutzername erzeugen"
 
-#: templates/account/account_edit.html:93
-#: templates/account/account_new.html:59
+#: templates/account/account_edit.html:93 templates/account/account_new.html:59
 #: templates/account/custom_admin_account_change.html:27
-#: templates/account/pwd_form.html:56
+#: templates/account/pwd_form.html:64
 msgid "generate password"
 msgstr "Passwort erzeugen"
 
-#: templates/account/account_list.html:19
+#: templates/account/account_list.html:15
 msgid "accounts for "
 msgstr "Konten für Domain "
 
-#: templates/account/account_list.html:35 templates/account/pwd_list.html:36
-msgid "account user"
-msgstr "Benutzername"
+#: templates/account/account_list.html:26
+msgid "Filter"
+msgstr ""
 
-#: templates/account/account_list.html:37
-msgid "redirected to"
-msgstr "Weiterleitung an"
+#: templates/account/account_list.html:30
+msgid "Clear filter"
+msgstr "Filter löschen"
 
-#: templates/account/account_list.html:69 templates/account/pwd_list.html:62
-msgid "load credentials pdf"
-msgstr "Kontodatendokument laden"
-
-#: templates/account/account_list.html:93 templates/account/pwd_list.html:85
+#: templates/account/account_list.html:36 templates/account/pwd_list.html:85
 msgid "back"
 msgstr "zurück"
 
-#: templates/account/account_list.html:97 templates/account/pwd_list.html:89
+#: templates/account/account_list.html:40 templates/account/pwd_list.html:89
 msgid "new account"
 msgstr "Neues Konto anlegen"
 
-#: templates/account/account_list.html:101 templates/account/pwd_list.html:93
+#: templates/account/account_list.html:44 templates/account/pwd_list.html:93
 msgid "refresh credentials for all accounts"
 msgstr "Alle Kontodatendokumente aktualisieren"
+
+#: templates/account/account_list.html:58 templates/account/pwd_list.html:36
+msgid "account user"
+msgstr "Benutzername"
+
+#: templates/account/account_list.html:60
+msgid "redirected to"
+msgstr "Weiterleitung an"
+
+#: templates/account/account_list.html:92 templates/account/pwd_list.html:62
+msgid "load credentials pdf"
+msgstr "Kontodatendokument laden"
 
 #: templates/account/import.html:18
 msgid "import accounts"
@@ -357,7 +367,7 @@ msgstr "Name / Weiterleitung"
 msgid "Your password was changed."
 msgstr ""
 
-#: templates/account/password_change_form.html:4 templates/base.html:79
+#: templates/account/password_change_form.html:4 templates/base.html:85
 msgid "Password change"
 msgstr ""
 
@@ -411,23 +421,23 @@ msgstr "Posteingangsserver"
 msgid "Outgoing mail server"
 msgstr "Postausgangsserver"
 
-#: templates/base.html:34 templates/base.html:39 urls.py:29
+#: templates/base.html:36 templates/base.html:41 urls.py:29
 msgid "Account Manager"
 msgstr "Account-Manager"
 
-#: templates/base.html:57
+#: templates/base.html:59
 msgid "import"
 msgstr "Import"
 
-#: templates/base.html:75
+#: templates/base.html:80
 msgid "Log out"
 msgstr ""
 
-#: templates/base.html:83
+#: templates/base.html:89
 msgid "Two factor authentication"
 msgstr "Zwei-Faktor-Authentifizierung"
 
-#: templates/base.html:89
+#: templates/base.html:95
 msgid "Admin"
 msgstr ""
 
@@ -730,53 +740,56 @@ msgid ""
 "authentication for your account."
 msgstr "Wir raten davon ab, Zwei-Faktor-Authentifizierung zu deaktivieren."
 
-#: views.py:34
+#: views.py:35
 msgid "No tenant selected."
 msgstr "Kein Mandant ausgewählt."
 
-#: views.py:54
+#: views.py:55
 msgid "No document available for this user"
 msgstr "Für diesen Benutzer ist kein PDF Dokument verfügbar"
 
-#: views.py:86
+#: views.py:87
 msgid "Tenant changed"
 msgstr "Mandant geändert."
 
-#: views.py:95 views.py:117 views.py:132
+#: views.py:96 views.py:118 views.py:133
 msgid "Cancelled"
 msgstr "Abgebrochen"
 
-#: views.py:103
+#: views.py:104
 msgid "Tenant created"
 msgstr "Mandant angelegt"
 
-#: views.py:175
+#: views.py:190
 msgid "account changed."
 msgstr "Konto geändert."
 
-#: views.py:178
+#: views.py:193
 msgid "error in edit account."
 msgstr "Fehler beim Bearbeiten des Kontos."
 
-#: views.py:198
+#: views.py:213
 #, python-brace-format
 msgid "account {account} deleted."
 msgstr "Konto {account} gelöscht."
 
-#: views.py:222
+#: views.py:237
 msgid "redirection changed."
 msgstr "Weiterleitung geändert."
 
-#: views.py:225
+#: views.py:240
 msgid "error in edit redirection."
 msgstr "Fehler beim Bearbeiten der Weiterleitung."
 
-#: views.py:242
+#: views.py:257
 #, python-brace-format
 msgid "Redirection {redirection} deleted."
 msgstr "Weiterleitung {redirection} gelöscht."
 
-#: views.py:256
+#: views.py:271
 #, python-brace-format
 msgid "{count} credentials refreshed."
 msgstr "{count} Kontodatendokumente aktualisiert."
+
+#~ msgid "user"
+#~ msgstr "Benutzername"
