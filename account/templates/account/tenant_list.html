@@ -52,13 +52,13 @@
                     {% else %}
                     <a href="{% url 'pwdlist' tenant.id %}">
                     {% endif %}
-                    <img class="card-img-top" src="{% version tenant.logo 'medium' %}" alt="">
-                        <div class="card-body text-center">
-                            <h5>{{ tenant.name }}</h5>
-                            {% if tenant.type == 'mail' %}
-                            <p>(@{{ tenant.domain }})</p>
-                            {% endif %}
-                        </div>
+                    <img class="card-img-top bg-light" src="{% version tenant.logo 'medium' %}" alt="">
+                    <div class="card-body text-center">
+                        <h5>{{ tenant.name }}</h5>
+                        {% if tenant.type == 'mail' %}
+                        <p>(@{{ tenant.domain }})</p>
+                        {% endif %}
+                    </div>
                     </a>
                 </div>
             </div>
