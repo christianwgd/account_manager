@@ -3,6 +3,7 @@ Django==6.0
 django-bootstrap5==25.3
 django-bootstrap5-dark-mode-switch==0.2.2
 django-filebrowser-no-grappelli==4.0.2
+django-filter==25.2
 # django-two-factor-auth depends on
 # django-two-factor-auth 1.14 depends on
 django-phonenumber-field<8.0.0
