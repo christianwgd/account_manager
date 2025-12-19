@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.utils.translation import gettext_lazy as _
 from django import forms
 from django.core.validators import FileExtensionValidator
@@ -55,10 +54,10 @@ class PwdForm(forms.ModelForm):
             raise forms.ValidationError(_('This field is required.'))
         return data
 
-    
+
 class ImportForm(forms.Form):
     tenant = forms.ModelChoiceField(queryset=Tenant.objects.all(), label=_('tenant'))
-    scheduleFile = forms.FileField(
+    schedule_file = forms.FileField(
         label='Datei',
         validators=[FileExtensionValidator(allowed_extensions=['txt', 'csv'])]
     )

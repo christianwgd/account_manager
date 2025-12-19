@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
+from pathlib import Path
 
-import os
 from django import template
 from account.crypt import get_creds_filename
 from account.models import Account
@@ -12,9 +11,8 @@ register = template.Library()
 def f_exists(account_id):
     account = Account.objects.get(pk=account_id)
     fname = get_creds_filename(account)
-    if os.path.exists(fname):
+    if Path(fname).exists():
         return ''
-    else:
-        return ' disabled' 
+    return ' disabled'
 
 

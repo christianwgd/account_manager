@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """The code used to generate PDF files (based on Reportlab)."""
 from io import BytesIO
 
@@ -67,14 +66,12 @@ def credentials(account):
     buff = BytesIO()
     doc = SimpleDocTemplate(buff, pagesize=A4)
     story = []
-    story.append(resized_image(crypt.get_document_logo(account.tenant.logo), 6*cm))
+    if account.tenant.logo:
+        story.append(resized_image(crypt.get_document_logo(account.tenant.logo), 6*cm))
     story.append(Spacer(1, 1 * cm))
     story.append(Paragraph(_("Personal account information"), styles["Title"]))
     story.append(Spacer(1, 1 * cm))
-    if account.full_name:
-        name = account.full_name
-    else:
-        name = account.username.split('@')[0]
+    name = account.full_name or account.username.split('@')[0]
     story.append(Paragraph(_("""
 Dear %s, this document contains the credentials you will need
 to connect to your email account. Learn the content and destroy

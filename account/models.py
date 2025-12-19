@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
@@ -13,11 +12,7 @@ from .password_pdf import password_credentials
 
 
 def user_str_patch(self):
-    if self.first_name and self.last_name:
-        name = self.get_full_name()
-    else:
-        name = self.username
-    return name
+    return self.get_full_name() if self.first_name and self.last_name else self.username
 
 
 User.__str__ = user_str_patch
@@ -41,8 +36,7 @@ class Tenant(models.Model):
     def __str__(self):
         if self.name is not None:
             return self.name
-        else:
-            return 'Tenant'
+        return 'Tenant'
 
     class Meta:
         verbose_name = _('mail tenant')
@@ -77,18 +71,15 @@ class Account(models.Model):
     def __str__(self):
         if self.username:
             return self.username
-        else:
-            if self.name:
-                return self.name
-            else:
-                return 'no name'
+        if self.name:
+            return self.name
+        return 'no name'
 
     @property
     def full_name(self):
         if self.first_name is not None and self.last_name is not None:
             return self.first_name + ' ' + self.last_name
-        else:
-            return None
+        return 'no name'
 
     class Meta:
         verbose_name = _('mail account')

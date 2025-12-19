@@ -10,4 +10,5 @@ db.*
 *.db
 .project
 _versions/
-
+.coverage
+htmlcov/

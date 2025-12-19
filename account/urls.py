@@ -42,7 +42,7 @@ urlpatterns = [
     path('tenantedit/<int:pk>/', views.TenantUpdate.as_view(), name='tenantedit'),
     path('tenantdelete/<int:pk>/', views.TenantDelete.as_view(), name='tenantdelete'),
 
-    path('accountlist/<int:tenant_id>/', views.account_list, name='accountlist'),
+    path('accountlist/<int:tenant_id>/', views.AccountListView.as_view(), name='accountlist'),
     path('accountdisplay/<int:account_id>/', views.account_display, name='accountdisplay'),
     path('accountedit/<int:tenant_id>/', views.account_edit, name='accountnew'),
     path('accountedit/<int:tenant_id>/<int:account_id>/', views.account_edit, name='accountedit'),
@@ -53,7 +53,7 @@ urlpatterns = [
     path('redirectdelete/<int:redirect_id>/', views.redirect_delete, name='redirectdelete'),
     path('get_account_credentials/<int:account_id>/', views.get_account_credentials, name='get_account_credentials'),
     path('refreshcredentials/<int:tenant_id>/', views.refresh_credentials, name='refreshcredentials'),
-    
+
     path('pwdlist/<int:tenant_id>/', views.PwdList.as_view(), name='pwdlist'),
     path('pwddetail/<int:pk>/', views.PwdDetail.as_view(), name='pwddetail'),
     path('pwdcreate/<int:tenant_id>/', views.PwdCreate.as_view(), name='pwdcreate'),
@@ -62,7 +62,7 @@ urlpatterns = [
     path('get_tenant_domain/<int:tenant_id>/', views.get_tenant_domain, name='get_tenant_domain'),
     path('get_default_password/', views.create_default_password, name='get_default_password'),
 
-    path('import/', file_import.importFromFile, name='import'),
+    path('import/', file_import.import_from_file, name='import'),
 
     path(
         'pwd_change/',
@@ -79,7 +79,7 @@ urlpatterns = [
         ),
         name='pwd_change_done'
     ),
-] 
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

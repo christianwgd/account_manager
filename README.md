@@ -1,3 +1,5 @@
+[![Django CI run test](https://github.com/christianwgd/account_manager/actions/workflows/django-test.yml/badge.svg)](https://github.com/christianwgd/account_manager/actions/workflows/django-test.yml)
+
 # account_manager
 Manage email accounts for different tenants and domains
 

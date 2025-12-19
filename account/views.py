@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 import json
-import os
 import sys
+from pathlib import Path
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -13,10 +12,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
+from django_filters.views import FilterView
 
-from .crypt import get_creds_filename, decrypt_file
-from .models import Tenant, Account, Redirection
-from .forms import AccountForm, RedirectionForm, TenantForm, PwdForm
+from account.crypt import get_creds_filename, decrypt_file
+from account.filters import AccountFilter
+from account.models import Tenant, Account, Redirection
+from account.forms import AccountForm, RedirectionForm, TenantForm, PwdForm
 
 
 def bad_request(message):
@@ -40,8 +41,8 @@ def create_default_password(request):
         allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
         pw_str = get_random_string(length=12, allowed_chars=allowed_chars)
         pw = '-'.join(pw_str[i:i + 3] for i in range(0, len(pw_str), 3))
-    except:
-        exc_type, exc_value, exc_traceback = sys.exc_info()
+    except:  # noqa: E722
+        _exc_type, exc_value, _exc_traceback = sys.exc_info()
         return bad_request(message=exc_value)
     return HttpResponse(pw)
 
@@ -50,16 +51,16 @@ def get_account_credentials(request, account_id):
     """View to download a document."""
     account = Account.objects.get(pk=account_id)
     fname = get_creds_filename(account)
-    if not os.path.exists(fname):
+    if not Path(fname).exists():
         messages.error(request, _("No document available for this user"))
     try:
         content = decrypt_file(fname)
-    except:
+    except:  # noqa: E722
         return redirect(request.META.get('HTTP_REFERER'))
     resp = HttpResponse(content)
     resp["Content-Type"] = "application/pdf"
     resp["Content-Length"] = len(content)
-    resp["Content-Disposition"] = f'attachment; filename={os.path.basename(fname)}'
+    resp["Content-Disposition"] = f'attachment; filename={Path(fname).name}'
     return resp
 
 
@@ -69,13 +70,13 @@ class TenantList(LoginRequiredMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         request.session['edit'] = request.GET.get('edit', '0')
-        return super(TenantList, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
         return Tenant.objects.filter(manager=self.request.user).order_by('type', 'name')
 
     def get_context_data(self, **kwargs):
-        ctx = super(TenantList, self).get_context_data(**kwargs)
+        ctx = super().get_context_data(**kwargs)
         ctx['edit'] = self.request.session['edit']
         return ctx
 
@@ -94,7 +95,7 @@ class TenantUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         if 'cancel' in request.POST:
             messages.info(request, _('Cancelled'))
             return redirect(self.get_success_url())
-        return super(TenantUpdate, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
 
 class TenantCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -108,15 +109,15 @@ class TenantCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         )
 
     def get_initial(self):
-        initial = super(TenantCreate, self).get_initial()
-        initial = {"manager": self.request.user}
+        initial = super().get_initial()
+        initial['manager'] = self.request.user
         return initial
 
     def post(self, request, *args, **kwargs):
         if 'cancel' in request.POST:
             messages.info(request, _('Cancelled'))
             return redirect(self.get_success_url())
-        return super(TenantCreate, self).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
 
 class TenantDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
@@ -134,14 +135,28 @@ class TenantDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         return super(DeleteView, self).post(request, *args, **kwargs)
 
 
-@login_required(login_url='/account/login/')
-def account_list(request, tenant_id):
-    tenant = Tenant.objects.get(pk=tenant_id)
-    accounts = Account.objects.filter(tenant=tenant).order_by('username', 'type')
-    return render(request, 'account/account_list.html', {
-        'accountlist': accounts,
-        'tenant': tenant
-    })
+# @login_required(login_url='/account/login/')
+# def account_list(request, tenant_id):
+#     tenant = Tenant.objects.get(pk=tenant_id)
+#     accounts = Account.objects.filter(tenant=tenant).order_by('username', 'type')
+#     return render(request, 'account/account_list.html', {
+#         'accountlist': accounts,
+#         'tenant': tenant
+#     })
+
+class AccountListView(LoginRequiredMixin, FilterView):
+    model = Account
+    filterset_class = AccountFilter
+    template_name = 'account/account_list.html'
+
+    def get_queryset(self):
+        tenant = Tenant.objects.get(pk=self.kwargs['tenant_id'])
+        return Account.objects.filter(tenant=tenant).order_by('username', 'type')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=None, **kwargs)
+        context['tenant'] = Tenant.objects.get(pk=self.kwargs['tenant_id'])
+        return context
 
 
 @login_required(login_url='/account/login/')

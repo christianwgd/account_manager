@@ -2,6 +2,7 @@
 from io import BytesIO
 import os
 import struct
+from pathlib import Path
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
@@ -14,34 +15,31 @@ from django.utils.translation import gettext as _
 def init_storage_dir():
     """Create the directory whare documents will be stored."""
     storage_dir = getattr(settings, "STORAGE_DIR", 'media/credentials/')
-    if os.path.exists(storage_dir):
+    if Path(storage_dir).exists():
         return
     try:
-        os.mkdir(storage_dir)
-    except (OSError, IOError) as inst:
+        Path(storage_dir).mkdir()
+    except OSError as inst:
         raise FileNotFoundError(
             _("Failed to create the directory that will contain "
               "PDF documents (%s)") % inst
-        )
+        ) from inst
 
 
 def get_creds_filename(account):
     """Return the full path of a document."""
     base_dir = getattr(settings, "BASE_DIR", None)
     storage_dir = getattr(settings, "STORAGE_DIR", 'media/credentials/')
-    if account.type == '1':
-        name = account.username
-    else:
-        name = f'{account.name}_{account.tenant.name}'
-    return os.path.join(base_dir, storage_dir, name + ".pdf")
+    name = account.username if account.type == '1' else f'{account.name}_{account.tenant.name}'
+    return Path(base_dir) / storage_dir / f"{name}.pdf"
 
 
 def delete_credentials(account):
     """Try to delete a local file."""
     fname = get_creds_filename(account)
-    if not os.path.exists(fname):
+    if not Path(fname).exists():
         return
-    os.remove(fname)
+    Path.unlink(fname)
 
 
 def _get_cipher(iv):
@@ -60,14 +58,14 @@ def crypt_and_save_to_file(content, filename, length, chunksize=64*512):
     iv = os.urandom(16)
     cipher = _get_cipher(iv)
     encryptor = cipher.encryptor()
-    with open(filename, "wb") as fp:
+    with Path.open(filename, "wb") as fp:
         fp.write(struct.pack(b"<Q", length))
         fp.write(iv)
         while True:
             chunk = content.read(chunksize)
             if not len(chunk):
                 break
-            elif len(chunk) % 16:
+            if len(chunk) % 16:
                 chunk += b" " * (16 - len(chunk) % 16)
             fp.write(encryptor.update(force_bytes(chunk)))
         fp.write(encryptor.finalize())
@@ -77,7 +75,7 @@ def decrypt_file(filename, chunksize=24*1024):
     """Decrypt the content of a file and return it."""
     buff = BytesIO()
     try:
-        with open(filename, "rb") as fp:
+        with Path.open(filename, "rb") as fp:
             origsize = struct.unpack(b"<Q", fp.read(struct.calcsize(b"Q")))[0]
             iv = fp.read(16)
             cipher = _get_cipher(iv)
@@ -97,7 +95,7 @@ def decrypt_file(filename, chunksize=24*1024):
 def get_document_logo(logo):
     """Retrieve path to logo."""
     try:
-        logo = os.path.join(settings.MEDIA_ROOT, logo.path)
+        logo = Path(settings.MEDIA_ROOT) / logo.path
     except AttributeError:
         logo = None
     return logo

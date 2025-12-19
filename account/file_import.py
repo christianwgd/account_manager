@@ -1,9 +1,8 @@
-# encoding: utf-8
 
 import codecs
-import os
 import json
 import csv
+from pathlib import Path
 
 from django.urls import reverse
 from django.shortcuts import render, redirect
@@ -19,18 +18,16 @@ from .forms import ImportForm
 
 
 @login_required(login_url='/accounts/login/')
-def importFromFile(request):
+def import_from_file(request):
 
     accounts = {}
 
-    MBTYPE = 0
-    USRNAME = 1
+    mbtype = 0
+    usrname = 1
+    fstname = 3
+    lstname = 4
+    redrct = 3
 
-    FSTNAME = 3
-    LSTNAME = 4
-
-    REDIRECT = 3
-    
 
     if request.method == 'POST':
         if 'cancel' in request.POST:
@@ -41,39 +38,38 @@ def importFromFile(request):
             if count is None:
                 messages.info(request, _('No accounts created').format(count))
             else:
-                messages.success(request, '{} accounts created'.format(count))
+                messages.success(request, f'{count} accounts created')
             return redirect(reverse('tenantlist'))
-    
+
 
         form = ImportForm(request.POST, request.FILES)
         if form.is_valid():
-            try:
-                accounts = []
-                tenant = form.cleaned_data['tenant']
-                schedFile = request.FILES['scheduleFile']
-                fs = FileSystemStorage(location='imports/')
-                filename = fs.save(schedFile.name, schedFile)
-                enc = 'utf-8'
-                # enc = 'cp1252'
-                f = codecs.open(filename, 'r', encoding=enc)
+            accounts = []
+            tenant = form.cleaned_data['tenant']
+            sched_file = request.FILES['schedule_file']
+            fs = FileSystemStorage(location='imports/')
+            filename = fs.save(sched_file.name, sched_file)
+            enc = 'utf-8'
+            # enc = 'cp1252'
+            with codecs.open(filename, 'r', encoding=enc) as f:
                 reader = csv.reader(f, delimiter=';', quotechar='"')
-                
+
                 for row in reader:
-                    if row[MBTYPE] == 'account':
+                    if row[mbtype] == 'account':
                         account = {
                             'type': '1',
                             'tenant': tenant.id,
-                            'username': row[USRNAME],
-                            'first_name': row[FSTNAME],
-                            'last_name': row[LSTNAME],
+                            'username': row[usrname],
+                            'first_name': row[fstname],
+                            'last_name': row[lstname],
                         }
-                    elif row[MBTYPE] == 'alias':
+                    elif row[mbtype] == 'alias':
                         account = {
                             'type': '2',
                             'tenant': tenant.id,
-                            'username': row[USRNAME],
+                            'username': row[usrname],
                         }
-                        alias_col = REDIRECT
+                        alias_col = redrct
                         try:
                             redirections = []
                             while row[alias_col]:
@@ -82,23 +78,18 @@ def importFromFile(request):
                         except IndexError:
                             pass
                         account['redirections'] = redirections
-                    else:
-                        print('invalid type')
                     accounts.append(account)
 
-                f.close()
-                dump_accounts(accounts, tenant.id)
-                # if os.path.exists(fullfile):
-                #     os.remove(fullfile)
-            except:
-                import traceback
-                traceback.print_exc()
+            f.close()
+            dump_accounts(accounts, tenant.id)
+            # if os.path.exists(fullfile):
+            #     os.remove(fullfile)
 
     else:  # GET
         try:
             form = ImportForm()
         except Exception as exc:
-            messages.error(request, u'Error %s' % exc)
+            messages.error(request, f'Error {exc}')
 
     return render(request, 'account/import.html', {
         'form': form,
@@ -107,27 +98,24 @@ def importFromFile(request):
 
 
 def dump_accounts(accounts, tenant):
-    filename = '{}/imports/import.json'.format(settings.MEDIA_ROOT)
-    exportdata = {}
+    filename = Path(f'{settings.MEDIA_ROOT}/imports/import.json')
+    exportdata = {'tenant': tenant, 'accounts': accounts}
 
-    exportdata['tenant'] = tenant
-    exportdata['accounts'] = accounts
-
-    with open(filename, 'w') as outfile:
+    with Path.open(filename, 'w') as outfile:
         outfile.write(json.dumps(exportdata, indent=4))
     outfile.close()
 
 
 @transaction.atomic
 def load_accounts():
-    filename = '{}/imports/import.json'.format(settings.MEDIA_ROOT)
-    if os.path.exists(filename):
-        with open(filename, 'r') as infile:
+    filename = Path(f'{settings.MEDIA_ROOT}/imports/import.json')
+    if filename.exists():
+        with Path.open(filename) as infile:
             importdata = infile.read()
 
         jsondata = json.loads(importdata)
         if len(jsondata['accounts']) == 0:
-            return
+            return None
 
         tenant = Tenant.objects.get(pk=jsondata['tenant'])
         count = len(jsondata['accounts'])
@@ -135,7 +123,7 @@ def load_accounts():
             if acc['type'] == '1':
                 account = Account(
                     tenant = tenant,
-                    type = acc['type'], 
+                    type = acc['type'],
                     username = acc['username'],
                     first_name = acc['first_name'],
                     last_name = acc['last_name'],
@@ -144,7 +132,7 @@ def load_accounts():
             else:
                 account = Account(
                     tenant = tenant,
-                    type = acc['type'], 
+                    type = acc['type'],
                     username = acc['username'],
                 )
                 account.save()
@@ -156,3 +144,4 @@ def load_accounts():
                     redirection.save()
         infile.close()
         return count
+    return 0
