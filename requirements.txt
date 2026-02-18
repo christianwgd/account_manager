@@ -1,13 +1,14 @@
-cryptography==46.0.4
+cryptography==46.0.5
 Django==6.0.2
 django-bootstrap5==26.2
 django-bootstrap5-dark-mode-switch==0.2.2
-django-filebrowser-no-grappelli==4.0.2
+# django-filebrowser-no-grappelli==4.0.2
+git+https://github.com/christianwgd/django-filebrowser-no-grappelli.git
 django-filter==25.2
 # django-two-factor-auth depends on
 # django-two-factor-auth 1.14 depends on
 django-phonenumber-field<8.0.0
 django-select2==8.4.8
 django-two-factor-auth==1.18.1
-reportlab==4.4.9
-phonenumbers==9.0.23
+reportlab==4.4.10
+phonenumbers==9.0.24
