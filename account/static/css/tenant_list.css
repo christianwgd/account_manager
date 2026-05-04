@@ -1,3 +1,11 @@
+[data-bs-theme="dark"] {
+    --bs-light-rgb: rgb(130, 130, 130);
+}
+
+.card-img-top {
+    background-color: var(--bs-light-rgb);
+}
+
 .edit_toggle {
     position: absolute;
     top: 75px;
