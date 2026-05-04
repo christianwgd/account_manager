@@ -1,4 +1,4 @@
-cryptography==46.0.7
+cryptography==47.0.0
 Django==6.0.4
 django-bootstrap5==26.2
 django-bootstrap5-dark-mode-switch==0.2.2
@@ -10,5 +10,5 @@ django-filter==25.2
 django-phonenumber-field<8.0.0
 django-select2==8.4.8
 django-two-factor-auth==1.18.1
-reportlab==4.4.10
-phonenumbers==9.0.27
+reportlab==4.5.0
+phonenumbers==9.0.29
