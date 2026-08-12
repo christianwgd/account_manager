@@ -1,6 +1,6 @@
-from django.utils.translation import gettext_lazy as _
 from django import forms
 from django.core.validators import FileExtensionValidator
+from django.utils.translation import gettext_lazy as _
 from django_select2.forms import Select2MultipleWidget
 
 from .models import Account, Redirection, Tenant
@@ -16,7 +16,7 @@ class AccountForm(forms.ModelForm):
         model = Account
         fields = [
             'type', 'first_name', 'last_name',
-            'username', 'description', 'def_pwd'
+            'username', 'description', 'def_pwd',
         ]
 
     def clean_username(self):
@@ -41,11 +41,11 @@ class PwdForm(forms.ModelForm):
             'name', 'user', 'username',
             'first_name', 'last_name',
             'description', 'def_pwd', 'pin',
-            'date', 'comment'
+            'date', 'comment',
         ]
         widgets = {
             'date': DateInput(),
-            'comment': forms.Textarea(attrs={'rows': 6})
+            'comment': forms.Textarea(attrs={'rows': 6}),
         }
 
     def clean_name(self):
@@ -59,7 +59,7 @@ class ImportForm(forms.Form):
     tenant = forms.ModelChoiceField(queryset=Tenant.objects.all(), label=_('tenant'))
     schedule_file = forms.FileField(
         label='Datei',
-        validators=[FileExtensionValidator(allowed_extensions=['txt', 'csv'])]
+        validators=[FileExtensionValidator(allowed_extensions=['txt', 'csv'])],
     )
 
 
@@ -75,5 +75,5 @@ class TenantForm(forms.ModelForm):
             'man_url', 'manager',
         ]
         widgets = {
-            'manager': Select2MultipleWidget
+            'manager': Select2MultipleWidget,
         }

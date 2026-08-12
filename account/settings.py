@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-from pathlib import Path
 import sys
+from pathlib import Path
 
 from django.urls import reverse_lazy
 
@@ -88,7 +88,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'account.db',
-    }
+    },
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

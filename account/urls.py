@@ -13,18 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include, reverse_lazy
-from django.views.generic import RedirectView
-from filebrowser.sites import site
 from django.conf import settings
 from django.conf.urls.static import static
-from django.utils.translation import gettext_lazy as _
+from django.contrib import admin
 from django.contrib.auth import views as auth_views
-
-from account import views
-from account import file_import
+from django.urls import include, path, reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import RedirectView
+from filebrowser.sites import site
 from two_factor.urls import urlpatterns as tf_urls
+
+from account import file_import, views
 
 admin.site.site_header = _('Account Manager')
 
@@ -68,16 +67,16 @@ urlpatterns = [
         'pwd_change/',
         auth_views.PasswordChangeView.as_view(
             template_name='account/password_change_form.html',
-            success_url=reverse_lazy('pwd_change_done')
+            success_url=reverse_lazy('pwd_change_done'),
         ),
-        name='pwd_change'
+        name='pwd_change',
     ),
     path(
         'pwd_change_done/',
         auth_views.PasswordChangeDoneView.as_view(
-            template_name='account/password_change_done_form.html'
+            template_name='account/password_change_done_form.html',
         ),
-        name='pwd_change_done'
+        name='pwd_change_done',
     ),
 ]
 

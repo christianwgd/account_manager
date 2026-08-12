@@ -1,5 +1,5 @@
-from django.test import TestCase
 from django.contrib import auth
+from django.test import TestCase
 from faker import Faker
 
 from account.models import Account, Tenant
@@ -56,7 +56,7 @@ class AccountModelTests(BaseTest):
         self.account.save()
         self.assertEqual(
             self.account.full_name,
-            f'{self.account.first_name} {self.account.last_name}'
+            f'{self.account.first_name} {self.account.last_name}',
         )
 
     def test_account_has_date(self):

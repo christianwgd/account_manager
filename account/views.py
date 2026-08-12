@@ -2,22 +2,22 @@ import json
 import sys
 from pathlib import Path
 
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import UpdateView, CreateView, ListView, DeleteView, DetailView
-from django.shortcuts import HttpResponse, render, redirect
-from django.urls import reverse
-from django.utils.crypto import get_random_string
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.signals import post_save
+from django.shortcuts import HttpResponse, redirect, render
+from django.urls import reverse
+from django.utils.crypto import get_random_string
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from django_filters.views import FilterView
 
-from account.crypt import get_creds_filename, decrypt_file
+from account.crypt import decrypt_file, get_creds_filename
 from account.filters import AccountFilter
-from account.models import Tenant, Account, Redirection
-from account.forms import AccountForm, RedirectionForm, TenantForm, PwdForm
+from account.forms import AccountForm, PwdForm, RedirectionForm, TenantForm
+from account.models import Account, Redirection, Tenant
 
 
 def bad_request(message):
@@ -88,7 +88,7 @@ class TenantUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def get_success_url(self):
         return '{url}?edit=1'.format(
-            url=reverse('tenantlist')
+            url=reverse('tenantlist'),
         )
 
     def post(self, request, *args, **kwargs):
@@ -105,7 +105,7 @@ class TenantCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     def get_success_url(self):
         return '{url}?edit=1'.format(
-            url=reverse('tenantlist')
+            url=reverse('tenantlist'),
         )
 
     def get_initial(self):
@@ -125,7 +125,7 @@ class TenantDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
 
     def get_success_url(self):
         return '{url}?edit=1'.format(
-            url=reverse('tenantlist')
+            url=reverse('tenantlist'),
         )
 
     def post(self, request, *args, **kwargs):
@@ -189,7 +189,7 @@ def account_edit(request, tenant_id, account_id=None):
                 form.save()
                 messages.success(request, _('account changed.'))
                 return redirect(reverse('accountlist', args=(account.tenant.id,)))
-        except Exception:
+        except Exception:  # noqa: BLE001
             messages.error(request, _('error in edit account.'))
     return render(request, template, {
         'form': form,
@@ -225,7 +225,7 @@ def redirect_edit(request, account_id, redirect_id=None):
         redirection = Redirection.objects.get(pk=redirect_id)
 
     if 'cancel' in request.POST:
-        return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
+        return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id)))
 
     if request.method == 'GET':
         form = RedirectionForm(instance=redirection)
@@ -235,8 +235,8 @@ def redirect_edit(request, account_id, redirect_id=None):
             if form.is_valid():
                 form.save()
                 messages.success(request, _('redirection changed.'))
-                return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
-        except Exception:
+                return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id)))
+        except Exception:  # noqa: BLE001
             messages.error(request, _('error in edit redirection.'))
     return render(request, 'account/redirect_edit.html', {
         'form': form,
@@ -250,12 +250,12 @@ def redirect_delete(request, redirect_id):
 
     if request.method == 'POST':
         if 'cancel' in request.POST:
-            return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
+            return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id)))
 
         redirection.delete()
         messages.success(request, _(
             'Redirection {redirection} deleted.').format(redirection=redirection.email))
-        return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id,)))
+        return redirect(reverse('accountedit', args=(redirection.account.tenant.id, redirection.account.id)))
 
     return render(request, 'account/redirect_delete.html', {'redirection': redirection})
 
@@ -281,7 +281,7 @@ class PwdList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Account.objects.filter(
-            type='3', tenant__id=self.kwargs['tenant_id']
+            type='3', tenant__id=self.kwargs['tenant_id'],
         )
 
     def get_context_data(self, *, object_list=None, **kwargs):

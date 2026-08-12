@@ -1,34 +1,28 @@
 """The code used to generate PDF files (based on Reportlab)."""
 from io import BytesIO
 
+from django.conf import settings
 from django.utils import formats
-from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.units import cm
+from django.utils.translation import gettext as _
+from reportlab import rl_config
+from reportlab.lib import colors, utils
 from reportlab.lib.enums import TA_CENTER
-from reportlab.lib import utils
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Frame,
-    Image
-)
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab import rl_config
-
-from django.utils.translation import gettext as _
-from django.conf import settings
+from reportlab.platypus import Frame, Image, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 
 from account import crypt
-
 
 styles = getSampleStyleSheet()
 styles.add(ParagraphStyle(
     name="Footer", alignment=TA_CENTER,
-    textColor=colors.lightgrey
+    textColor=colors.lightgrey,
 ))
 styles.add(ParagraphStyle(
-    name="Left", fontSize=12, fontName="IBMPlex", leading=16
+    name="Left", fontSize=12, fontName="IBMPlex", leading=16,
 ))
 styles.add(ParagraphStyle(
     name="Tableheader", alignment=TA_CENTER, fontSize=14, fontName="IBMPlex",

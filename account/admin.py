@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
 
-from .models import Tenant, Account, Redirection
+from .models import Account, Redirection, Tenant
 
 
 @admin.register(Tenant)
@@ -15,7 +15,7 @@ class TenantAdmin(admin.ModelAdmin):
 
     list_display = ['name', 'domain', 'logo_thumbnail']
     ordering = ['name']
-    filter_horizontal = ['manager', ]
+    filter_horizontal = ['manager' ]
     logo_thumbnail.allow_tags = True
     logo_thumbnail.short_description = "Logo"
     autocomplete_fields = ['manager']
@@ -34,7 +34,7 @@ class RedirectionInlineAdmin(admin.TabularInline):
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
     list_display = ['get_name', 'date']
-    list_filter = ['tenant', ]
+    list_filter = ['tenant' ]
     ordering = ['last_name']
     change_form_template = "account/custom_admin_account_change.html"
     readonly_fields = ['date']

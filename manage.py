@@ -13,6 +13,6 @@ if __name__ == '__main__':
             "Did you forget to activate a virtual environment?"
         )
         raise ImportError(
-            msg
+            msg,
         ) from exc
     execute_from_command_line(sys.argv)

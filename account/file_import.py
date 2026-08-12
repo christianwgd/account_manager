@@ -1,24 +1,24 @@
 
 import codecs
-import json
 import csv
+import json
 from pathlib import Path
 
-from django.urls import reverse
-from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from .models import Account, Tenant, Redirection
 from .forms import ImportForm
+from .models import Account, Redirection, Tenant
 
 
 @login_required(login_url='/accounts/login/')
-def import_from_file(request):
+def import_from_file(request):  # noqa: C901, PLR0912
 
     accounts = {}
 
@@ -88,7 +88,7 @@ def import_from_file(request):
     else:  # GET
         try:
             form = ImportForm()
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001
             messages.error(request, f'Error {exc}')
 
     return render(request, 'account/import.html', {
