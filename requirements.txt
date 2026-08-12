@@ -1,5 +1,5 @@
 cryptography==50.0.0
-Django==6.0.8
+Django==6.1
 django-bootstrap5==26.2
 django-bootstrap5-dark-mode-switch==0.2.2
 # django-filebrowser-no-grappelli==4.0.2
